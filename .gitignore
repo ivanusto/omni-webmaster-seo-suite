@@ -1,0 +1,9 @@
+# Claude Code local settings
+.claude/
+
+# WordPress / IDE artifacts
+.DS_Store
+Thumbs.db
+*.log
+node_modules/
+vendor/

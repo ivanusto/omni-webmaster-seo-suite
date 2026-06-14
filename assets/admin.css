@@ -1,0 +1,608 @@
+/**
+ * Omni Webmaster & SEO Suite - Admin stylesheet
+ * Optimized for rich aesthetics, smooth transitions, and premium visual design.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+.omni-settings-wrap {
+    max-width: 1100px;
+    margin: 20px 20px 20px 0;
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Header section styling with modern gradients and shadows */
+.omni-header {
+    background: linear-gradient(135deg, #0f766e, #0d9488);
+    border-radius: 12px;
+    padding: 28px 36px;
+    box-shadow: 0 10px 15px -3px rgba(15, 118, 110, 0.15), 0 4px 6px -4px rgba(15, 118, 110, 0.15);
+    margin-bottom: 30px;
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+.omni-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(20, 184, 166, 0.25) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.omni-header-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.omni-header-title h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.omni-badge {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(4px);
+    letter-spacing: 0.5px;
+}
+
+.omni-header-desc {
+    font-size: 14px;
+    color: #ccfbf1;
+    margin: 10px 0 0 0;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+/* Tab container overrides */
+.omni-settings-wrap .nav-tab-wrapper {
+    border-bottom: 2px solid #e5e7eb;
+    margin-bottom: 0;
+    padding-left: 5px;
+    display: flex;
+    gap: 4px;
+}
+
+.omni-settings-wrap .nav-tab {
+    background: #f3f4f6;
+    border: 1.5px solid #e5e7eb;
+    border-bottom: none;
+    color: #6b7280;
+    font-weight: 500;
+    padding: 12px 24px;
+    border-radius: 8px 8px 0 0;
+    margin-right: 0;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.omni-settings-wrap .nav-tab:hover {
+    background: #f9fafb;
+    color: #111827;
+    border-color: #d1d5db;
+}
+
+.omni-settings-wrap .nav-tab-active,
+.omni-settings-wrap .nav-tab-active:hover {
+    background: #ffffff;
+    border-color: #e5e7eb;
+    border-bottom: 2px solid #ffffff;
+    color: #0f766e;
+    font-weight: 600;
+    position: relative;
+    top: 2px;
+    box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.02);
+}
+
+.omni-settings-wrap .nav-tab-active::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #0f766e, #14b8a6);
+    border-radius: 8px 8px 0 0;
+}
+
+.omni-settings-wrap .nav-tab .dashicons {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+}
+
+/* Card Container layout */
+.omni-content-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+    padding: 35px 40px;
+    transition: all 0.3s ease;
+}
+
+.omni-tab-panel {
+    display: none;
+}
+
+.omni-tab-panel.is-active {
+    display: block;
+    animation: fadeIn 0.35s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.omni-tab-content h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111827;
+    margin-top: 0;
+    margin-bottom: 6px;
+    letter-spacing: -0.2px;
+}
+
+.section-desc {
+    font-size: 13px;
+    color: #6b7280;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+/* Table Form styling */
+.omni-form-table {
+    margin-top: 0;
+    width: 100%;
+}
+
+.omni-form-table th {
+    font-weight: 600;
+    color: #374151;
+    width: 240px;
+    padding: 24px 16px 24px 0;
+    font-size: 14px;
+}
+
+.omni-form-table td {
+    padding: 24px 0;
+}
+
+.omni-form-table tr {
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.omni-form-table tr:last-child {
+    border-bottom: none;
+}
+
+/* Custom CSS Toggle Switch */
+.omni-field-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+}
+
+.omni-switch {
+    position: relative;
+    display: inline-block;
+    width: 52px;
+    height: 28px;
+    flex-shrink: 0;
+}
+
+.omni-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.omni-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #e5e7eb;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 34px;
+    border: 1px solid #d1d5db;
+}
+
+.omni-slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.omni-switch input:checked + .omni-slider {
+    background: linear-gradient(135deg, #0d9488, #14b8a6);
+    border-color: #0f766e;
+}
+
+.omni-switch input:focus + .omni-slider {
+    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.25);
+}
+
+.omni-switch input:checked + .omni-slider:before {
+    transform: translateX(24px);
+    box-shadow: 0 2px 4px rgba(15, 118, 110, 0.2);
+}
+
+/* Switch description texts */
+.omni-field-desc strong {
+    display: block;
+    font-size: 14px;
+    color: #111827;
+    margin-bottom: 4px;
+}
+
+.omni-field-desc p {
+    font-size: 13px;
+    color: #6b7280;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Alerts and Notifications */
+.omni-alert {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.omni-alert-success {
+    background-color: #f0fdf4;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+    box-shadow: 0 2px 4px rgba(22, 101, 52, 0.02);
+}
+
+.omni-alert-success .dashicons {
+    color: #15803d;
+}
+
+/* Grid for image sizes checkboxes */
+.omni-sizes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 18px;
+    margin-top: 10px;
+}
+
+.omni-size-card {
+    background: #ffffff;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 18px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.omni-size-card:hover {
+    border-color: #14b8a6;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+}
+
+.omni-size-card.is-checked {
+    background: #f0fdfa;
+    border-color: #14b8a6;
+    box-shadow: 0 4px 6px -1px rgba(20, 184, 166, 0.1);
+}
+
+.omni-size-card.is-checked .omni-size-key {
+    background: #ccfbf1;
+    color: #0f766e;
+}
+
+.omni-size-card-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+}
+
+.omni-size-card-header strong {
+    font-size: 14px;
+    color: #111827;
+}
+
+.omni-size-key {
+    font-size: 11px;
+    color: #4b5563;
+    background: #f3f4f6;
+    padding: 2px 6px;
+    border-radius: 4px;
+    align-self: flex-start;
+    margin-top: 6px;
+    font-family: SFMono-Regular, Consolas, monospace;
+}
+
+.omni-size-card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #f3f4f6;
+    padding-top: 12px;
+}
+
+.omni-dimensions {
+    font-size: 12px;
+    color: #6b7280;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.omni-dimensions .dashicons {
+    font-size: 14px;
+    width: 14px;
+    height: 14px;
+}
+
+.omni-checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #374151;
+    cursor: pointer;
+}
+
+/* Radio Labels for Delete Mode */
+.omni-delete-mode-selector {
+    background: #f9fafb;
+    border: 1.5px solid #f3f4f6;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.omni-radio-label {
+    position: relative;
+    cursor: pointer;
+    padding: 10px 14px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    border: 1.5px solid transparent;
+}
+
+.omni-radio-label:hover {
+    background-color: #ffffff;
+    border-color: #e5e7eb;
+}
+
+.omni-radio-label input[type="radio"]:checked + .omni-radio-text + p.description {
+    color: #4b5563;
+}
+
+.omni-radio-label input[type="radio"] {
+    margin-right: 8px;
+    accent-color: #0f766e;
+}
+
+/* Cleanup tool block style */
+.omni-cleanup-card {
+    background: #fffdfa;
+    border: 1.5px solid #ffedd5;
+    border-radius: 12px;
+    padding: 26px;
+    margin-top: 15px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+}
+
+.omni-cleanup-card h4 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: #ea580c;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.omni-cleanup-card p {
+    font-size: 13px;
+    color: #6b7280;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+.omni-cleanup-actions {
+    margin-bottom: 15px;
+}
+
+/* Progress bar container and components */
+.omni-progress-wrapper {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 24px;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.omni-progress-bar-container {
+    height: 10px;
+    background-color: #f3f4f6;
+    border-radius: 9999px;
+    overflow: hidden;
+    margin-bottom: 14px;
+}
+
+.omni-progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #0f766e, #14b8a6);
+    border-radius: 9999px;
+    transition: width 0.3s ease;
+}
+
+.omni-progress-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    font-weight: 500;
+    color: #374151;
+}
+
+/* Output Log Console style */
+.omni-log-console {
+    background-color: #0f172a;
+    color: #f8fafc;
+    font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 11px;
+    padding: 14px 18px;
+    border-radius: 8px;
+    height: 160px;
+    overflow-y: auto;
+    margin-top: 20px;
+    border: 1px solid #1e293b;
+    line-height: 1.6;
+}
+
+.omni-log-console div {
+    margin-bottom: 6px;
+}
+
+.omni-log-info { color: #38bdf8; }
+.omni-log-success { color: #4ade80; }
+.omni-log-warn { color: #facc15; }
+
+/* Slug translator tab styles */
+.omni-input-key {
+    font-family: SFMono-Regular, Consolas, monospace;
+    letter-spacing: 0.5px;
+    padding: 6px 12px !important;
+}
+
+.omni-api-tester {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.omni-test-result {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.omni-test-result.success {
+    color: #16803d;
+}
+
+.omni-test-result.error {
+    color: #b91c1c;
+}
+
+/* Settings submit footer button container */
+.omni-submit-section {
+    margin-top: 35px;
+    padding-top: 25px;
+    border-top: 1px solid #e5e7eb;
+}
+
+#omni-submit-btn {
+    background: #0f766e !important;
+    border-color: #0d9488 !important;
+    box-shadow: 0 4px 6px -1px rgba(15, 118, 110, 0.2) !important;
+    font-weight: 500 !important;
+    padding: 4px 20px 6px !important;
+    height: auto !important;
+    border-radius: 6px !important;
+    transition: all 0.2s ease !important;
+}
+
+#omni-submit-btn:hover {
+    background: #0d9488 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 8px -1px rgba(15, 118, 110, 0.3) !important;
+}
+
+/* 數據匯出特定樣式 */
+.omni-export-panel-box select {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+}
+
+.omni-export-panel-box select:focus {
+    border-color: #14b8a6 !important;
+    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.15) !important;
+}
+
+.omni-export-panel-box input[type="text"]:focus {
+    border-color: #14b8a6 !important;
+    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.15) !important;
+}
+
+#omni-export-preview-table thead th {
+    background: #f8fafc !important;
+    border-bottom: 2px solid #e2e8f0 !important;
+    color: #475569 !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+}
+
+#omni-export-preview-table tbody td {
+    padding: 14px 16px !important;
+    font-size: 13px !important;
+    color: #334155 !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    line-height: 1.5 !important;
+}
+
+#omni-export-preview-table tbody tr:hover {
+    background-color: #f8fafc !important;
+}
+
+.omni-export-status-message-info {
+    background-color: #f0f9ff;
+    border: 1.5px solid #bae6fd;
+    color: #0369a1;
+}
+
+.omni-export-status-message-success {
+    background-color: #f0fdf4;
+    border: 1.5px solid #bbf7d0;
+    color: #15803d;
+}
+
+.omni-export-status-message-error {
+    background-color: #fef2f2;
+    border: 1.5px solid #fecaca;
+    color: #b91c1c;
+}
+
