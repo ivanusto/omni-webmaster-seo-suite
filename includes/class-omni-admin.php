@@ -542,7 +542,7 @@ class Omni_Admin {
                                         <label for="omni_export_views_meta" style="font-weight: 600; color: #374151;"><strong>瀏覽量自訂欄位 (Meta Key)</strong></label>
                                         <div style="display: flex; flex-direction: column; gap: 4px;">
                                             <input type="text" id="omni_export_views_meta" name="<?php echo esc_attr( $this->option_name ); ?>[views_meta_key]" value="<?php echo esc_attr( $settings['views_meta_key'] ); ?>" class="regular-text" style="width: 150px; padding: 6px 12px; border-radius: 6px; border: 1.5px solid #d1d5db;" placeholder="views" />
-                                            <span class="description" style="font-size: 11px; color: #6b7280;">預設為 <code>views</code> (WP-PostViews 用)。若為 JNews View Counter 請輸入 <code>jnews_post_view</code> (系統將自動以 JNews 原生 API 或自訂資料表撈取)。</span>
+                                            <span class="description" style="font-size: 11px; color: #6b7280;">預設為 <code>views</code> (WP-PostViews 用)。請輸入您網站使用的瀏覽量自訂欄位名稱 (Meta Key)。</span>
                                         </div>
                                     </div>
                                 </div>

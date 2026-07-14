@@ -40,9 +40,11 @@ class Omni_Slug_Converter {
             return $data;
         }
         
-        // 僅允許草稿 (draft) 和發布 (publish) 狀態處理
-        $allowed_statuses = [ 'draft', 'publish' ];
-        $current_status   = isset( $postarr['post_status'] ) ? $postarr['post_status'] : '';
+        // 排除 auto-draft 與 revision/inherit 狀態以避免在建立草稿或修訂版時進行非必要翻譯
+        $current_status = isset( $postarr['post_status'] ) ? $postarr['post_status'] : '';
+        if ( in_array( $current_status, [ 'auto-draft', 'inherit' ], true ) ) {
+            return $data;
+        }
         
          // 檢查是否含有中文字 (使用更完整的 Han Unicode 範圍檢查)
         if ( ! preg_match( '/\p{Han}/u', $data['post_title'] ) ) {
@@ -128,7 +130,7 @@ class Omni_Slug_Converter {
                     'sl'     => 'zh-TW',
                     'tl'     => 'en',
                     'dt'     => 't',
-                    'q'      => rawurlencode( $title ),
+                    'q'      => $title,
                 ],
                 $url
             );
@@ -204,7 +206,7 @@ class Omni_Slug_Converter {
                     'sl'     => 'zh-TW',
                     'tl'     => 'en',
                     'dt'     => 't',
-                    'q'      => rawurlencode( $test_text ),
+                    'q'      => $test_text,
                 ],
                 $url
             );
