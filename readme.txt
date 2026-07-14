@@ -4,7 +4,7 @@ Tags: seo, performance, comments, thumbnails, translation
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.3
+Stable tag: 1.4
 License: Apache-2.0
 License URI: https://opensource.org/license/apache-2-0
 
@@ -50,6 +50,11 @@ No. It only deletes resized sub-sizes. Your original uploaded images remain comp
 No. This plugin uses a clean, unified settings array (`omni_webmaster_settings`) to prevent database clutter. You will need to check the desired options in the new admin settings panel.
 
 == Changelog ==
+
+= 1.4 =
+* Fixed Google Translate API double URL-encoding issue that caused translation failures.
+* Fixed post slug getting stuck as 'auto-draft' when saving Chinese-titled posts.
+* Excluded 'auto-draft' and 'inherit' statuses from trigger translation workflow to optimize performance.
 
 = 1.3 =
 * Hardened the oEmbed cache cleanup query (escaped LIKE wildcard, prepared statement) and now flush the object cache after purging so stale embed cards regenerate reliably.

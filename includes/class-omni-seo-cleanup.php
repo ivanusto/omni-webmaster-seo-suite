@@ -70,8 +70,21 @@ class Omni_SEO_Cleanup {
      */
     public function advanced_selective_disable_feeds() {
         if ( is_feed() ) {
-            if ( is_category() || is_author() || is_home() ) {
-                return; // 放行
+            // 1. 放行分類 Feed 與作者 Feed
+            if ( is_category() || is_author() ) {
+                return;
+            }
+            
+            // 2. 放行首頁/主文章 Feed
+            if ( is_home() || is_front_page() ) {
+                return;
+            }
+            
+            // 3. 確保標準 Feed (例如 /feed/) 正常運作：
+            // 如果不是留言 Feed、不是單一文章/頁面 Feed、不是標籤 Feed、不是搜尋 Feed、不是自訂分類 Feed、不是自訂文章類型封存 Feed、不是附件 Feed、不是日期封存 Feed
+            // 則判定其為網站的主訂閱源 (Main Feed)，予以放行。
+            if ( ! is_comment_feed() && ! is_singular() && ! is_tag() && ! is_search() && ! is_tax() && ! is_post_type_archive() && ! is_attachment() && ! is_date() ) {
+                return;
             }
         }
         

@@ -15,7 +15,7 @@ jQuery(document).ready(function($) {
         var $btn = $(this);
         
         if (!apiKey) {
-            $resultSpan.html('<span class="dashicons dashicons-warning" style="color:#d97706; vertical-align:middle; font-size:18px;"></span> 請先輸入 API 金鑰金鑰。')
+            $resultSpan.html('<span class="dashicons dashicons-warning" style="color:#d97706; vertical-align:middle; font-size:18px;"></span> 請先輸入 API 金鑰。')
                        .removeClass('success').addClass('error')
                        .css('color', '#d97706');
             return;
