@@ -103,6 +103,11 @@ class Omni_Admin {
         // 瀏覽量自訂欄位 (Meta Key)
         $sanitized['views_meta_key']  = ! empty( $input['views_meta_key'] ) ? sanitize_text_field( trim( $input['views_meta_key'] ) ) : 'views';
         
+        // Meta Pixel 選項
+        $sanitized['meta_pixel_enable']   = isset( $input['meta_pixel_enable'] ) ? '1' : '0';
+        $sanitized['meta_pixel_id']       = isset( $input['meta_pixel_id'] ) ? sanitize_text_field( trim( $input['meta_pixel_id'] ) ) : '';
+        $sanitized['meta_pixel_advanced'] = isset( $input['meta_pixel_advanced'] ) ? '1' : '0';
+        
         return $sanitized;
     }
 
@@ -169,23 +174,26 @@ class Omni_Admin {
 
         // 取得目前設定，設定預設值
         $defaults = [
-            'disable_feeds'    => '1',
-            'cleanup_head'     => '1',
-            'robots_meta'      => '1',
-            'clean_sitemap'    => '1',
-            'embed_styles'     => '0',
-            'gist_styles'      => '0',
-            'disable_comments' => '0',
-            'disabled_sizes'   => [],
-            'slug_api_key'     => '',
-            'slug_max_length'  => 30,
-            'views_meta_key'   => 'views'
+            'disable_feeds'       => '1',
+            'cleanup_head'        => '1',
+            'robots_meta'         => '1',
+            'clean_sitemap'       => '1',
+            'embed_styles'        => '0',
+            'gist_styles'         => '0',
+            'disable_comments'    => '0',
+            'disabled_sizes'      => [],
+            'slug_api_key'        => '',
+            'slug_max_length'     => 30,
+            'views_meta_key'      => 'views',
+            'meta_pixel_enable'   => '0',
+            'meta_pixel_id'       => '',
+            'meta_pixel_advanced' => '0',
         ];
         $settings = wp_parse_args( get_option( $this->option_name, [] ), $defaults );
 
         // 頁籤切換
         $active_tab = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : 'seo'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-        if ( ! in_array( $active_tab, [ 'seo', 'comments', 'thumbnails', 'slug', 'export' ], true ) ) {
+        if ( ! in_array( $active_tab, [ 'seo', 'comments', 'thumbnails', 'slug', 'export', 'pixel' ], true ) ) {
             $active_tab = 'seo';
         }
         ?>
@@ -214,6 +222,9 @@ class Omni_Admin {
                 </a>
                 <a href="?page=omni-webmaster-seo&tab=slug" class="nav-tab <?php echo $active_tab === 'slug' ? 'nav-tab-active' : ''; ?>">
                     <span class="dashicons dashicons-translation"></span> 中英網址翻譯
+                </a>
+                <a href="?page=omni-webmaster-seo&tab=pixel" class="nav-tab <?php echo $active_tab === 'pixel' ? 'nav-tab-active' : ''; ?>">
+                    <span class="dashicons dashicons-chart-line"></span> Meta Pixel 追蹤
                 </a>
                 <a href="?page=omni-webmaster-seo&tab=export" class="nav-tab <?php echo $active_tab === 'export' ? 'nav-tab-active' : ''; ?>">
                     <span class="dashicons dashicons-database-export"></span> 文章數據匯出
@@ -493,6 +504,64 @@ class Omni_Admin {
                                                min="5" 
                                                max="200" />
                                         <p class="description">產生的英文網址最大字元數（建議為 30 至 50 之間）。系統會自動預留 12 個字元供後續追加文章 ID 做防重複保護。</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Tab: Meta Pixel -->
+                    <div class="omni-tab-panel <?php echo $active_tab === 'pixel' ? 'is-active' : ''; ?>">
+                        <div class="omni-tab-content">
+                            <h3>Meta Pixel 廣告轉換追蹤</h3>
+                            <p class="section-desc">整合 Meta (Facebook) Pixel 追蹤代碼，在網站前端自動載入基礎 PageView 及進階行銷追蹤事件，提升廣告轉換率與受眾優化精準度。</p>
+                            
+                            <table class="form-table omni-form-table">
+                                <tr>
+                                    <th scope="row">啟用 Meta Pixel 追蹤</th>
+                                    <td>
+                                        <div class="omni-field-row">
+                                            <label class="omni-switch">
+                                                <input type="checkbox" name="<?php echo esc_attr( $this->option_name ); ?>[meta_pixel_enable]" value="1" <?php checked( '1', $settings['meta_pixel_enable'] ); ?> />
+                                                <span class="omni-slider"></span>
+                                            </label>
+                                            <div class="omni-field-desc">
+                                                <strong>開啟前端 Meta Pixel 追蹤碼載入</strong>
+                                                <p>啟用後會在網站所有公開前端頁面的 `<head>` 區域插入 Meta Pixel 追蹤腳本，並自動觸發基礎的 <code>PageView</code> 事件。</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Meta Pixel ID</th>
+                                    <td>
+                                        <input type="text" 
+                                               name="<?php echo esc_attr( $this->option_name ); ?>[meta_pixel_id]" 
+                                               value="<?php echo esc_attr( $settings['meta_pixel_id'] ); ?>" 
+                                               class="regular-text" 
+                                               placeholder="例如：123456789012345" 
+                                               pattern="[0-9]*" 
+                                               title="請輸入純數字的 Meta Pixel ID" />
+                                        <p class="description">請輸入您的 Meta (Facebook) 像素編號（純數字）。可在 Facebook 事件管理工具的設定頁中找到。</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">啟用進階事件追蹤</th>
+                                    <td>
+                                        <div class="omni-field-row">
+                                            <label class="omni-switch">
+                                                <input type="checkbox" name="<?php echo esc_attr( $this->option_name ); ?>[meta_pixel_advanced]" value="1" <?php checked( '1', $settings['meta_pixel_advanced'] ); ?> />
+                                                <span class="omni-slider"></span>
+                                            </label>
+                                            <div class="omni-field-desc">
+                                                <strong>自動追蹤單一內容瀏覽與搜尋行為</strong>
+                                                <p>除了基礎的 <code>PageView</code> 外，系統會自動在適當的頁面發送以下標準事件以做進階廣告受眾優化：</p>
+                                                <ul style="list-style-type: disc; margin-left: 20px; margin-top: 6px; color: #6b7280; line-height: 1.5;">
+                                                    <li><strong>單一文章/頁面 (ViewContent)</strong>：當訪客瀏覽單篇文章或頁面時發送，包含文章標題、全部分類名稱、文章 ID 與文章類型。</li>
+                                                    <li><strong>搜尋結果 (Search)</strong>：當訪客在網站進行內部搜尋時發送，包含訪客輸入的搜尋關鍵字。</li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             </table>

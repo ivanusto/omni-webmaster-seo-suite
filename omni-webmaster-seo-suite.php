@@ -24,6 +24,7 @@ require_once OMNI_WEBMASTER_DIR . 'includes/class-omni-seo-cleanup.php';
 require_once OMNI_WEBMASTER_DIR . 'includes/class-omni-disable-comments.php';
 require_once OMNI_WEBMASTER_DIR . 'includes/class-omni-disable-thumbnails.php';
 require_once OMNI_WEBMASTER_DIR . 'includes/class-omni-slug-converter.php';
+require_once OMNI_WEBMASTER_DIR . 'includes/class-omni-meta-pixel.php';
 require_once OMNI_WEBMASTER_DIR . 'includes/class-omni-admin.php';
 
 // 初始化外掛
@@ -35,6 +36,7 @@ function omni_webmaster_seo_suite_init() {
     $disable_comments   = new Omni_Disable_Comments();
     $disable_thumbnails = new Omni_Disable_Thumbnails();
     $slug_converter     = new Omni_Slug_Converter();
+    $meta_pixel         = new Omni_Meta_Pixel();
     
     // 實例化後台管理介面，傳入其他模組以做互動（如取得圖片尺寸、處理 AJAX 請求等）
     new Omni_Admin( $seo_cleanup, $disable_comments, $disable_thumbnails, $slug_converter );
