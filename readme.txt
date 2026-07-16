@@ -4,7 +4,7 @@ Tags: seo, performance, comments, thumbnails, translation
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.4
+Stable tag: 1.5
 License: Apache-2.0
 License URI: https://opensource.org/license/apache-2-0
 
@@ -50,6 +50,11 @@ No. It only deletes resized sub-sizes. Your original uploaded images remain comp
 No. This plugin uses a clean, unified settings array (`omni_webmaster_settings`) to prevent database clutter. You will need to check the desired options in the new admin settings panel.
 
 == Changelog ==
+
+= 1.5 =
+* Added Meta Pixel tracking integration.
+* Added PageView, ViewContent (on single posts/pages), and Search tracking.
+* Added Meta Pixel tracking settings tab and options in admin console.
 
 = 1.4 =
 * Fixed Google Translate API double URL-encoding issue that caused translation failures.
