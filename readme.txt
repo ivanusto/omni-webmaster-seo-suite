@@ -4,7 +4,7 @@ Tags: seo, performance, comments, thumbnails, translation
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.5
+Stable tag: 1.6
 License: Apache-2.0
 License URI: https://opensource.org/license/apache-2-0
 
@@ -50,6 +50,17 @@ No. It only deletes resized sub-sizes. Your original uploaded images remain comp
 No. This plugin uses a clean, unified settings array (`omni_webmaster_settings`) to prevent database clutter. You will need to check the desired options in the new admin settings panel.
 
 == Changelog ==
+
+= 1.6 =
+* Optimized Meta Pixel module: settings are now cached per request instead of being re-read on every output hook.
+* Added "Exclude site staff" option (enabled by default) so logged-in users with edit_posts capability are no longer tracked, keeping ad audience data clean.
+* Pixel tracking is now skipped on feeds, post previews, customizer previews, and oEmbed pages.
+* Pixel ID is strictly sanitized to digits only on save and on output.
+* Added preconnect/dns-prefetch resource hints for connect.facebook.net to speed up fbevents.js loading.
+* Advanced event parameters (ViewContent/Search) are now encoded with wp_json_encode for safer output.
+* Inline pixel script is now printed via wp_print_inline_script_tag() for CSP-nonce compatibility.
+* Fixed unescaped ampersand in the noscript fallback image URL.
+* Added omni_meta_pixel_enabled filter so themes or consent plugins can conditionally disable tracking.
 
 = 1.5 =
 * Added Meta Pixel tracking integration.

@@ -103,10 +103,11 @@ class Omni_Admin {
         // 瀏覽量自訂欄位 (Meta Key)
         $sanitized['views_meta_key']  = ! empty( $input['views_meta_key'] ) ? sanitize_text_field( trim( $input['views_meta_key'] ) ) : 'views';
         
-        // Meta Pixel 選項
-        $sanitized['meta_pixel_enable']   = isset( $input['meta_pixel_enable'] ) ? '1' : '0';
-        $sanitized['meta_pixel_id']       = isset( $input['meta_pixel_id'] ) ? sanitize_text_field( trim( $input['meta_pixel_id'] ) ) : '';
-        $sanitized['meta_pixel_advanced'] = isset( $input['meta_pixel_advanced'] ) ? '1' : '0';
+        // Meta Pixel 選項（像素編號僅由數字組成，直接過濾非數字字元）
+        $sanitized['meta_pixel_enable']         = isset( $input['meta_pixel_enable'] ) ? '1' : '0';
+        $sanitized['meta_pixel_id']             = isset( $input['meta_pixel_id'] ) ? preg_replace( '/\D/', '', sanitize_text_field( trim( $input['meta_pixel_id'] ) ) ) : '';
+        $sanitized['meta_pixel_advanced']       = isset( $input['meta_pixel_advanced'] ) ? '1' : '0';
+        $sanitized['meta_pixel_exclude_admins'] = isset( $input['meta_pixel_exclude_admins'] ) ? '1' : '0';
         
         return $sanitized;
     }
@@ -188,6 +189,7 @@ class Omni_Admin {
             'meta_pixel_enable'   => '0',
             'meta_pixel_id'       => '',
             'meta_pixel_advanced' => '0',
+            'meta_pixel_exclude_admins' => '1',
         ];
         $settings = wp_parse_args( get_option( $this->option_name, [] ), $defaults );
 
@@ -539,8 +541,9 @@ class Omni_Admin {
                                                name="<?php echo esc_attr( $this->option_name ); ?>[meta_pixel_id]" 
                                                value="<?php echo esc_attr( $settings['meta_pixel_id'] ); ?>" 
                                                class="regular-text" 
-                                               placeholder="例如：123456789012345" 
-                                               pattern="[0-9]*" 
+                                               placeholder="例如：123456789012345"
+                                               pattern="[0-9]*"
+                                               inputmode="numeric"
                                                title="請輸入純數字的 Meta Pixel ID" />
                                         <p class="description">請輸入您的 Meta (Facebook) 像素編號（純數字）。可在 Facebook 事件管理工具的設定頁中找到。</p>
                                     </td>
@@ -560,6 +563,21 @@ class Omni_Admin {
                                                     <li><strong>單一文章/頁面 (ViewContent)</strong>：當訪客瀏覽單篇文章或頁面時發送，包含文章標題、全部分類名稱、文章 ID 與文章類型。</li>
                                                     <li><strong>搜尋結果 (Search)</strong>：當訪客在網站進行內部搜尋時發送，包含訪客輸入的搜尋關鍵字。</li>
                                                 </ul>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">排除網站管理人員</th>
+                                    <td>
+                                        <div class="omni-field-row">
+                                            <label class="omni-switch">
+                                                <input type="checkbox" name="<?php echo esc_attr( $this->option_name ); ?>[meta_pixel_exclude_admins]" value="1" <?php checked( '1', $settings['meta_pixel_exclude_admins'] ); ?> />
+                                                <span class="omni-slider"></span>
+                                            </label>
+                                            <div class="omni-field-desc">
+                                                <strong>不追蹤登入中的管理員與編輯</strong>
+                                                <p>啟用後，具備文章編輯權限（<code>edit_posts</code>）的登入使用者瀏覽前台時將不會載入 Pixel 追蹤碼，避免站方人員自身的瀏覽行為污染廣告受眾與轉換數據（建議保持開啟）。</p>
                                             </div>
                                         </div>
                                     </td>
