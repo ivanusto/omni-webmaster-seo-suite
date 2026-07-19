@@ -4,3 +4,6 @@ Thumbs.db
 *.log
 node_modules/
 vendor/
+
+# Distribution archives
+*.zip

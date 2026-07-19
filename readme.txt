@@ -4,7 +4,7 @@ Tags: seo, performance, comments, thumbnails, translation
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.6
+Stable tag: 1.7
 License: Apache-2.0
 License URI: https://opensource.org/license/apache-2-0
 
@@ -31,6 +31,7 @@ This plugin incorporates the following major components:
 
 4. Slug Translator
    Auto Chinese Title to English Slug: Integrates with Google Cloud Translation API to translate Chinese titles into clean, lowercase English URL slugs, preventing duplicate URLs and character overflow.
+   This module shares its core logic with the standalone plugin Chinese to English Slug Converter (zh-to-en-slug): https://github.com/ivanusto/zh-to-en-slug — use the standalone plugin if slug translation is the only feature you need.
 
 == Installation ==
 
@@ -41,7 +42,7 @@ This plugin incorporates the following major components:
 == Frequently Asked Questions ==
 
 = Does translation require an API Key? =
-Yes, auto-translation utilizes Google Cloud Translation API. You need to create an API key in Google Cloud Console. If left blank, translation will be inactive while other optimizations continue to work.
+No, an API key is optional. With a Google Cloud Translation API key configured, the official Cloud API is used. If the key is left blank (or a Cloud API call fails), the plugin falls back to the key-less public Google Translate endpoint automatically.
 
 = Does deleting thumbnails delete my original images? =
 No. It only deletes resized sub-sizes. Your original uploaded images remain completely safe.
@@ -50,6 +51,16 @@ No. It only deletes resized sub-sizes. Your original uploaded images remain comp
 No. This plugin uses a clean, unified settings array (`omni_webmaster_settings`) to prevent database clutter. You will need to check the desired options in the new admin settings panel.
 
 == Changelog ==
+
+= 1.7 =
+* Rewrote the Slug Translator module to align with the standalone zh-to-en-slug plugin (v1.2.2) implementation, with shared API-call helpers for the save-time translation and the AJAX key test.
+* Cloud Translation API requests now ask for plain-text responses (format=text) so HTML entities can no longer pollute generated slugs.
+* Translation now only runs for an allow-list of post statuses (draft, publish, future, pending, private), customizable via the new omni_slug_allowed_statuses filter.
+* Plugin settings are now loaded lazily on first use instead of on every page load.
+* Hardened the AJAX API test endpoint: added a manage_options capability check and escaped all dynamic output.
+* Generated slugs now keep a minimum length of 8 characters, and the max-length setting is clamped to 20-200 so the ID reserve can no longer truncate slugs to an empty string.
+* Fixed the OMNI_WEBMASTER_VERSION constant lagging behind the actual plugin version.
+* Documentation: corrected the API-key FAQ (key-less fallback) and cross-linked the standalone zh-to-en-slug project.
 
 = 1.6 =
 * Optimized Meta Pixel module: settings are now cached per request instead of being re-read on every output hook.
