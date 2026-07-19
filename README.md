@@ -29,6 +29,9 @@ An all-in-one WordPress performance & SEO suite for webmasters: cleans the HTML 
 - **Meta (Facebook) Pixel integration**: PageView, ViewContent (single posts/pages), and Search event tracking.
 - **Clean audience data**: Site staff (logged-in users with `edit_posts`) are excluded by default; feeds, previews, and oEmbed pages are never tracked.
 
+### 6. Post Data Export
+- **Monthly CSV export**: Preview and export post data by month — including a configurable page-view meta key — straight from the admin panel.
+
 ## Requirements
 
 - WordPress 6.0 or higher
@@ -57,9 +60,18 @@ No. This plugin uses a clean, unified settings array (`omni_webmaster_settings`)
 
 See the Changelog section in [readme.txt](readme.txt) for the full version history.
 
-## Related Project
+## Origin Projects
 
-- [Chinese to English Slug Converter (zh-to-en-slug)](https://github.com/ivanusto/zh-to-en-slug) — the standalone, single-purpose version of this suite's Slug Translator module.
+This suite grew out of six standalone plugins previously written by the author. Their functionality was consolidated and optimized into one cohesive toolkit, with Meta Pixel tracking and monthly post data export added on top:
+
+- [disable-all-thumbnails](https://github.com/ivanusto/disable-all-thumbnails) — prevent the generation of specific thumbnail formats in WordPress
+- [disable-all-comments](https://github.com/ivanusto/disable-all-comments) — completely disable all comment features in WordPress
+- [zh-to-en-slug](https://github.com/ivanusto/zh-to-en-slug) — automatically translate Chinese post titles to English slugs (still maintained in sync with this suite's Slug Translator module)
+- [smart-image-upload-resizer](https://github.com/ivanusto/smart-image-upload-resizer) — automatically resize uploaded images and convert them to WebP
+- [smart-file-renamer](https://github.com/ivanusto/smart-file-renamer) — rename files with accents and special characters during upload for better SEO
+- [modern-rss-image-feed](https://github.com/ivanusto/modern-rss-image-feed) — add modern image formats (WebP, AVIF) support to RSS feeds
+
+If you only need a single feature, the standalone plugins remain available.
 
 ## License
 

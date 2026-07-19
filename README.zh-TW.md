@@ -29,6 +29,9 @@
 - **Meta（Facebook）Pixel 整合**：自動載入 PageView、ViewContent（單篇文章與頁面）與 Search 事件追蹤。
 - **乾淨的受眾資料**：預設排除網站工作人員（具 `edit_posts` 權限的登入使用者），並且不在 feed、預覽與 oEmbed 頁面載入追蹤代碼。
 
+### 6. 文章數據匯出
+- **按月 CSV 匯出**：直接在後台預覽並按月份匯出文章數據，支援自訂瀏覽量欄位（Meta Key）。
+
 ## 系統需求
 
 - WordPress 6.0 或更高版本
@@ -57,9 +60,18 @@
 
 完整版本紀錄請參閱 [readme.txt](readme.txt) 的 Changelog 章節。
 
-## 相關專案
+## 專案起源
 
-- [Chinese to English Slug Converter (zh-to-en-slug)](https://github.com/ivanusto/zh-to-en-slug)——本套件「網址代稱翻譯」模組的獨立單一功能版本。
+本套件由作者先前撰寫的六個獨立外掛整合最佳化而來，並額外加入 Meta Pixel 追蹤與文章數據按月匯出功能：
+
+- [disable-all-thumbnails](https://github.com/ivanusto/disable-all-thumbnails)——停用 WordPress 指定縮圖格式的生成
+- [disable-all-comments](https://github.com/ivanusto/disable-all-comments)——完全禁用 WordPress 網站的所有留言功能
+- [zh-to-en-slug](https://github.com/ivanusto/zh-to-en-slug)——自動將中文文章標題翻譯成英文 Slug（仍持續維護，並與本套件的網址代稱翻譯模組同步）
+- [smart-image-upload-resizer](https://github.com/ivanusto/smart-image-upload-resizer)——圖片上傳自動縮圖並轉換 WebP
+- [smart-file-renamer](https://github.com/ivanusto/smart-file-renamer)——上傳時自動重新命名含變音符號與特殊字元的檔案以提升 SEO
+- [modern-rss-image-feed](https://github.com/ivanusto/modern-rss-image-feed)——為 RSS 訂閱源提供現代圖片格式（WebP、AVIF）支援
+
+若您只需要單一功能，這些獨立外掛皆可繼續使用。
 
 ## 授權條款
 

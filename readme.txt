@@ -33,6 +33,23 @@ This plugin incorporates the following major components:
    Auto Chinese Title to English Slug: Integrates with Google Cloud Translation API to translate Chinese titles into clean, lowercase English URL slugs, preventing duplicate URLs and character overflow.
    This module shares its core logic with the standalone plugin Chinese to English Slug Converter (zh-to-en-slug): https://github.com/ivanusto/zh-to-en-slug — use the standalone plugin if slug translation is the only feature you need.
 
+5. Meta Pixel Tracking
+   Meta (Facebook) Pixel integration with PageView, ViewContent, and Search event tracking. Site staff are excluded by default to keep ad audience data clean.
+
+6. Post Data Export
+   Preview and export monthly post data (including a configurable page-view meta key) as CSV from the admin panel.
+
+= Origin Projects =
+
+This suite grew out of six standalone plugins previously written by the author, consolidated and optimized into one toolkit:
+
+* disable-all-thumbnails: https://github.com/ivanusto/disable-all-thumbnails
+* disable-all-comments: https://github.com/ivanusto/disable-all-comments
+* zh-to-en-slug: https://github.com/ivanusto/zh-to-en-slug
+* smart-image-upload-resizer: https://github.com/ivanusto/smart-image-upload-resizer
+* smart-file-renamer: https://github.com/ivanusto/smart-file-renamer
+* modern-rss-image-feed: https://github.com/ivanusto/modern-rss-image-feed
+
 == Installation ==
 
 1. Upload the `omni-webmaster-seo-suite` folder to the `/wp-content/plugins/` directory.
