@@ -98,7 +98,8 @@ class Omni_Admin {
         
         // 中英 Slug 選項
         $sanitized['slug_api_key']    = isset( $input['slug_api_key'] ) ? sanitize_text_field( $input['slug_api_key'] ) : '';
-        $sanitized['slug_max_length'] = isset( $input['slug_max_length'] ) ? max( 5, min( 200, absint( $input['slug_max_length'] ) ) ) : 30;
+        // 夾在 20-200 之間，避免扣除 ID 保留空間後 slug 長度歸零
+        $sanitized['slug_max_length'] = isset( $input['slug_max_length'] ) ? max( 20, min( 200, absint( $input['slug_max_length'] ) ) ) : 30;
 
         // 瀏覽量自訂欄位 (Meta Key)
         $sanitized['views_meta_key']  = ! empty( $input['views_meta_key'] ) ? sanitize_text_field( trim( $input['views_meta_key'] ) ) : 'views';
@@ -502,8 +503,8 @@ class Omni_Admin {
                                         <input type="number" 
                                                name="<?php echo esc_attr( $this->option_name ); ?>[slug_max_length]" 
                                                value="<?php echo esc_attr( $settings['slug_max_length'] ); ?>" 
-                                               class="small-text" 
-                                               min="5" 
+                                               class="small-text"
+                                               min="20"
                                                max="200" />
                                         <p class="description">產生的英文網址最大字元數（建議為 30 至 50 之間）。系統會自動預留 12 個字元供後續追加文章 ID 做防重複保護。</p>
                                     </td>
