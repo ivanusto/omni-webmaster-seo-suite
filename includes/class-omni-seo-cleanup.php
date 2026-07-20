@@ -218,7 +218,7 @@ class Omni_SEO_Cleanup {
                 border-radius: 4px;
             }
         ';
-        wp_register_style( 'omni-embed-styles', false );
+        wp_register_style( 'omni-embed-styles', false, [], OMNI_WEBMASTER_VERSION );
         wp_enqueue_style( 'omni-embed-styles' );
         wp_add_inline_style( 'omni-embed-styles', $css );
     }
@@ -269,7 +269,7 @@ class Omni_SEO_Cleanup {
                 color: #e6e6e6 !important;
             }
         ';
-        wp_register_style( 'omni-gist-styles', false );
+        wp_register_style( 'omni-gist-styles', false, [], OMNI_WEBMASTER_VERSION );
         wp_enqueue_style( 'omni-gist-styles' );
         wp_add_inline_style( 'omni-gist-styles', $css );
     }
