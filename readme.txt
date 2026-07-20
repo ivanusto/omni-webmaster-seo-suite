@@ -1,5 +1,5 @@
 === Omni Webmaster & SEO Suite ===
-Contributors: Ivan Lin
+Contributors: ivanusto
 Tags: seo, performance, comments, thumbnails, translation
 Requires at least: 6.0
 Tested up to: 7.0
@@ -49,6 +49,24 @@ This suite grew out of six standalone plugins previously written by the author, 
 * smart-image-upload-resizer: https://github.com/ivanusto/smart-image-upload-resizer
 * smart-file-renamer: https://github.com/ivanusto/smart-file-renamer
 * modern-rss-image-feed: https://github.com/ivanusto/modern-rss-image-feed
+
+== External Services ==
+
+This plugin utilizes third-party and external services to provide specific functionalities:
+
+1. Google Cloud Translation API & Google Translate Public Endpoint:
+   * What it is: Used to translate Chinese post titles into English lowercase slugs.
+   * Data sent: The text of the post title is sent to Google's translation endpoints when a post with a Chinese title is created or updated. No personally identifiable information (PII) or user data is transmitted.
+   * Terms and Privacy:
+     * Google Terms of Service: https://policies.google.com/terms
+     * Google Privacy Policy: https://policies.google.com/privacy
+
+2. Meta (Facebook) Pixel:
+   * What it is: Used for tracking website visitor interactions (PageView, ViewContent, and Search events) for analytics and advertising.
+   * Data sent: Sends visitor interaction data (visited page URL, search queries) to Meta. By default, logged-in site staff (users with `edit_posts` capability) are excluded, and tracking is disabled on feeds, previews, and oEmbed pages.
+   * Terms and Privacy:
+     * Meta Business Tools Terms: https://www.facebook.com/legal/controller_addendum
+     * Meta Privacy Policy: https://www.facebook.com/privacy/policy/
 
 == Installation ==
 

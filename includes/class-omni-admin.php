@@ -200,10 +200,6 @@ class Omni_Admin {
             $active_tab = 'seo';
         }
         ?>
-        <style>
-            .omni-tab-panel { display: none !important; }
-            .omni-tab-panel.is-active { display: block !important; }
-        </style>
         <div class="wrap omni-settings-wrap">
             <header class="omni-header">
                 <div class="omni-header-title">

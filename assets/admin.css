@@ -144,11 +144,11 @@
 }
 
 .omni-tab-panel {
-    display: none;
+    display: none !important;
 }
 
 .omni-tab-panel.is-active {
-    display: block;
+    display: block !important;
     animation: fadeIn 0.35s ease;
 }
 

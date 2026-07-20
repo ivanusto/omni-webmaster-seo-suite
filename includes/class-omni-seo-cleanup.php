@@ -41,12 +41,12 @@ class Omni_SEO_Cleanup {
 
         // 5. WP 嵌入區塊樣式 (Embed Card)
         if ( ! empty( $settings['embed_styles'] ) ) {
-            add_action( 'embed_head', [ $this, 'custom_embed_styles' ], 999 );
+            add_action( 'enqueue_embed_scripts', [ $this, 'enqueue_embed_styles' ] );
         }
 
         // 6. GitHub Gist 樣式修正
         if ( ! empty( $settings['gist_styles'] ) ) {
-            add_action( 'wp_footer', [ $this, 'custom_gist_styles' ], 999 );
+            add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_gist_styles' ] );
         }
     }
 
@@ -194,46 +194,40 @@ class Omni_SEO_Cleanup {
     /**
      * WP 嵌入區塊樣式 (Embed Card)
      */
-    public function custom_embed_styles() {
-        echo '<style>
-            /* 核心修正：同時針對 body 和 .wp-embed 設定背景 */
+    public function enqueue_embed_styles() {
+        $css = '
             body, .wp-embed {
-                background-color: #1a1a1a !important; /* 深色背景 */
-                color: #ffffff !important; /* 預設文字改為白色 */
+                background-color: #1a1a1a !important;
+                color: #ffffff !important;
             }
-            /* 確保標題是白色且清楚 */
             .wp-embed-heading a {
                 color: #ffffff !important;
                 text-decoration: none;
                 font-weight: bold;
             }
-            /* 摘要文字顏色 - 稍微調亮一點以利閱讀 */
             .wp-embed-excerpt {
                 color: #dddddd !important; 
             }
-            /* 底部 Meta 資訊 */
             .wp-embed-site-title a,
             .wp-embed-meta {
                 color: #bbbbbb !important;
             }
-            /* 去除預設的白色邊框與陰影，改用深色邊框 */
             .wp-embed {
                 border: 1px solid #333333 !important;
                 box-shadow: none !important;
-                border-radius: 4px; /* 加一點圓角比較現代 */
+                border-radius: 4px;
             }
-        </style>';
+        ';
+        wp_register_style( 'omni-embed-styles', false );
+        wp_enqueue_style( 'omni-embed-styles' );
+        wp_add_inline_style( 'omni-embed-styles', $css );
     }
 
     /**
      * GitHub Gist 樣式修正
      */
-    public function custom_gist_styles() {
-        echo '<style>
-            /* =========================================================================
-               針對 GitHub Gist 嵌入樣式 (非 Iframe，而是 Javascript 生成) 的暗色修正
-               ========================================================================= */
-            
+    public function enqueue_gist_styles() {
+        $css = '
             /* 1. 全域容器與程式碼區域背景 */
             .gist .gist-file, .gist div.gist-data {
                 background-color: #1a1a1a !important;
@@ -260,11 +254,7 @@ class Omni_SEO_Cleanup {
                 color: #ffffff !important;
             }
             
-            /* =========================================================================
-               補強：修正 GitHub Gist 語法高亮區塊 (.blob-code) 的頑固白色背景
-               ========================================================================= */
-            
-            /* 強制將內部表格、語法高亮區塊與每一行程式碼的背景改為深色 */
+            /* 5. 修正 GitHub Gist 語法高亮區塊 (.blob-code) 的頑固白色背景 */
             .gist .blob-code,
             .gist .blob-wrapper,
             .gist .highlight,
@@ -272,13 +262,15 @@ class Omni_SEO_Cleanup {
             .gist table.highlight tr,
             .gist table.highlight td {
                 background-color: #1a1a1a !important;
-                border: none !important; /* 移除可能的內部細線 */
+                border: none !important;
             }
             
-            /* 確保預設的純文字（如註解或沒有高亮的變數）在黑底上是清晰的淺色 */
             .gist .blob-code-inner {
                 color: #e6e6e6 !important;
             }
-        </style>';
+        ';
+        wp_register_style( 'omni-gist-styles', false );
+        wp_enqueue_style( 'omni-gist-styles' );
+        wp_add_inline_style( 'omni-gist-styles', $css );
     }
 }

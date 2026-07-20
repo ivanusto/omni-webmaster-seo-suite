@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Omni Webmaster & SEO Suite
- * Plugin URI:  https://yblog.org/plugins/omni-webmaster-seo-suite
+ * Plugin URI:  https://github.com/ivanusto/omni-webmaster-seo-suite
  * Description: 一站式 WordPress 網站優化與 SEO 站長工具。整合了 SEO 標記優化、進階 RSS 控制、中文標題自動翻譯、完全禁用留言以及選擇性停用圖片縮圖與一鍵批次清理功能。
  * Version:     1.7
  * Author:      Ivan Lin
