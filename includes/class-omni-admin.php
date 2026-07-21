@@ -81,6 +81,7 @@ class Omni_Admin {
         $sanitized['clean_sitemap'] = isset( $input['clean_sitemap'] ) ? '1' : '0';
         $sanitized['embed_styles']  = isset( $input['embed_styles'] ) ? '1' : '0';
         $sanitized['gist_styles']   = isset( $input['gist_styles'] ) ? '1' : '0';
+        $sanitized['xmlrpc_hardening'] = isset( $input['xmlrpc_hardening'] ) ? '1' : '0';
         
         // 留言禁用選項
         $sanitized['disable_comments'] = isset( $input['disable_comments'] ) ? '1' : '0';
@@ -192,6 +193,7 @@ class Omni_Admin {
             'clean_sitemap'       => '1',
             'embed_styles'        => '0',
             'gist_styles'         => '0',
+            'xmlrpc_hardening'    => '0',
             'disable_comments'    => '0',
             'disabled_sizes'      => [],
             'slug_api_key'        => '',
@@ -312,6 +314,22 @@ class Omni_Admin {
                                             <div class="omni-field-desc">
                                                 <strong>從網站地圖中移除標籤 (Tags)</strong>
                                                 <p>從 WP 原生 Sitemap 結構中徹底拔除 `post_tag` 項目，保留主要文章與作者目錄，精簡 Sitemap 指向。</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">XML-RPC 安全強化</th>
+                                    <td>
+                                        <div class="omni-field-row">
+                                            <label class="omni-switch">
+                                                <input type="checkbox" name="<?php echo esc_attr( $this->option_name ); ?>[xmlrpc_hardening]" value="1" <?php checked( '1', $settings['xmlrpc_hardening'] ); ?> />
+                                                <span class="omni-slider"></span>
+                                            </label>
+                                            <div class="omni-field-desc">
+                                                <strong>移除所有 WordPress XML-RPC 方法</strong>
+                                                <p>清除 <code>xmlrpc.php</code> 中全部 WordPress 方法（<code>wp.*</code>、<code>metaWeblog.*</code>、<code>pingback.*</code> 等），僅保留三個無害的系統方法，阻斷繞過登入頁防護的<strong>暴力破解</strong>與 pingback 濫用攻擊面，同時移除 <code>X-Pingback</code> 回應標頭。不依賴 .htaccess，相容任何伺服器。</p>
+                                                <p style="color: #d97706;"><span class="dashicons dashicons-info-outline" style="font-size: 15px; width: 15px; height: 15px; vertical-align: text-top;"></span> 若您仍在使用 Jetpack 或依賴 XML-RPC 的舊版離線編輯器，請勿啟用此選項。</p>
                                             </div>
                                         </div>
                                     </td>

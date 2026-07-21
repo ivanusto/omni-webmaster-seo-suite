@@ -4,7 +4,7 @@
 
 一站式 WordPress 網站優化與 SEO 站長工具：清理 HTML head、進階 RSS 控制、完全停用留言、選擇性停用縮圖與批次清理、中文標題自動翻譯英文網址，以及 Meta Pixel 廣告追蹤整合——全部集中在單一設定面板管理。
 
-![Version](https://img.shields.io/badge/version-1.8-blue) ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759b) ![PHP](https://img.shields.io/badge/PHP-7.4%2B-777bb4) ![License](https://img.shields.io/badge/license-Apache--2.0-green)
+![Version](https://img.shields.io/badge/version-1.9-blue) ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759b) ![PHP](https://img.shields.io/badge/PHP-7.4%2B-777bb4) ![License](https://img.shields.io/badge/license-Apache--2.0-green)
 
 ## 功能模組
 
@@ -13,6 +13,7 @@
 - **HTML Head 清理**：移除多餘的 feed 連結、RSD、WLManifest、shortlink 與 REST API header 標記。
 - **Robots Meta 客製化**：自動將標籤彙整頁、日期彙整頁、站內搜尋與深層分頁（第 3 頁以上）標記為 `noindex, follow`，集中搜尋權重。
 - **Sitemap 淨化**：從 WordPress 原生 sitemap 排除 `post_tag`，避免低品質彙整頁被索引。
+- **XML-RPC 安全強化**（選用）：移除全部 WordPress XML-RPC 方法（`wp.*`、`metaWeblog.*`、`pingback.*` 等），僅保留三個無害的系統方法——阻斷 `xmlrpc.php` 暴力破解與 pingback 濫用，相容任何伺服器、不依賴 `.htaccess`。
 
 ### 2. 留言控制
 - **全面停用留言**：一次關閉所有文章類型的留言、引用（trackback）與 pingback，隱藏歷史留言並移除後台的留言選單與小工具。

@@ -48,6 +48,13 @@ class Omni_SEO_Cleanup {
         if ( ! empty( $settings['gist_styles'] ) ) {
             add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_gist_styles' ] );
         }
+
+        // 7. XML-RPC 安全強化
+        if ( ! empty( $settings['xmlrpc_hardening'] ) ) {
+            // priority 999：晚於其他外掛註冊，確保過濾結果為最終清單
+            add_filter( 'xmlrpc_methods', [ $this, 'harden_xmlrpc_methods' ], 999 );
+            add_filter( 'wp_headers', [ $this, 'remove_x_pingback_header' ] );
+        }
     }
 
     /**
@@ -59,8 +66,9 @@ class Omni_SEO_Cleanup {
             'cleanup_head'  => '1',
             'robots_meta'   => '1',
             'clean_sitemap' => '1',
-            'embed_styles'  => '0',
-            'gist_styles'   => '0',
+            'embed_styles'     => '0',
+            'gist_styles'      => '0',
+            'xmlrpc_hardening' => '0',
         ];
         return wp_parse_args( get_option( 'omni_webmaster_settings', [] ), $defaults );
     }
@@ -179,6 +187,27 @@ class Omni_SEO_Cleanup {
             }
         }
         return $robots;
+    }
+
+    /**
+     * XML-RPC 安全強化：移除所有 WordPress 方法（wp.*、metaWeblog.*、blogger.*、
+     * mt.*、pingback.* 等），僅保留三個無害的系統方法。
+     *
+     * 需認證的方法（如 wp.getUsersBlogs）是繞過 wp-login.php 防護、
+     * 直接對 xmlrpc.php 進行暴力破解的主要目標；移除後即使 system.multicall
+     * 仍在，也沒有任何可打包呼叫的攻擊面。不依賴 .htaccess，相容任何伺服器。
+     */
+    public function harden_xmlrpc_methods( $methods ) {
+        $allowed = [ 'system.multicall', 'system.listMethods', 'system.getCapabilities' ];
+        return array_intersect_key( $methods, array_flip( $allowed ) );
+    }
+
+    /**
+     * 移除 HTTP 回應標頭中的 X-Pingback，不再對外宣告 XML-RPC 端點位置
+     */
+    public function remove_x_pingback_header( $headers ) {
+        unset( $headers['X-Pingback'] );
+        return $headers;
     }
 
     /**

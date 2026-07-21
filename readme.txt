@@ -4,7 +4,7 @@ Tags: seo, performance, comments, thumbnails, translation
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.8
+Stable tag: 1.9
 License: Apache-2.0
 License URI: https://opensource.org/license/apache-2-0
 
@@ -21,6 +21,7 @@ This plugin incorporates the following major components:
    HTML Head Cleanup: Removes redundant feed links, RSD, WLManifest, shortlink, and REST API header markings.
    Robots Meta Customization: Automatically tags tags archive, date archive, internal search, and deep pagination (page 3+) as `noindex, follow` to focus search authority.
    Sitemap Sanitization: Excludes `post_tag` from WordPress native sitemaps to prevent indexing low-quality archive pages.
+   XML-RPC Hardening: Optionally strips all WordPress XML-RPC methods (wp.*, metaWeblog.*, blogger.*, mt.*, pingback.*), keeping only three harmless system methods, to shut down xmlrpc.php brute-force and pingback abuse without touching .htaccess. Also removes the X-Pingback response header.
 
 2. Comments Control
    Disable Comments Everywhere: Completely turn off comments, trackbacks, and pingbacks across all post types. Hides historical comments and removes comment menus and widgets from the WordPress dashboard.
@@ -89,6 +90,11 @@ No. It only deletes resized sub-sizes. Your original uploaded images remain comp
 No. This plugin uses a clean, unified settings array (`omni_webmaster_settings`) to prevent database clutter. You will need to check the desired options in the new admin settings panel.
 
 == Changelog ==
+
+= 1.9 =
+* Added XML-RPC Security Hardening option (SEO tab, off by default): removes all WordPress XML-RPC methods (wp.*, metaWeblog.*, blogger.*, mt.*, pingback.*), keeping only system.multicall, system.listMethods, and system.getCapabilities.
+* Blocks xmlrpc.php credential brute-force (e.g. via wp.getUsersBlogs) and pingback amplification abuse; works on any web server without .htaccess rules.
+* Removes the X-Pingback response header when hardening is enabled.
 
 = 1.8 =
 * Added Homepage Meta Tags & Structured Data module: outputs Meta Description, Open Graph tags (og:type/site_name/title/description/url/image/locale, twitter:card), and Schema.org WebSite + Organization JSON-LD on the homepage.

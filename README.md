@@ -4,7 +4,7 @@
 
 An all-in-one WordPress performance & SEO suite for webmasters: cleans the HTML head, restricts RSS feeds, disables comments and thumbnails, translates Chinese URL slugs into English, and integrates Meta Pixel tracking — all from a single unified settings panel.
 
-![Version](https://img.shields.io/badge/version-1.8-blue) ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759b) ![PHP](https://img.shields.io/badge/PHP-7.4%2B-777bb4) ![License](https://img.shields.io/badge/license-Apache--2.0-green)
+![Version](https://img.shields.io/badge/version-1.9-blue) ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759b) ![PHP](https://img.shields.io/badge/PHP-7.4%2B-777bb4) ![License](https://img.shields.io/badge/license-Apache--2.0-green)
 
 ## Modules
 
@@ -13,6 +13,7 @@ An all-in-one WordPress performance & SEO suite for webmasters: cleans the HTML 
 - **HTML Head Cleanup**: Removes redundant feed links, RSD, WLManifest, shortlink, and REST API header markings.
 - **Robots Meta Customization**: Automatically tags tag archives, date archives, internal search, and deep pagination (page 3+) as `noindex, follow` to focus search authority.
 - **Sitemap Sanitization**: Excludes `post_tag` from WordPress native sitemaps to prevent indexing low-quality archive pages.
+- **XML-RPC Hardening** (optional): Strips all WordPress XML-RPC methods (`wp.*`, `metaWeblog.*`, `pingback.*`, …), keeping only three harmless system methods — shuts down `xmlrpc.php` brute-force and pingback abuse on any server, no `.htaccess` needed.
 
 ### 2. Comments Control
 - **Disable Comments Everywhere**: Completely turn off comments, trackbacks, and pingbacks across all post types. Hides historical comments and removes comment menus and widgets from the dashboard.
