@@ -72,7 +72,7 @@
 - [disable-all-thumbnails](https://github.com/ivanusto/disable-all-thumbnails)——停用 WordPress 指定縮圖格式的生成
 - [disable-all-comments](https://github.com/ivanusto/disable-all-comments)——完全禁用 WordPress 網站的所有留言功能
 - [zh-to-en-slug](https://github.com/ivanusto/zh-to-en-slug)——自動將中文文章標題翻譯成英文 Slug（仍持續維護，並與本套件的網址代稱翻譯模組同步）
-- [smart-image-upload-resizer](https://github.com/ivanusto/smart-image-upload-resizer)——圖片上傳自動縮圖並轉換 WebP
+- [smart-image-upload-resizer](https://github.com/ivanusto/smart-image-upload-resizer)——圖片上傳自動縮圖並 WebP / AFIV 
 - [smart-file-renamer](https://github.com/ivanusto/smart-file-renamer)——上傳時自動重新命名含變音符號與特殊字元的檔案以提升 SEO
 - [modern-rss-image-feed](https://github.com/ivanusto/modern-rss-image-feed)——為 RSS 訂閱源提供現代圖片格式（WebP、AVIF）支援
 
