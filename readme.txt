@@ -4,7 +4,7 @@ Tags: seo, performance, comments, thumbnails, translation
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.9
+Stable tag: 2.0
 License: Apache-2.0
 License URI: https://opensource.org/license/apache-2-0
 
@@ -90,6 +90,11 @@ No. It only deletes resized sub-sizes. Your original uploaded images remain comp
 No. This plugin uses a clean, unified settings array (`omni_webmaster_settings`) to prevent database clutter. You will need to check the desired options in the new admin settings panel.
 
 == Changelog ==
+
+= 2.0 =
+* Resolved official WordPress.org Plugin Directory review feedback: removed persistent database updates to core media size options (thumbnail_size_w/h) so core media settings remain intact.
+* Replaced direct style tag outputs with wp_add_inline_style() calls using version tags for cleaner CSP compliance and caching.
+* Added External Services section in readme.txt to comply with Guideline 6 regarding Google Translate and Meta Pixel.
 
 = 1.9 =
 * Added XML-RPC Security Hardening option (SEO tab, off by default): removes all WordPress XML-RPC methods (wp.*, metaWeblog.*, blogger.*, mt.*, pingback.*), keeping only system.multicall, system.listMethods, and system.getCapabilities.
