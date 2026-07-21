@@ -175,12 +175,6 @@ class Omni_Disable_Thumbnails {
         
         foreach ( $disabled_sizes as $size ) {
             remove_image_size( $size );
-            
-            // 如果是 WordPress 內建尺寸，將其寬高設為 0 以防生成
-            if ( in_array( $size, [ 'thumbnail', 'medium', 'large' ], true ) ) {
-                update_option( "{$size}_size_w", 0 );
-                update_option( "{$size}_size_h", 0 );
-            }
         }
     }
 
