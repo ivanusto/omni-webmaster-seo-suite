@@ -109,7 +109,14 @@ class Omni_Admin {
         $sanitized['meta_pixel_id']             = isset( $input['meta_pixel_id'] ) ? preg_replace( '/\D/', '', sanitize_text_field( trim( $input['meta_pixel_id'] ) ) ) : '';
         $sanitized['meta_pixel_advanced']       = isset( $input['meta_pixel_advanced'] ) ? '1' : '0';
         $sanitized['meta_pixel_exclude_admins'] = isset( $input['meta_pixel_exclude_admins'] ) ? '1' : '0';
-        
+
+        // 首頁 Meta 標籤與結構化資料選項
+        $sanitized['meta_tags_enable']      = isset( $input['meta_tags_enable'] ) ? '1' : '0';
+        $sanitized['home_meta_description'] = isset( $input['home_meta_description'] ) ? sanitize_textarea_field( $input['home_meta_description'] ) : '';
+        $sanitized['og_default_image']      = isset( $input['og_default_image'] ) ? esc_url_raw( trim( $input['og_default_image'] ) ) : '';
+        $sanitized['site_alternate_name']   = isset( $input['site_alternate_name'] ) ? sanitize_text_field( trim( $input['site_alternate_name'] ) ) : '';
+        $sanitized['schema_website_enable'] = isset( $input['schema_website_enable'] ) ? '1' : '0';
+
         return $sanitized;
     }
 
@@ -121,6 +128,9 @@ class Omni_Admin {
             return;
         }
         
+        // 媒體庫選取器（供 og:image 分享圖選取使用）
+        wp_enqueue_media();
+
         wp_enqueue_style(
             'omni-webmaster-admin-css',
             OMNI_WEBMASTER_URL . 'assets/admin.css',
@@ -191,6 +201,11 @@ class Omni_Admin {
             'meta_pixel_id'       => '',
             'meta_pixel_advanced' => '0',
             'meta_pixel_exclude_admins' => '1',
+            'meta_tags_enable'      => '0',
+            'home_meta_description' => '',
+            'og_default_image'      => '',
+            'site_alternate_name'   => '',
+            'schema_website_enable' => '1',
         ];
         $settings = wp_parse_args( get_option( $this->option_name, [] ), $defaults );
 
@@ -344,6 +359,96 @@ class Omni_Admin {
                                             </div>
                                         </div>
                                         <div id="omni-oembed-clear-result" style="margin-top: 10px; font-weight: 500; display: none;"></div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <hr style="margin: 30px 0; border: 0; border-top: 1px solid #e5e7eb;" />
+
+                            <h3>首頁 Meta 標籤與結構化資料</h3>
+                            <p class="section-desc">在未安裝大型 SEO 外掛時，於首頁輸出 Meta Description、Open Graph 社群分享標籤與 Schema.org（WebSite / Organization）結構化資料。單篇文章頁的 OG 標籤請交由佈景主題處理，本區僅作用於首頁。</p>
+
+                            <?php $seo_conflict = Omni_Meta_Tags::detect_seo_plugin(); ?>
+                            <?php if ( '' !== $seo_conflict ) : ?>
+                                <div class="omni-alert omni-alert-warning" style="margin-bottom: 15px;">
+                                    <span class="dashicons dashicons-warning"></span> 偵測到「<?php echo esc_html( $seo_conflict ); ?>」外掛。為避免重複輸出 meta 標籤造成衝突，本區設定將保留但<strong>自動停止前台輸出</strong>，直到該外掛停用為止。
+                                </div>
+                            <?php endif; ?>
+
+                            <table class="form-table omni-form-table">
+                                <tr>
+                                    <th scope="row">啟用首頁 Meta 標籤</th>
+                                    <td>
+                                        <div class="omni-field-row">
+                                            <label class="omni-switch">
+                                                <input type="checkbox" name="<?php echo esc_attr( $this->option_name ); ?>[meta_tags_enable]" value="1" <?php checked( '1', $settings['meta_tags_enable'] ); ?> />
+                                                <span class="omni-slider"></span>
+                                            </label>
+                                            <div class="omni-field-desc">
+                                                <strong>於首頁輸出 Meta Description 與 Open Graph 標籤</strong>
+                                                <p>僅在首頁第一頁輸出（分頁不重複），包含 <code>description</code>、<code>og:title</code>、<code>og:description</code>、<code>og:url</code>、<code>og:image</code>、<code>og:locale</code> 與 <code>twitter:card</code>。</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">首頁 Meta Description</th>
+                                    <td>
+                                        <textarea id="omni_home_meta_description"
+                                                  name="<?php echo esc_attr( $this->option_name ); ?>[home_meta_description]"
+                                                  rows="3"
+                                                  class="large-text"
+                                                  maxlength="300"
+                                                  placeholder="例如：yBlog 分享網站架設教學、軟體工具評測與生活記事，提供實用的教學筆記與站長經驗談。"><?php echo esc_textarea( $settings['home_meta_description'] ); ?></textarea>
+                                        <p class="description">建議 90 至 160 個字元，過長會在搜尋結果中被截斷。目前字數：<strong id="omni-meta-desc-count">0</strong></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">預設社群分享圖 (og:image)</th>
+                                    <td>
+                                        <div style="display: flex; gap: 8px; align-items: flex-start; flex-wrap: wrap;">
+                                            <input type="url"
+                                                   id="omni_og_default_image"
+                                                   name="<?php echo esc_attr( $this->option_name ); ?>[og_default_image]"
+                                                   value="<?php echo esc_url( $settings['og_default_image'] ); ?>"
+                                                   class="regular-text"
+                                                   placeholder="https://example.com/og-image.jpg" />
+                                            <button type="button" id="omni-btn-select-og-image" class="button">
+                                                <span class="dashicons dashicons-format-image" style="vertical-align: text-bottom;"></span> 從媒體庫選取
+                                            </button>
+                                        </div>
+                                        <p class="description">FB / LINE / Telegram 分享首頁時顯示的預覽圖，建議尺寸 <strong>1200 × 630</strong> 像素。留空時社群平台將自行抓圖（可能抓到作者頭像或隨機圖片）。</p>
+                                        <?php if ( ! empty( $settings['og_default_image'] ) ) : ?>
+                                            <img id="omni-og-image-preview" src="<?php echo esc_url( $settings['og_default_image'] ); ?>" alt="" style="margin-top: 10px; max-width: 300px; height: auto; border-radius: 8px; border: 1px solid #e5e7eb;" />
+                                        <?php else : ?>
+                                            <img id="omni-og-image-preview" src="" alt="" style="display: none; margin-top: 10px; max-width: 300px; height: auto; border-radius: 8px; border: 1px solid #e5e7eb;" />
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Schema.org 結構化資料</th>
+                                    <td>
+                                        <div class="omni-field-row">
+                                            <label class="omni-switch">
+                                                <input type="checkbox" name="<?php echo esc_attr( $this->option_name ); ?>[schema_website_enable]" value="1" <?php checked( '1', $settings['schema_website_enable'] ); ?> />
+                                                <span class="omni-slider"></span>
+                                            </label>
+                                            <div class="omni-field-desc">
+                                                <strong>輸出 WebSite 與 Organization JSON-LD</strong>
+                                                <p>協助 Google 在搜尋結果顯示正確的<strong>站名</strong>（而非網域名稱）與網站 logo（優先使用「網站圖示 Site Icon」，未設定時退回上方分享圖）。需同時開啟上方「啟用首頁 Meta 標籤」。</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">站名簡稱 (alternateName)</th>
+                                    <td>
+                                        <input type="text"
+                                               name="<?php echo esc_attr( $this->option_name ); ?>[site_alternate_name]"
+                                               value="<?php echo esc_attr( $settings['site_alternate_name'] ); ?>"
+                                               class="regular-text"
+                                               placeholder="例如：yBlog" />
+                                        <p class="description">（選填）網站的常用簡稱，提供給 Google 作為站名的替代識別。</p>
                                     </td>
                                 </tr>
                             </table>

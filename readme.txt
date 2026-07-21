@@ -4,7 +4,7 @@ Tags: seo, performance, comments, thumbnails, translation
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.7
+Stable tag: 1.8
 License: Apache-2.0
 License URI: https://opensource.org/license/apache-2-0
 
@@ -38,6 +38,9 @@ This plugin incorporates the following major components:
 
 6. Post Data Export
    Preview and export monthly post data (including a configurable page-view meta key) as CSV from the admin panel.
+
+7. Homepage Meta Tags & Structured Data
+   Outputs Meta Description, Open Graph social sharing tags (og:title, og:description, og:image, twitter:card), and Schema.org WebSite/Organization JSON-LD on the homepage — a lightweight alternative when no full SEO plugin is installed. Automatically disables its output when a major SEO plugin (Yoast SEO, Rank Math, All in One SEO, SEOPress, The SEO Framework) is detected to prevent duplicate tags.
 
 = Origin Projects =
 
@@ -86,6 +89,16 @@ No. It only deletes resized sub-sizes. Your original uploaded images remain comp
 No. This plugin uses a clean, unified settings array (`omni_webmaster_settings`) to prevent database clutter. You will need to check the desired options in the new admin settings panel.
 
 == Changelog ==
+
+= 1.8 =
+* Added Homepage Meta Tags & Structured Data module: outputs Meta Description, Open Graph tags (og:type/site_name/title/description/url/image/locale, twitter:card), and Schema.org WebSite + Organization JSON-LD on the homepage.
+* Output is limited to the first page of the homepage (paginated pages excluded) to avoid duplicate descriptions across URLs.
+* Automatic conflict detection: output is suppressed when Yoast SEO, Rank Math, All in One SEO, SEOPress, or The SEO Framework is active, with a notice shown in the settings panel.
+* Added og:image picker with WordPress media library integration and live preview in the admin panel.
+* Added live character counter (90-160 recommended range) for the homepage meta description field.
+* Organization logo uses the Site Icon when set, falling back to the configured share image.
+* JSON-LD is printed via wp_print_inline_script_tag with wp_json_encode for safe, CSP-friendly output.
+* Added omni_meta_tags_enabled filter so themes or consent plugins can conditionally disable output.
 
 = 1.7 =
 * Rewrote the Slug Translator module to align with the standalone zh-to-en-slug plugin (v1.2.2) implementation, with shared API-call helpers for the save-time translation and the AJAX key test.

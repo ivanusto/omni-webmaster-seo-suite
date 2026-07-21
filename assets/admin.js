@@ -390,4 +390,71 @@ jQuery(document).ready(function($) {
             }
         });
     });
+
+    // ==========================================
+    // 首頁 Meta 標籤：og:image 媒體庫選取器
+    // ==========================================
+    var ogMediaFrame = null;
+    $('#omni-btn-select-og-image').on('click', function(e) {
+        e.preventDefault();
+
+        if (typeof wp === 'undefined' || !wp.media) {
+            alert('媒體庫載入失敗，請直接貼上圖片網址。');
+            return;
+        }
+
+        // 重複點擊時重用同一個 media frame
+        if (ogMediaFrame) {
+            ogMediaFrame.open();
+            return;
+        }
+
+        ogMediaFrame = wp.media({
+            title: '選擇社群分享圖（建議 1200 × 630）',
+            button: { text: '使用這張圖片' },
+            library: { type: 'image' },
+            multiple: false
+        });
+
+        ogMediaFrame.on('select', function() {
+            var attachment = ogMediaFrame.state().get('selection').first().toJSON();
+            // 優先使用 large 尺寸避免原圖過大，無 large 時退回原圖
+            var url = (attachment.sizes && attachment.sizes.large) ? attachment.sizes.large.url : attachment.url;
+            $('#omni_og_default_image').val(url);
+            $('#omni-og-image-preview').attr('src', url).show();
+        });
+
+        ogMediaFrame.open();
+    });
+
+    // og:image 網址手動修改時同步預覽
+    $('#omni_og_default_image').on('change input', function() {
+        var url = $(this).val().trim();
+        if (url) {
+            $('#omni-og-image-preview').attr('src', url).show();
+        } else {
+            $('#omni-og-image-preview').hide();
+        }
+    });
+
+    // ==========================================
+    // 首頁 Meta Description 字數即時計算
+    // ==========================================
+    function updateMetaDescCount() {
+        var len = $('#omni_home_meta_description').val().length;
+        var $count = $('#omni-meta-desc-count');
+        $count.text(len);
+        // 90-160 字元為建議區間，超出顯示警告色
+        if (len > 160) {
+            $count.css('color', '#dc2626');
+        } else if (len >= 90) {
+            $count.css('color', '#059669');
+        } else {
+            $count.css('color', '#6b7280');
+        }
+    }
+    if ($('#omni_home_meta_description').length) {
+        updateMetaDescCount();
+        $('#omni_home_meta_description').on('input', updateMetaDescCount);
+    }
 });

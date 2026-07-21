@@ -297,6 +297,17 @@
     color: #15803d;
 }
 
+.omni-alert-warning {
+    background-color: #fffbeb;
+    color: #92400e;
+    border: 1px solid #fde68a;
+    box-shadow: 0 2px 4px rgba(146, 64, 14, 0.02);
+}
+
+.omni-alert-warning .dashicons {
+    color: #d97706;
+}
+
 /* Grid for image sizes checkboxes */
 .omni-sizes-grid {
     display: grid;

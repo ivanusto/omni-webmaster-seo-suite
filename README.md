@@ -4,7 +4,7 @@
 
 An all-in-one WordPress performance & SEO suite for webmasters: cleans the HTML head, restricts RSS feeds, disables comments and thumbnails, translates Chinese URL slugs into English, and integrates Meta Pixel tracking — all from a single unified settings panel.
 
-![Version](https://img.shields.io/badge/version-1.7-blue) ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759b) ![PHP](https://img.shields.io/badge/PHP-7.4%2B-777bb4) ![License](https://img.shields.io/badge/license-Apache--2.0-green)
+![Version](https://img.shields.io/badge/version-1.8-blue) ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759b) ![PHP](https://img.shields.io/badge/PHP-7.4%2B-777bb4) ![License](https://img.shields.io/badge/license-Apache--2.0-green)
 
 ## Modules
 
@@ -31,6 +31,11 @@ An all-in-one WordPress performance & SEO suite for webmasters: cleans the HTML 
 
 ### 6. Post Data Export
 - **Monthly CSV export**: Preview and export post data by month — including a configurable page-view meta key — straight from the admin panel.
+
+### 7. Homepage Meta Tags & Structured Data
+- **Homepage-only output**: Meta Description, Open Graph social sharing tags (`og:title`, `og:description`, `og:image`, `twitter:card`), and Schema.org WebSite/Organization JSON-LD — a lightweight alternative when no full SEO plugin is installed.
+- **Conflict-safe**: Output is automatically suppressed when a major SEO plugin (Yoast SEO, Rank Math, All in One SEO, SEOPress, The SEO Framework) is active, so tags are never duplicated.
+- **Media library picker**: Choose the `og:image` share image (recommended 1200 × 630) directly from the media library, with live preview and a character counter for the description.
 
 ## Requirements
 
