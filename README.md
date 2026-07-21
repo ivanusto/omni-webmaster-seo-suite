@@ -72,7 +72,7 @@ This suite grew out of six standalone plugins previously written by the author. 
 - [disable-all-thumbnails](https://github.com/ivanusto/disable-all-thumbnails) — prevent the generation of specific thumbnail formats in WordPress
 - [disable-all-comments](https://github.com/ivanusto/disable-all-comments) — completely disable all comment features in WordPress
 - [zh-to-en-slug](https://github.com/ivanusto/zh-to-en-slug) — automatically translate Chinese post titles to English slugs (still maintained in sync with this suite's Slug Translator module)
-- [smart-image-upload-resizer](https://github.com/ivanusto/smart-image-upload-resizer) — automatically resize uploaded images and convert them to WebP
+- [smart-image-upload-resizer](https://github.com/ivanusto/smart-image-upload-resizer) — automatically resize uploaded images and support to WebP /AVIF
 - [smart-file-renamer](https://github.com/ivanusto/smart-file-renamer) — rename files with accents and special characters during upload for better SEO
 - [modern-rss-image-feed](https://github.com/ivanusto/modern-rss-image-feed) — add modern image formats (WebP, AVIF) support to RSS feeds
 
