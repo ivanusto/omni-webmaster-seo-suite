@@ -81,7 +81,8 @@ This plugin utilizes third-party and external services to provide specific funct
 == Screenshots ==
 
 1. SEO & Site Optimization settings tab with toggles for RSS control, HTML head cleanup, robots meta, sitemap sanitization, and XML-RPC hardening.
-2. Batch thumbnail cleanup tool with safe-mode options, live progress bar, and per-batch log console.
+2. Media & Thumbnails tab: selectively disable individual thumbnail sizes to stop them from being generated on upload.
+3. Batch thumbnail cleanup tool with safe-mode options, live progress bar, and per-batch log console (shown running in the bundled Traditional Chinese locale).
 
 == Frequently Asked Questions ==
 
