@@ -1,10 +1,12 @@
 # Omni Webmaster & SEO Suite（全方位站長 SEO 工具套件）
 
-[English Version README](README.md)
+[English Version README](README.md) | [WordPress.org 官方外掛頁面](https://wordpress.org/plugins/omni-webmaster-seo-suite/)
 
 一站式 WordPress 網站優化與 SEO 站長工具：清理 HTML head、進階 RSS 控制、完全停用留言、選擇性停用縮圖與批次清理、中文標題自動翻譯英文網址，以及 Meta Pixel 廣告追蹤整合——全部集中在單一設定面板管理。
 
-![Version](https://img.shields.io/badge/version-1.9-blue) ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759b) ![PHP](https://img.shields.io/badge/PHP-7.4%2B-777bb4) ![License](https://img.shields.io/badge/license-Apache--2.0-green)
+> 🌟 **已通過 WordPress 官方審查並正式上架**：[WordPress.org 官方外掛頁面](https://wordpress.org/plugins/omni-webmaster-seo-suite/)
+
+![Version](https://img.shields.io/badge/version-2.1.2-blue) ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759b) ![PHP](https://img.shields.io/badge/PHP-7.4%2B-777bb4) ![License](https://img.shields.io/badge/license-Apache--2.0-green)
 
 ## 功能模組
 

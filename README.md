@@ -1,10 +1,12 @@
 # Omni Webmaster & SEO Suite
 
-[繁體中文說明](README.zh-TW.md)
+[繁體中文說明](README.zh-TW.md) | [WordPress.org Plugin Page](https://wordpress.org/plugins/omni-webmaster-seo-suite/)
 
 An all-in-one WordPress performance & SEO suite for webmasters: cleans the HTML head, restricts RSS feeds, disables comments and thumbnails, translates Chinese URL slugs into English, and integrates Meta Pixel tracking — all from a single unified settings panel.
 
-![Version](https://img.shields.io/badge/version-1.9-blue) ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759b) ![PHP](https://img.shields.io/badge/PHP-7.4%2B-777bb4) ![License](https://img.shields.io/badge/license-Apache--2.0-green)
+> 🌟 **Officially approved & published on WordPress.org**: [omni-webmaster-seo-suite on WordPress.org](https://wordpress.org/plugins/omni-webmaster-seo-suite/)
+
+![Version](https://img.shields.io/badge/version-2.1.2-blue) ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759b) ![PHP](https://img.shields.io/badge/PHP-7.4%2B-777bb4) ![License](https://img.shields.io/badge/license-Apache--2.0-green)
 
 ## Modules
 
