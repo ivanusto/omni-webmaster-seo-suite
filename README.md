@@ -8,6 +8,19 @@ An all-in-one WordPress performance & SEO suite for webmasters: cleans the HTML 
 
 ![Version](https://img.shields.io/badge/version-2.1.2-blue) ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759b) ![PHP](https://img.shields.io/badge/PHP-7.4%2B-777bb4) ![License](https://img.shields.io/badge/license-Apache--2.0-green)
 
+![Banner](.wordpress-org/banner-1544x500.png)
+
+## Screenshots
+
+### 1. SEO & Site Optimization Settings
+![SEO & Site Optimization Settings](.wordpress-org/screenshot-1.png)
+
+### 2. Media & Thumbnail Control
+![Media & Thumbnail Control](.wordpress-org/screenshot-2.png)
+
+### 3. Batch Thumbnail Cleanup Tool
+![Batch Thumbnail Cleanup Tool](.wordpress-org/screenshot-3.png)
+
 ## Modules
 
 ### 1. SEO & Optimization

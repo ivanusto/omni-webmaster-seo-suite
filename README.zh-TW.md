@@ -8,6 +8,19 @@
 
 ![Version](https://img.shields.io/badge/version-2.1.2-blue) ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759b) ![PHP](https://img.shields.io/badge/PHP-7.4%2B-777bb4) ![License](https://img.shields.io/badge/license-Apache--2.0-green)
 
+![Banner](.wordpress-org/banner-1544x500.png)
+
+## 畫面截圖（Screenshots）
+
+### 1. SEO 與網站優化設定面板
+![SEO 與網站優化設定面板](.wordpress-org/screenshot-1.png)
+
+### 2. 媒體與縮圖控制
+![媒體與縮圖控制](.wordpress-org/screenshot-2.png)
+
+### 3. AJAX 縮圖批次清理工具
+![AJAX 縮圖批次清理工具](.wordpress-org/screenshot-3.png)
+
 ## 功能模組
 
 ### 1. SEO 與優化
