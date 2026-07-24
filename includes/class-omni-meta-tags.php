@@ -2,9 +2,10 @@
 /**
  * Omni_Meta_Tags Class
  *
- * 在未安裝大型 SEO 外掛時，於首頁輸出 Meta Description、
- * Open Graph 社群標籤與 Schema.org（WebSite / Organization）結構化資料。
- * 單篇文章頁的 OG 標籤交由佈景主題或其他機制處理，本模組僅負責首頁。
+ * When no major SEO plugin is installed, outputs the Meta Description,
+ * Open Graph social tags, and Schema.org (WebSite / Organization) structured
+ * data on the homepage. OG tags for single posts are left to the theme or
+ * other mechanisms; this module only handles the homepage.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -14,19 +15,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Omni_Meta_Tags {
 
     /**
-     * 設定值快取，避免同一請求內重複讀取 option
+     * Settings cache to avoid re-reading the option within the same request
      */
     private $settings = null;
 
     public function __construct() {
         if ( ! empty( $this->get_settings()['meta_tags_enable'] ) ) {
-            // priority 5：早於主題與多數外掛的 wp_head 輸出，讓 meta 標籤緊接在 charset/viewport 之後
+            // priority 5: earlier than the theme and most plugins' wp_head output, so the meta tags follow right after charset/viewport
             add_action( 'wp_head', [ $this, 'output_head_tags' ], 5 );
         }
     }
 
     /**
-     * 取得外掛設定值（同一請求內快取）
+     * Get plugin settings (cached within the same request)
      */
     private function get_settings() {
         if ( null === $this->settings ) {
@@ -43,10 +44,11 @@ class Omni_Meta_Tags {
     }
 
     /**
-     * 偵測是否已安裝大型 SEO 外掛（它們會自行輸出 meta/OG/schema，
-     * 重複輸出反而有害，偵測到時本模組自動停止輸出）。
+     * Detect whether a major SEO plugin is installed (they output their own
+     * meta/OG/schema, and duplicate output is harmful, so this module stops
+     * outputting automatically when one is detected).
      *
-     * @return string 偵測到的外掛名稱，無則回傳空字串。
+     * @return string Name of the detected plugin, or an empty string if none.
      */
     public static function detect_seo_plugin() {
         if ( defined( 'WPSEO_VERSION' ) ) {
@@ -68,11 +70,12 @@ class Omni_Meta_Tags {
     }
 
     /**
-     * 於首頁 head 輸出 Meta Description、Open Graph 與結構化資料
+     * Output Meta Description, Open Graph, and structured data in the homepage head
      */
     public function output_head_tags() {
-        // 僅在首頁第一頁輸出：分頁（/page/2/ 之後）不重複輸出相同描述，
-        // 靜態首頁與「最新文章」模式皆由 is_front_page() 涵蓋。
+        // Only output on the first page of the homepage: paginated pages (/page/2/ and beyond)
+        // do not repeat the same description. Both a static front page and the
+        // "latest posts" mode are covered by is_front_page().
         if ( ! is_front_page() || is_paged() ) {
             return;
         }
@@ -82,9 +85,9 @@ class Omni_Meta_Tags {
         }
 
         /**
-         * 允許佈景主題或其他外掛條件式停用首頁 meta 標籤輸出。
+         * Allow themes or other plugins to conditionally disable homepage meta tag output.
          *
-         * @param bool $enabled 是否輸出首頁 meta 標籤。
+         * @param bool $enabled Whether to output the homepage meta tags.
          */
         if ( ! apply_filters( 'omni_meta_tags_enabled', true ) ) {
             return;
@@ -130,10 +133,11 @@ class Omni_Meta_Tags {
     }
 
     /**
-     * 輸出 WebSite + Organization JSON-LD 結構化資料。
+     * Output WebSite + Organization JSON-LD structured data.
      *
-     * WebSite schema 的主要作用是搜尋結果的站名識別（site name），
-     * Organization 則提供 Google 知識面板與搜尋結果 logo 的資料來源。
+     * The main purpose of the WebSite schema is site name recognition in search
+     * results, while Organization provides the data source for the Google
+     * knowledge panel and the logo shown in search results.
      */
     private function output_schema( $site_name, $description, $image ) {
         $settings  = $this->get_settings();
@@ -161,7 +165,7 @@ class Omni_Meta_Tags {
             'url'   => $home,
         ];
 
-        // logo 優先使用網站圖示（通常為正方形，符合 Google 建議），其次退回 OG 分享圖
+        // Prefer the site icon for the logo (usually square, matching Google's recommendation), falling back to the OG share image
         $logo = get_site_icon_url( 512 );
         if ( ! $logo && '' !== $image ) {
             $logo = $image;

@@ -1,0 +1,529 @@
+# Traditional Chinese translation for Omni Webmaster & SEO Suite.
+msgid ""
+msgstr ""
+"Project-Id-Version: Omni Webmaster & SEO Suite 2.1\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: hand-merged\n"
+msgid "%1$d-%2$02d"
+msgstr "%1$d 年 %2$02d 月"
+
+msgid "(Optional) A common short name for your site, provided to Google as an alternate identifier for the site name."
+msgstr "（選填）網站的常用簡稱，提供給 Google 作為站名的替代識別。"
+
+msgid "(Optional) AIzaSy..."
+msgstr "（選填）AIzaSy..."
+
+msgid ", "
+msgstr "、"
+
+msgid "[Warning] Are you sure you want to delete ALL thumbnails? This removes every image size variant and may cause broken or slow-loading images on the front end. This action cannot be undone!"
+msgstr "【警告】您確定要刪除所有的縮圖嗎？這會清除所有圖片版本，可能會導致前端頁面圖片損壞或載入緩慢。此動作無法復原！"
+
+msgid "<strong>Search results (Search)</strong>: sent when a visitor performs an internal site search, including the search keyword the visitor entered."
+msgstr "<strong>搜尋結果 (Search)</strong>：當訪客在網站進行內部搜尋時發送，包含訪客輸入的搜尋關鍵字。"
+
+msgid "<strong>Single post/page (ViewContent)</strong>: sent when a visitor views a single post or page, including the post title, all category names, post ID, and post type."
+msgstr "<strong>單一文章/頁面 (ViewContent)</strong>：當訪客瀏覽單篇文章或頁面時發送，包含文章標題、全部分類名稱、文章 ID 與文章類型。"
+
+msgid "1536px (1536x1536)"
+msgstr "1536 像素 (1536x1536)"
+
+msgid "2048px (2048x2048)"
+msgstr "2048 像素 (2048x2048)"
+
+msgid "Advanced RSS Feed Control"
+msgstr "進階 RSS Feed 控制"
+
+msgid "All images processed! Scanned %1$s image attachments in total and removed %2$s thumbnail files."
+msgstr "全部圖片處理完成！總共掃描 %1$s 張圖片附件，累計清除了 %2$s 個縮圖實體檔案。"
+
+msgid "An error occurred. Please try again."
+msgstr "發生錯誤，請重試。"
+
+msgid "Angle / Topics"
+msgstr "切角/主題"
+
+msgid "Applies dark styling to the iframe blocks of native WordPress post embeds, ideal for dark-background sites or dark themes."
+msgstr "針對 WordPress 原生嵌入文章的 iframe 區塊進行暗色化，適合黑底網站或深色主題。"
+
+msgid "Apply Dark Background and Style Fixes"
+msgstr "套用深色背景與樣式修正"
+
+msgid "Are you sure you want to clear all oEmbed preview card caches for the entire site? This forces WordPress to re-fetch embed preview cards on page load (no posts are deleted; only the cache is reset)."
+msgstr "您確定要清除全站所有的 oEmbed 預覽卡片快取嗎？這會強制 WordPress 在頁面加載時重新抓取嵌入內容的預覽卡片（此動作不會刪除任何文章，僅重設快取）。"
+
+msgid "Are you sure you want to delete the thumbnail sizes checked as disabled? Only the sizes selected for disabling will be deleted; all other sizes are safely kept. This action cannot be undone!"
+msgstr "您確定要刪除已勾選停用的縮圖尺寸嗎？這只會刪除被選定停用的縮圖規格，其餘規格會被安全保留。此動作無法復原！"
+
+msgid "Automatic Slug Translation"
+msgstr "中英網址自動翻譯"
+
+msgid "Automatically Track Single Content Views and Search Behavior"
+msgstr "自動追蹤單一內容瀏覽與搜尋行為"
+
+msgid "Batch %1$s complete: scanned %2$s images, deleted %3$s thumbnail files."
+msgstr "批次 %1$s 處理完成：掃描 %2$s 張，共刪除 %3$s 個縮圖檔案。"
+
+msgid "Batch %1$s: no thumbnails needed deleting."
+msgstr "批次 %1$s：無縮圖需要刪除。"
+
+msgid "Batch Clean Existing Thumbnails"
+msgstr "批次清理現有縮圖"
+
+msgid "Batch processing in progress. Please do not close this window..."
+msgstr "正在批次處理中，請勿關閉視窗..."
+
+msgid "Block every WordPress comment entry point with a single switch, simplifying maintenance for non-community sites while preventing comment spam and improving security."
+msgstr "一鍵完全阻斷 WordPress 留言入口，極簡化非社群互動型網站運維，防止垃圾留言侵擾並提升安全。"
+
+msgid "Cache clearing failed due to a database query error."
+msgstr "清除失敗，資料庫查詢錯誤。"
+
+msgid "Check a thumbnail size below and newly uploaded images will <strong>no longer</strong> generate physical thumbnails at that size:"
+msgstr "勾選下方縮圖規格後，未來上傳的新圖片將<strong>不再</strong>自動生成該尺寸的實體縮圖："
+
+msgid "Choose Cleanup Scope and Mode"
+msgstr "選擇清理範圍與模式"
+
+msgid "clean all sizes"
+msgstr "清理所有尺寸"
+
+msgid "clean disabled sizes only"
+msgstr "僅清理停用尺寸"
+
+msgid "Clean thumbnails of all sizes (not recommended)"
+msgstr "清理所有尺寸的縮圖 (不推薦)"
+
+msgid "Clean Up HTML Head"
+msgstr "清理 HTML Head"
+
+msgid "Clean WordPress Sitemap"
+msgstr "清洗 WordPress Sitemap"
+
+msgid "Cleaning up: %1$s / %2$s images"
+msgstr "正在清理中: %1$s / %2$s 張圖片"
+
+msgid "Cleanup complete! All image files have been processed."
+msgstr "清理完成！已清理全部圖片檔案。"
+
+msgid "Cleanup process interrupted"
+msgstr "清理程序中斷"
+
+msgid "Clear Cache Now"
+msgstr "立即清除快取"
+
+msgid "Clearing cache..."
+msgstr "正在清理快取中..."
+
+msgid "Cloud API connection failed: %s"
+msgstr "Cloud API 連線失敗：%s"
+
+msgid "Cloud API error: %s"
+msgstr "Cloud API 錯誤：%s"
+
+msgid "Cloud API test succeeded! Result: %s"
+msgstr "Cloud API 測試成功！翻譯結果：%s"
+
+msgid "Comments are now fully locked down across the entire site."
+msgstr "目前全站留言功能已被徹底鎖定。"
+
+msgid "Comments Control"
+msgstr "留言功能控制"
+
+msgid "Completely Disable Comments"
+msgstr "完全禁用留言功能"
+
+msgid "Completely removes the `post_tag` entries from the native WordPress sitemap while keeping the main post and author listings for a leaner sitemap."
+msgstr "從 WP 原生 Sitemap 結構中徹底拔除 `post_tag` 項目，保留主要文章與作者目錄，精簡 Sitemap 指向。"
+
+msgid "Completely Turn Off Site Comments"
+msgstr "完全關閉網站留言功能"
+
+msgid "Connection error. Please try again."
+msgstr "連線錯誤，請重試。"
+
+msgid "Copy failed. Please select the table manually and copy it."
+msgstr "複製失敗，請手動選取表格複製。"
+
+msgid "Copy to Clipboard (Paste into Sheets/Excel)"
+msgstr "一鍵複製到剪貼簿 (貼上 Sheets/Excel)"
+
+msgid "Could not retrieve a translation. Please check that the API key is correct."
+msgstr "無法取得翻譯結果，請檢查 API Key 是否正確"
+
+msgid "Custom Robots Meta"
+msgstr "自訂 Robots Meta"
+
+msgid "Custom size: %s"
+msgstr "自訂尺寸：%s"
+
+msgid "Data Preview"
+msgstr "數據預覽"
+
+msgid "Date"
+msgstr "日期"
+
+msgid "Default Social Share Image (og:image)"
+msgstr "預設社群分享圖 (og:image)"
+
+msgid "Defaults to <code>views</code> (used by WP-PostViews). Enter the view count custom field name (meta key) used on your site."
+msgstr "預設為 <code>views</code> (WP-PostViews 用)。請輸入您網站使用的瀏覽量自訂欄位名稱 (Meta Key)。"
+
+msgid "Disable Generation"
+msgstr "停用生成"
+
+msgid "Disable Non-Essential RSS Feeds"
+msgstr "停用非必要 RSS 訂閱源"
+
+msgid "Disable specific thumbnail sizes to keep a single upload from generating dozens of unused copies that eat up your hosting disk space."
+msgstr "自訂停用特定寬高的圖片縮圖規格，防止上傳一張圖片生成數十個無用分身佔用虛擬主機硬碟容量。"
+
+msgid "Disabled thumbnail settings only affect newly uploaded images. To free up disk space, use the tool below to batch delete thumbnail files already generated for existing images."
+msgstr "已停用的縮圖設定僅對「新上傳」圖片有效。若要釋放硬碟空間，可使用下方工具批次刪除歷史圖片已產生的縮圖檔案。"
+
+msgid "Do Not Track Logged-In Administrators and Editors"
+msgstr "不追蹤登入中的管理員與編輯"
+
+msgid "Download CSV File (Excel)"
+msgstr "下載 CSV 檔案 (Excel)"
+
+msgid "e.g. 123456789012345"
+msgstr "例如：123456789012345"
+
+msgid "e.g. yBlog"
+msgstr "例如：yBlog"
+
+msgid "e.g. yBlog shares website building tutorials, software reviews, and everyday notes, offering practical guides and hands-on webmaster experience."
+msgstr "例如：yBlog 分享網站架設教學、軟體工具評測與生活記事，提供實用的教學筆記與站長經驗談。"
+
+msgid "Enable Advanced Event Tracking"
+msgstr "啟用進階事件追蹤"
+
+msgid "Enable Homepage Meta Tags"
+msgstr "啟用首頁 Meta 標籤"
+
+msgid "Enable Meta Pixel Tracking"
+msgstr "啟用 Meta Pixel 追蹤"
+
+msgid "Enter a Cloud Translation API key created in the Google Cloud console.<br/><strong>Fallback (no key required)</strong>: leave this field empty and the plugin automatically uses the keyless public Google Translate endpoint for effortless slug translation!"
+msgstr "請填寫 Google Cloud 主控台申請的 Cloud Translation API Key。<br/><strong>備用方案 (免金鑰)</strong>：若欄位留空，系統將自動啟用免金鑰的 Google Translate 公開端點，無痛進行網址翻譯！"
+
+msgid "Enter a numbers-only Meta Pixel ID"
+msgstr "請輸入純數字的 Meta Pixel ID"
+
+msgid "Enter your Meta (Facebook) Pixel ID (numbers only). You can find it on the settings page of Facebook Events Manager."
+msgstr "請輸入您的 Meta (Facebook) 像素編號（純數字）。可在 Facebook 事件管理工具的設定頁中找到。"
+
+msgid "Exclude Site Staff"
+msgstr "排除網站管理人員"
+
+msgid "Failed to load the media library. Please paste the image URL directly."
+msgstr "媒體庫載入失敗，請直接貼上圖片網址。"
+
+msgid "Failed to load: %1$s"
+msgstr "載入失敗：%1$s"
+
+msgid "Filter published posts by month and export their dates, titles, category and tag topics, permalinks, and view count statistics."
+msgstr "篩選指定月份的發布文章，匯出包含日期、標題、分類與標籤主題、網址連結、以及瀏覽量統計數據。"
+
+msgid "Fixes the white background of JavaScript-rendered GitHub Gist table blocks so they blend into dark themes."
+msgstr "解決 JavaScript 產生的 GitHub Gist 表格區塊出現白色背景的問題，使其融入深色主題。"
+
+msgid "Force GitHub Gist Code Blocks into Dark Mode"
+msgstr "強制將 GitHub Gist 程式碼區塊轉換為深色模式"
+
+msgid "Full cleanup: deletes every thumbnail of each image (e.g. 150x150, 300x300), which may cause 404 broken images on the front end or slow pages that have to load the original image."
+msgstr "完整清除：將刪除該圖片的所有縮圖（例如 150x150, 300x300 等），前端頁面可能會因找不到圖片而回傳 404 破圖或需加載原圖而變慢。"
+
+msgid "GitHub Gist Dark Mode Fix"
+msgstr "GitHub Gist 程式碼深色修正"
+
+msgid "Global Comment Blocking Switch"
+msgstr "留言全局封鎖開關"
+
+msgid "Helps Google display the correct <strong>site name</strong> (instead of the domain name) and site logo in search results (the Site Icon is used first, falling back to the share image above when not set). Requires \"Enable Homepage Meta Tags\" above to be turned on as well."
+msgstr "協助 Google 在搜尋結果顯示正確的<strong>站名</strong>（而非網域名稱）與網站 logo（優先使用「網站圖示 Site Icon」，未設定時退回上方分享圖）。需同時開啟上方「啟用首頁 Meta 標籤」。"
+
+msgid "Homepage Meta Description"
+msgstr "首頁 Meta Description"
+
+msgid "Homepage Meta Tags & Structured Data"
+msgstr "首頁 Meta 標籤與結構化資料"
+
+msgid "If enabling \"Clean Up HTML Head\" previously turned your embed cards into plain links, then after <strong>turning \"Clean Up HTML Head\" off</strong> you need to click this button to clear the failed oEmbed cache from the database so post pages can re-fetch and restore the rich preview cards."
+msgstr "若您先前啟用過「清理 HTML Head」導致嵌入卡片變成普通連結，在<strong>關閉「清理 HTML Head」</strong>後，您需要點擊此按鈕清除資料庫中的 oEmbed 失敗快取，文章頁面才會重新抓取並還原精美的預覽卡片。"
+
+msgid "If you still use Jetpack or a legacy offline editor that relies on XML-RPC, do not enable this option."
+msgstr "若您仍在使用 Jetpack 或依賴 XML-RPC 的舊版離線編輯器，請勿啟用此選項。"
+
+msgid "In addition to the base <code>PageView</code>, the system automatically sends the following standard events on the appropriate pages for advanced ad audience optimization:"
+msgstr "除了基礎的 <code>PageView</code> 外，系統會自動在適當的頁面發送以下標準事件以做進階廣告受眾優化："
+
+msgid "Insufficient permissions"
+msgstr "權限不足"
+
+msgid "Insufficient permissions."
+msgstr "權限不足"
+
+msgid "Integrates the Meta (Facebook) Pixel tracking code, automatically loading the base PageView event plus advanced marketing tracking events on the front end to improve ad conversion rates and audience optimization accuracy."
+msgstr "整合 Meta (Facebook) Pixel 追蹤代碼，在網站前端自動載入基礎 PageView 及進階行銷追蹤事件，提升廣告轉換率與受眾優化精準度。"
+
+msgid "Invalid month format."
+msgstr "月份格式錯誤。"
+
+msgid "Invalid security check (nonce validation failed)"
+msgstr "無效的安全性權限檢查 (Nonce validation failed)"
+
+msgid "Keyless API connection test failed: %s"
+msgstr "免金鑰 API 測試連線失敗：%s"
+
+msgid "Keyless translation test succeeded! Result: %s"
+msgstr "免金鑰翻譯測試成功！翻譯結果：%s"
+
+msgid "Large"
+msgstr "大尺寸 (Large)"
+
+msgid "Link"
+msgstr "連結"
+
+msgid "Load the Meta Pixel Tracking Code on the Front End"
+msgstr "開啟前端 Meta Pixel 追蹤碼載入"
+
+msgid "Loading post data, please wait..."
+msgstr "正在讀取文章數據，請稍後..."
+
+msgid "Manage your WordPress site optimization and SEO essentials in one place, including comment control, thumbnail optimization, and slug translation."
+msgstr "一站式管理您的 WordPress 網站優化與 SEO 基礎配置，整合留言防制、縮圖最佳化與網址翻譯。"
+
+msgid "Marks tag archives, date archives, internal search pages, and deep post pagination (page 3 and beyond) as `noindex, follow` to focus crawl priority and keep the site from generating large amounts of low-quality or duplicate content."
+msgstr "將標籤存檔頁、日期封存頁、內部搜尋頁與第 3 頁以上的深層文章分頁，標記為 `noindex, follow`，聚焦爬蟲權重，避免網站產生大量低質量或重複內容。"
+
+msgid "Maximum number of characters for generated English slugs (30 to 50 recommended). The system automatically reserves 12 characters for appending the post ID as duplicate protection."
+msgstr "產生的英文網址最大字元數（建議為 30 至 50 之間）。系統會自動預留 12 個字元供後續追加文章 ID 做防重複保護。"
+
+msgid "Maximum Slug Length"
+msgstr "最大字元長度"
+
+msgid "Media & Thumbnail Generation Optimization"
+msgstr "媒體與縮圖生成優化"
+
+msgid "Media & Thumbnails"
+msgstr "媒體與縮圖優化"
+
+msgid "Medium"
+msgstr "中尺寸 (Medium)"
+
+msgid "Medium Large"
+msgstr "中大尺寸 (Medium Large)"
+
+msgid "Meta Pixel Conversion Tracking"
+msgstr "Meta Pixel 廣告轉換追蹤"
+
+msgid "Meta Pixel Tracking"
+msgstr "Meta Pixel 追蹤"
+
+msgid "Monthly Post Data Export"
+msgstr "文章數據月報匯出"
+
+msgid "Network error. Unable to load preview data."
+msgstr "網路錯誤，無法載入預覽數據。"
+
+msgid "Network request failed. Please check your server status."
+msgstr "網路請求連線失敗，請檢查您的伺服器狀態。"
+
+msgid "No month specified."
+msgstr "未指定月份"
+
+msgid "No published posts"
+msgstr "無已發布文章"
+
+msgid "No published posts found for this month."
+msgstr "此月份查無任何已發布文章。"
+
+msgid "Omni Webmaster"
+msgstr "Omni 站長工具"
+
+msgid "Omni Webmaster & SEO Suite"
+msgstr "Omni 站長工具與 SEO 整合套件"
+
+msgid "Omni Webmaster & SEO Suite Settings"
+msgstr "Omni 站長工具與 SEO 設定"
+
+msgid "One-Click oEmbed Cache Clearing"
+msgstr "一鍵清除 oEmbed 快取"
+
+msgid "Only clean the thumbnail sizes checked as disabled (recommended)"
+msgstr "僅清理已勾選停用的縮圖尺寸 (推薦)"
+
+msgid "Only the homepage, category, and author RSS feeds are kept; all other unused feeds return a 410 response to stop crawlers from putting useless request load on your server."
+msgstr "僅放行首頁、文章分類與作者的 RSS Feed，阻斷其他無用 RSS 訂閱（回傳 410）以防止爬蟲對伺服器造成無效請求負荷。"
+
+msgid "Optimize HTML head tags, manage RSS feed sources, and clean up the sitemap to prevent unnecessary exposure of your site structure."
+msgstr "優化 HTML 頭部標籤，管理 RSS 訂閱來源並清洗 Sitemap 以防網站結構不必要地暴露。"
+
+msgid "Output Meta Description and Open Graph Tags on the Homepage"
+msgstr "於首頁輸出 Meta Description 與 Open Graph 標籤"
+
+msgid "Output only on the first page of the homepage (not repeated on paginated pages), including <code>description</code>, <code>og:title</code>, <code>og:description</code>, <code>og:url</code>, <code>og:image</code>, <code>og:locale</code>, and <code>twitter:card</code>."
+msgstr "僅在首頁第一頁輸出（分頁不重複），包含 <code>description</code>、<code>og:title</code>、<code>og:description</code>、<code>og:url</code>、<code>og:image</code>、<code>og:locale</code> 與 <code>twitter:card</code>。"
+
+msgid "Output WebSite and Organization JSON-LD"
+msgstr "輸出 WebSite 與 Organization JSON-LD"
+
+msgid "Please enter an API key first."
+msgstr "請先輸入 API 金鑰。"
+
+msgid "Please select a month to export."
+msgstr "請選擇要匯出的月份。"
+
+msgid "Please specify a month to export."
+msgstr "請指定要匯出的月份。"
+
+msgid "Post data copied to clipboard! You can paste it directly into Google Sheets or Excel."
+msgstr "文章數據已複製到剪貼簿！可直接貼上至 Google 試算表或 Excel 中。"
+
+msgid "Post Data Export"
+msgstr "文章數據匯出"
+
+msgid "Post Title"
+msgstr "文章標題"
+
+msgid "Preparing cleanup..."
+msgstr "準備進行清理..."
+
+msgid "Preview Data"
+msgstr "即時預覽數據"
+
+msgid "Recommended length is 90 to 160 characters; longer descriptions get truncated in search results. Current count:"
+msgstr "建議 90 至 160 個字元，過長會在搜尋結果中被截斷。目前字數："
+
+msgid "Remove All WordPress XML-RPC Methods"
+msgstr "移除所有 WordPress XML-RPC 方法"
+
+msgid "Remove Redundant HTML Tags"
+msgstr "移除 HTML 多餘標籤"
+
+msgid "Remove Tags from the Sitemap"
+msgstr "從網站地圖中移除標籤 (Tags)"
+
+msgid "Removes all WordPress methods from <code>xmlrpc.php</code> (<code>wp.*</code>, <code>metaWeblog.*</code>, <code>pingback.*</code>, and so on), keeping only three harmless system methods. This blocks the <strong>brute-force</strong> and pingback abuse attack surface that bypasses login page protection, and also removes the <code>X-Pingback</code> response header. It does not rely on .htaccess and is compatible with any server."
+msgstr "清除 <code>xmlrpc.php</code> 中全部 WordPress 方法（<code>wp.*</code>、<code>metaWeblog.*</code>、<code>pingback.*</code> 等），僅保留三個無害的系統方法，阻斷繞過登入頁防護的<strong>暴力破解</strong>與 pingback 濫用攻擊面，同時移除 <code>X-Pingback</code> 回應標頭。不依賴 .htaccess，相容任何伺服器。"
+
+msgid "Removes redundant feed links and REST API markup from the `<head>` section, keeping your source code clean and improving privacy."
+msgstr "移除 `<head>` 中冗餘的 Feed 連結與 REST API 頭部標記，保持源碼乾淨度並增強隱私。"
+
+msgid "Reset Site-Wide Embed Preview Cards"
+msgstr "重設全站嵌入預覽卡片"
+
+msgid "Safe mode: only deletes the sizes you checked as disabled above, keeping every other thumbnail size intact to avoid broken images on the front end."
+msgstr "安全模式：只會刪除您上方勾選停用的尺寸，保留其他正常的縮圖尺寸，避免前端文章破圖。"
+
+msgid "Save Changes"
+msgstr "儲存變更"
+
+msgid "Scanning media library image attachments and starting cleanup (mode: %1$s)..."
+msgstr "開始掃描媒體庫圖片附件並進行清理（模式：%1$s）..."
+
+msgid "Schema.org Structured Data"
+msgstr "Schema.org 結構化資料"
+
+msgid "Security check failed. Please try again."
+msgstr "安全性檢查失敗，請重新操作。"
+
+msgid "Select a social share image (1200 × 630 recommended)"
+msgstr "選擇社群分享圖（建議 1200 × 630）"
+
+msgid "Select Export Month"
+msgstr "選擇匯出月份"
+
+msgid "Select from Media Library"
+msgstr "從媒體庫選取"
+
+msgid "Select Thumbnail Sizes to Disable"
+msgstr "選擇要停用的縮圖尺寸"
+
+msgid "SEO & Site Optimization"
+msgstr "SEO 與網站優化"
+
+msgid "SEO Optimization & HTML Cleanup"
+msgstr "SEO 優化與 HTML 清理"
+
+msgid "Server returned an error: %1$s"
+msgstr "伺服器回傳失敗：%1$s"
+
+msgid "Set noindex on Search, Tag, and Paginated Pages"
+msgstr "搜尋、標籤與分頁設定 noindex"
+
+msgid "Settings"
+msgstr "設定"
+
+msgid "Site Name Abbreviation (alternateName)"
+msgstr "站名簡稱 (alternateName)"
+
+msgid "Site-wide oEmbed cache cleared successfully (%d cache records deleted). Refresh your pages to see the result."
+msgstr "成功清除全站 oEmbed 快取（共刪除 %d 筆快取紀錄）。請重新整理網頁查看效果。"
+
+msgid "Slug Translator"
+msgstr "中英網址翻譯"
+
+msgid "Start Batch Cleanup"
+msgstr "開始進行批次清理"
+
+msgid "Test API Key Connection"
+msgstr "測試 API 金鑰連線"
+
+msgid "Testing connection..."
+msgstr "測試連線中..."
+
+msgid "The \"%s\" plugin was detected. To avoid conflicts from duplicate meta tag output, the settings in this section are kept but <strong>front-end output is automatically disabled</strong> until that plugin is deactivated."
+msgstr "偵測到「%s」外掛。為避免重複輸出 meta 標籤造成衝突，本區設定將保留但<strong>自動停止前台輸出</strong>，直到該外掛停用為止。"
+
+msgid "The keyless translation endpoint returned unexpected data."
+msgstr "免金鑰翻譯端點回傳異常資料"
+
+msgid "The preview image shown when your homepage is shared on Facebook, LINE, or Telegram. Recommended size: <strong>1200 × 630</strong> pixels. If left empty, social platforms will pick an image on their own (possibly an author avatar or a random image)."
+msgstr "FB / LINE / Telegram 分享首頁時顯示的預覽圖，建議尺寸 <strong>1200 × 630</strong> 像素。留空時社群平台將自行抓圖（可能抓到作者頭像或隨機圖片）。"
+
+msgid "This scans every image attachment in the media library and removes the corresponding thumbnail files (original full-size images are kept). This is a destructive action; back up your site first."
+msgstr "這將掃描媒體庫中所有的圖片附件，並移除對應的縮圖實體檔案（保留原始大圖）。此為破壞性動作，建議先進行網站備份。"
+
+msgid "Thumbnail"
+msgstr "縮圖 (Thumbnail)"
+
+msgid "Use this image"
+msgstr "使用這張圖片"
+
+msgid "View Count Custom Field (Meta Key)"
+msgstr "瀏覽量自訂欄位 (Meta Key)"
+
+msgid "View Post"
+msgstr "查看文章"
+
+msgid "Views"
+msgstr "瀏覽量"
+
+msgid "When enabled, logged-in users with post editing capability (<code>edit_posts</code>) will not load the Pixel tracking code when browsing the front end, keeping staff browsing behavior from polluting your ad audiences and conversion data (recommended to keep on)."
+msgstr "啟用後，具備文章編輯權限（<code>edit_posts</code>）的登入使用者瀏覽前台時將不會載入 Pixel 追蹤碼，避免站方人員自身的瀏覽行為污染廣告受眾與轉換數據（建議保持開啟）。"
+
+msgid "When enabled, the Meta Pixel tracking script is inserted into the `<head>` section of every public front-end page and the base <code>PageView</code> event fires automatically."
+msgstr "啟用後會在網站所有公開前端頁面的 `<head>` 區域插入 Meta Pixel 追蹤腳本，並自動觸發基礎的 <code>PageView</code> 事件。"
+
+msgid "When enabled, this turns off comment and trackback support for all post types, hides existing comments, closes comments on new posts, and hides the admin comments menu and the dashboard comments widget."
+msgstr "啟用後會關閉所有文章類型的留言及跟蹤支援、隱藏現有留言、關閉新文章留言入口、並隱藏後台留言選單與儀表板上的留言小工具。"
+
+msgid "When no full-featured SEO plugin is installed, outputs a meta description, Open Graph social sharing tags, and Schema.org (WebSite / Organization) structured data on the homepage. OG tags for single posts are left to your theme; this section only affects the homepage."
+msgstr "在未安裝大型 SEO 外掛時，於首頁輸出 Meta Description、Open Graph 社群分享標籤與 Schema.org（WebSite / Organization）結構化資料。單篇文章頁的 OG 標籤請交由佈景主題處理，本區僅作用於首頁。"
+
+msgid "When you publish or save a post with an Asian-language title (Chinese, Japanese, Korean, Thai, etc.), the title is automatically translated into a clean English URL slug via the Google Translate API, improving SEO friendliness and preventing garbled characters when non-Latin URLs are copied."
+msgstr "當發布或儲存含中文的文章標題時，自動呼叫 Google 翻譯 API 翻譯為英文 URL Slug，增強 SEO 搜尋友好度與中文網址複製時產生亂碼的問題。"
+
+msgid "WP Embed Block Dark Mode Fix (Embed Card)"
+msgstr "WP 嵌入區塊深色修正 (Embed Card)"
+
+msgid "XML-RPC Security Hardening"
+msgstr "XML-RPC 安全強化"
+

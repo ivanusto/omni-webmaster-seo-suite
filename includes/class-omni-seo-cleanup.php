@@ -12,53 +12,53 @@ class Omni_SEO_Cleanup {
     public function __construct() {
         $settings = $this->get_settings();
 
-        // 1. 進階 RSS Feed 控制
+        // 1. Advanced RSS feed control
         if ( ! empty( $settings['disable_feeds'] ) ) {
-            $feed_types = [ 
-                'do_feed', 'do_feed_rdf', 'do_feed_rss', 
-                'do_feed_rss2', 'do_feed_atom', 
-                'do_feed_rss2_comment', 'do_feed_atom_comment' 
+            $feed_types = [
+                'do_feed', 'do_feed_rdf', 'do_feed_rss',
+                'do_feed_rss2', 'do_feed_atom',
+                'do_feed_rss2_comment', 'do_feed_atom_comment'
             ];
             foreach ( $feed_types as $feed ) {
                 add_action( $feed, [ $this, 'advanced_selective_disable_feeds' ], 1 );
             }
         }
 
-        // 2. 清理 HTML Head
+        // 2. Clean up HTML head
         if ( ! empty( $settings['cleanup_head'] ) ) {
             add_action( 'init', [ $this, 'cleanup_head_tags' ] );
         }
 
-        // 3. 自訂 Robots Meta
+        // 3. Custom robots meta
         if ( ! empty( $settings['robots_meta'] ) ) {
             add_filter( 'wp_robots', [ $this, 'custom_seo_robots_meta' ] );
         }
 
-        // 4. 清洗 Sitemap
+        // 4. Clean up Sitemap
         if ( ! empty( $settings['clean_sitemap'] ) ) {
             add_filter( 'wp_sitemaps_taxonomies', [ $this, 'clean_sitemap_taxonomies' ] );
         }
 
-        // 5. WP 嵌入區塊樣式 (Embed Card)
+        // 5. WP embed block styles (Embed Card)
         if ( ! empty( $settings['embed_styles'] ) ) {
             add_action( 'enqueue_embed_scripts', [ $this, 'enqueue_embed_styles' ] );
         }
 
-        // 6. GitHub Gist 樣式修正
+        // 6. GitHub Gist style fixes
         if ( ! empty( $settings['gist_styles'] ) ) {
             add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_gist_styles' ] );
         }
 
-        // 7. XML-RPC 安全強化
+        // 7. XML-RPC security hardening
         if ( ! empty( $settings['xmlrpc_hardening'] ) ) {
-            // priority 999：晚於其他外掛註冊，確保過濾結果為最終清單
+            // priority 999: run after other plugins register so the filtered result is the final list
             add_filter( 'xmlrpc_methods', [ $this, 'harden_xmlrpc_methods' ], 999 );
             add_filter( 'wp_headers', [ $this, 'remove_x_pingback_header' ] );
         }
     }
 
     /**
-     * 取得設定值（預設開啟安全 SEO 功能）
+     * Get settings (safe SEO features enabled by default)
      */
     private function get_settings() {
         $defaults = [
@@ -74,28 +74,28 @@ class Omni_SEO_Cleanup {
     }
 
     /**
-     * 阻斷非必要 Feed (僅放行主文章、分類與作者 Feed，其餘回傳 410)
+     * Block non-essential feeds (only the main post, category, and author feeds are allowed; everything else returns HTTP 410)
      */
     public function advanced_selective_disable_feeds() {
         if ( is_feed() ) {
-            // 1. 放行分類 Feed 與作者 Feed
+            // 1. Allow category feeds and author feeds
             if ( is_category() || is_author() ) {
                 return;
             }
-            
-            // 2. 放行首頁/主文章 Feed
+
+            // 2. Allow the homepage/main post feed
             if ( is_home() || is_front_page() ) {
                 return;
             }
-            
-            // 3. 確保標準 Feed (例如 /feed/) 正常運作：
-            // 如果不是留言 Feed、不是單一文章/頁面 Feed、不是標籤 Feed、不是搜尋 Feed、不是自訂分類 Feed、不是自訂文章類型封存 Feed、不是附件 Feed、不是日期封存 Feed
-            // 則判定其為網站的主訂閱源 (Main Feed)，予以放行。
+
+            // 3. Keep the standard feed (e.g. /feed/) working:
+            // If it is not a comment feed, not a single post/page feed, not a tag feed, not a search feed, not a custom taxonomy feed, not a custom post type archive feed, not an attachment feed, and not a date archive feed,
+            // treat it as the site's main feed and allow it through.
             if ( ! is_comment_feed() && ! is_singular() && ! is_tag() && ! is_search() && ! is_tax() && ! is_post_type_archive() && ! is_attachment() && ! is_date() ) {
                 return;
             }
         }
-        
+
         status_header( 410 );
         header( 'Content-Type: text/plain; charset=UTF-8' );
         echo 'This specific RSS feed has been permanently disabled to streamline SEO structure.';
@@ -103,35 +103,35 @@ class Omni_SEO_Cleanup {
     }
 
     /**
-     * 移除多餘的 HTML Head 標籤與不必要的資源加載 (如 Emoji)
+     * Remove redundant HTML head tags and unnecessary resource loading (e.g. Emoji)
      */
     public function cleanup_head_tags() {
         $settings = $this->get_settings();
-        
-        // 移除 Feed 連結 (若已停用 Feed)
+
+        // Remove feed links (when feeds are disabled)
         if ( ! empty( $settings['disable_feeds'] ) ) {
             remove_action( 'wp_head', 'feed_links', 2 );
             remove_action( 'wp_head', 'feed_links_extra', 3 );
         }
 
-        // 移除 RSD (Really Simple Discovery)
+        // Remove RSD (Really Simple Discovery)
         remove_action( 'wp_head', 'rsd_link' );
-        
-        // 移除 Windows Live Writer 連結
+
+        // Remove Windows Live Writer link
         remove_action( 'wp_head', 'wlwmanifest_link' );
-        
-        // 移除 WordPress 版本資訊
+
+        // Remove WordPress version info
         remove_action( 'wp_head', 'wp_generator' );
-        
-        // 移除短網址連結與相鄰文章連結
+
+        // Remove shortlink and adjacent post links
         remove_action( 'wp_head', 'wp_shortlink_wp_head', 10 );
         remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10 );
 
-        // 移除 REST API 連結
+        // Remove REST API links
         remove_action( 'wp_head', 'rest_output_link_wp_head', 10 );
         remove_action( 'template_redirect', 'rest_output_link_header', 11 );
 
-        // 停用 Emoji 載入 (優化前端效能)
+        // Disable Emoji loading (front-end performance optimization)
         remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
         remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
         remove_action( 'wp_print_styles', 'print_emoji_styles' );
@@ -144,7 +144,7 @@ class Omni_SEO_Cleanup {
     }
 
     /**
-     * TinyMCE 停用 Emoji 插件
+     * Disable the Emoji plugin in TinyMCE
      */
     public function disable_emojis_tinymce( $plugins ) {
         if ( is_array( $plugins ) ) {
@@ -154,7 +154,7 @@ class Omni_SEO_Cleanup {
     }
 
     /**
-     * 移除 Emoji 相關 DNS 預先獲取
+     * Remove Emoji-related DNS prefetch hints
      */
     public function disable_emojis_dns_prefetch( $urls, $relation_type ) {
         if ( 'dns-prefetch' === $relation_type ) {
@@ -170,7 +170,7 @@ class Omni_SEO_Cleanup {
     }
 
     /**
-     * 將標籤頁、日期頁、搜尋頁、深層分頁設定為 noindex
+     * Set tag pages, date archives, search pages, and deep pagination to noindex
      */
     public function custom_seo_robots_meta( $robots ) {
         if ( is_tag() || is_date() || is_search() ) {
@@ -190,12 +190,13 @@ class Omni_SEO_Cleanup {
     }
 
     /**
-     * XML-RPC 安全強化：移除所有 WordPress 方法（wp.*、metaWeblog.*、blogger.*、
-     * mt.*、pingback.* 等），僅保留三個無害的系統方法。
+     * XML-RPC security hardening: remove all WordPress methods (wp.*, metaWeblog.*,
+     * blogger.*, mt.*, pingback.*, etc.), keeping only three harmless system methods.
      *
-     * 需認證的方法（如 wp.getUsersBlogs）是繞過 wp-login.php 防護、
-     * 直接對 xmlrpc.php 進行暴力破解的主要目標；移除後即使 system.multicall
-     * 仍在，也沒有任何可打包呼叫的攻擊面。不依賴 .htaccess，相容任何伺服器。
+     * Authenticated methods (such as wp.getUsersBlogs) are the primary target for
+     * brute-force attacks that bypass wp-login.php protections by hitting xmlrpc.php
+     * directly; once removed, even if system.multicall remains, there is no attack
+     * surface left to bundle into calls. No .htaccess dependency, works on any server.
      */
     public function harden_xmlrpc_methods( $methods ) {
         $allowed = [ 'system.multicall', 'system.listMethods', 'system.getCapabilities' ];
@@ -203,7 +204,7 @@ class Omni_SEO_Cleanup {
     }
 
     /**
-     * 移除 HTTP 回應標頭中的 X-Pingback，不再對外宣告 XML-RPC 端點位置
+     * Remove the X-Pingback HTTP response header so the XML-RPC endpoint location is no longer advertised
      */
     public function remove_x_pingback_header( $headers ) {
         unset( $headers['X-Pingback'] );
@@ -211,7 +212,7 @@ class Omni_SEO_Cleanup {
     }
 
     /**
-     * 從 sitemap 中移除標籤分類
+     * Remove the tag taxonomy from the sitemap
      */
     public function clean_sitemap_taxonomies( $taxonomies ) {
         if ( isset( $taxonomies['post_tag'] ) ) {
@@ -221,7 +222,7 @@ class Omni_SEO_Cleanup {
     }
 
     /**
-     * WP 嵌入區塊樣式 (Embed Card)
+     * WP embed block styles (Embed Card)
      */
     public function enqueue_embed_styles() {
         $css = '
@@ -235,7 +236,7 @@ class Omni_SEO_Cleanup {
                 font-weight: bold;
             }
             .wp-embed-excerpt {
-                color: #dddddd !important; 
+                color: #dddddd !important;
             }
             .wp-embed-site-title a,
             .wp-embed-meta {
@@ -253,37 +254,37 @@ class Omni_SEO_Cleanup {
     }
 
     /**
-     * GitHub Gist 樣式修正
+     * GitHub Gist style fixes
      */
     public function enqueue_gist_styles() {
         $css = '
-            /* 1. 全域容器與程式碼區域背景 */
+            /* 1. Global container and code area background */
             .gist .gist-file, .gist div.gist-data {
                 background-color: #1a1a1a !important;
                 border: 1px solid #333333 !important;
                 color: #e6e6e6 !important;
             }
-            
-            /* 2. 行數邊欄背景與邊框 */
+
+            /* 2. Line-number gutter background and border */
             .gist div.gist-data .blob-num {
                 background-color: #2a2a2a !important;
                 border-right: 1px solid #333333 !important;
                 color: #888888 !important;
             }
-            
-            /* 3. 底部資訊列背景與文字 */
+
+            /* 3. Footer meta bar background and text */
             .gist div.gist-meta {
                 background-color: #2a2a2a !important;
                 color: #aaaaaa !important;
                 border-top: 1px solid #333333 !important;
             }
-            
-            /* 4. 底部連結顏色 */
+
+            /* 4. Footer link color */
             .gist div.gist-meta a {
                 color: #ffffff !important;
             }
-            
-            /* 5. 修正 GitHub Gist 語法高亮區塊 (.blob-code) 的頑固白色背景 */
+
+            /* 5. Fix the stubborn white background of GitHub Gist syntax-highlight blocks (.blob-code) */
             .gist .blob-code,
             .gist .blob-wrapper,
             .gist .highlight,
@@ -293,7 +294,7 @@ class Omni_SEO_Cleanup {
                 background-color: #1a1a1a !important;
                 border: none !important;
             }
-            
+
             .gist .blob-code-inner {
                 color: #e6e6e6 !important;
             }

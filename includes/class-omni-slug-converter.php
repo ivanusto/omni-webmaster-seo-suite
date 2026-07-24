@@ -2,7 +2,7 @@
 /**
  * Omni_Slug_Converter Class
  *
- * 核心邏輯與獨立外掛 zh-to-en-slug 同步維護：
+ * Core logic maintained in sync with the standalone plugin zh-to-en-slug:
  * https://github.com/ivanusto/zh-to-en-slug
  */
 
@@ -15,17 +15,18 @@ class Omni_Slug_Converter {
     private $options = null;
 
     public function __construct() {
-        // 修改 slug 生成的時機
+        // Hook into slug generation on post save
         add_filter( 'wp_insert_post_data', [ $this, 'process_post_data' ], 10, 2 );
 
-        // AJAX API 測試端點
+        // AJAX endpoint for testing the translation API
         if ( is_admin() ) {
             add_action( 'wp_ajax_omni_test_translation_api', [ $this, 'test_translation_api' ] );
         }
     }
 
     /**
-     * 延遲載入設定並合併預設值，避免舊資料缺少個別 key
+     * Lazy-load settings and merge defaults so older data without
+     * individual keys keeps working
      */
     private function get_options() {
         if ( null === $this->options ) {
@@ -39,10 +40,11 @@ class Omni_Slug_Converter {
     }
 
     /**
-     * 當文章儲存時，如果標題含中文，進行翻譯並轉成英文 Slug
+     * On post save: if the title contains Asian-script characters,
+     * translate it and use the result as an English slug
      */
     public function process_post_data( $data, $postarr ) {
-        // 自動儲存或修訂版不處理
+        // Skip autosaves and revisions
         if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
             return $data;
         }
@@ -51,7 +53,7 @@ class Omni_Slug_Converter {
             return $data;
         }
 
-        // 允許處理的文章狀態白名單，可透過 filter 自訂
+        // Whitelist of post statuses to process, customizable via filter
         $allowed_statuses = apply_filters( 'omni_slug_allowed_statuses', [ 'draft', 'publish', 'future', 'pending', 'private' ] );
         $current_status   = isset( $postarr['post_status'] ) ? $postarr['post_status'] : '';
 
@@ -59,12 +61,14 @@ class Omni_Slug_Converter {
             return $data;
         }
 
-        // 檢查是否包含中文（含 CJK Extension A 與基本區全範圍）
-        if ( ! preg_match( '/[\x{3400}-\x{4DBF}\x{4e00}-\x{9FFF}]/u', $data['post_title'] ) ) {
+        // Detect Asian scripts: CJK ideographs (incl. Extension A and
+        // compatibility block), Japanese kana, Hangul, and Thai
+        if ( ! preg_match( '/[\x{3400}-\x{4DBF}\x{4E00}-\x{9FFF}\x{F900}-\x{FAFF}\x{3040}-\x{30FF}\x{31F0}-\x{31FF}\x{1100}-\x{11FF}\x{AC00}-\x{D7AF}\x{0E00}-\x{0E7F}]/u', $data['post_title'] ) ) {
             return $data;
         }
 
-        // 如果已經有手動輸入的客製化 slug（不是預設的 auto-draft 且不是純中文 sanitize 後的結果），不重複翻譯
+        // Respect a manually entered custom slug (not the default auto-draft
+        // and not just the sanitized title) — do not re-translate
         if ( ! empty( $postarr['post_name'] ) &&
              ! preg_match( '/^auto-draft/', $postarr['post_name'] ) &&
              $postarr['post_name'] !== sanitize_title( $data['post_title'] ) &&
@@ -77,12 +81,12 @@ class Omni_Slug_Converter {
             $base_slug = $this->create_slug( $translated );
             $post_id   = isset( $postarr['ID'] ) ? $postarr['ID'] : 0;
 
-            // 已存在 ID 的文章，尾部附加 ID 避免重複衝突
+            // Posts that already have an ID get it appended to avoid slug collisions
             if ( $post_id > 0 ) {
                 $data['post_name'] = $base_slug . '-' . $post_id;
             } else {
-                // 新文章尚無 ID，直接使用翻譯後的 slug；
-                // 唯一性由 WordPress 核心的 wp_unique_post_slug 保證
+                // New posts have no ID yet; use the translated slug directly.
+                // Uniqueness is guaranteed by core's wp_unique_post_slug
                 $data['post_name'] = $base_slug;
             }
         }
@@ -91,7 +95,8 @@ class Omni_Slug_Converter {
     }
 
     /**
-     * 呼叫官方 Google Cloud Translation API
+     * Call the official Google Cloud Translation API.
+     * Source language is omitted so Google auto-detects it.
      */
     private function call_cloud_api( $api_key, $text ) {
         $url = add_query_arg(
@@ -102,9 +107,9 @@ class Omni_Slug_Converter {
         $args = [
             'body'    => wp_json_encode( [
                 'q'      => $text,
-                'source' => 'zh-TW',
                 'target' => 'en',
-                // 要求純文字回應，避免回傳 HTML entities（如 &#39;）污染 slug
+                // Request plain-text responses so HTML entities (e.g. &#39;)
+                // never leak into the slug
                 'format' => 'text',
             ] ),
             'headers' => [
@@ -112,7 +117,8 @@ class Omni_Slug_Converter {
                 'Referer'          => home_url(),
                 'X-Requested-With' => 'XMLHttpRequest',
             ],
-            // 翻譯失敗會回退到免金鑰端點或 WP 預設 slug，寧可快速失敗也不要卡住存檔流程
+            // On failure we fall back to the keyless endpoint or the WP
+            // default slug — fail fast rather than block the save flow
             'timeout' => 8,
         ];
 
@@ -120,13 +126,14 @@ class Omni_Slug_Converter {
     }
 
     /**
-     * 呼叫免 Key 的 Google Translate 公開端點（Fallback）
+     * Call the keyless public Google Translate endpoint (fallback).
+     * sl=auto lets Google detect the source language.
      */
     private function call_free_api( $text ) {
         $url = add_query_arg(
             [
                 'client' => 'gtx',
-                'sl'     => 'zh-TW',
+                'sl'     => 'auto',
                 'tl'     => 'en',
                 'dt'     => 't',
                 'q'      => $text,
@@ -145,7 +152,7 @@ class Omni_Slug_Converter {
     }
 
     /**
-     * 從 Cloud API 回應取出翻譯結果，失敗回傳 false
+     * Extract the translation from a Cloud API response; false on failure
      */
     private function parse_cloud_response( $response ) {
         if ( is_wp_error( $response ) ) {
@@ -158,7 +165,7 @@ class Omni_Slug_Converter {
     }
 
     /**
-     * 從免金鑰端點回應取出翻譯結果，失敗回傳 false
+     * Extract the translation from a keyless-endpoint response; false on failure
      */
     private function parse_free_response( $response ) {
         if ( is_wp_error( $response ) ) {
@@ -171,10 +178,11 @@ class Omni_Slug_Converter {
     }
 
     /**
-     * 翻譯標題（優先使用 Cloud API，若無金鑰或呼叫失敗則改用免金鑰公開端點）
+     * Translate a title (Cloud API first; fall back to the keyless
+     * public endpoint when no key is set or the call fails)
      */
     private function translate_title( $title ) {
-        // 相同標題直接使用快取，減少 API 呼叫次數與存檔延遲
+        // Cache identical titles to cut API calls and save-time latency
         $cache_key = 'omni_slug_tr_' . md5( $title );
         $cached    = get_transient( $cache_key );
         if ( false !== $cached ) {
@@ -201,60 +209,68 @@ class Omni_Slug_Converter {
     }
 
     /**
-     * 處理翻譯結果為標準 Slug 格式
+     * Normalize a translation into a standard slug
      */
     private function create_slug( $text ) {
         $text = strtolower( $text );
         $text = remove_accents( $text );
-        // 免金鑰端點可能回傳 HTML entities，先解碼再過濾
+        // The keyless endpoint may return HTML entities; decode before filtering
         $text = html_entity_decode( $text, ENT_QUOTES, 'UTF-8' );
         $text = preg_replace( '/[^a-z0-9\s-]/', '', $text );
         $text = preg_replace( '/\s+/', '-', $text );
         $text = trim( $text, '-' );
 
-        // 取得設定的最大長度，預留空間給 post_id
+        // Apply the configured max length, reserving room for the post ID suffix
         $options         = $this->get_options();
         $max_length      = absint( $options['max_length'] );
-        $reserved_length = 12; // 預留給 "-123456" 這樣的 ID 格式
-        // 保底 8 個字元，避免設定值過小時 slug 被截成空字串
+        $reserved_length = 12; // room for an ID suffix like "-123456"
+        // Floor of 8 chars so a tiny setting can't truncate the slug to nothing
         $actual_max_length = max( 8, $max_length - $reserved_length );
 
         if ( strlen( $text ) > $actual_max_length ) {
             $text = substr( $text, 0, $actual_max_length );
-            $text = preg_replace( '/-[^-]*$/', '', $text ); // 移除尾部未完字詞
+            $text = preg_replace( '/-[^-]*$/', '', $text ); // drop the trailing partial word
         }
 
         return $text;
     }
 
     /**
-     * 測試 API 連線的 AJAX 端點
+     * AJAX endpoint for testing API connectivity
      */
     public function test_translation_api() {
         check_ajax_referer( 'omni_slug_test_nonce', 'nonce' );
 
         if ( ! current_user_can( 'manage_options' ) ) {
-            wp_send_json_error( '權限不足' );
+            wp_send_json_error( __( 'Insufficient permissions.', 'omni-webmaster-seo-suite' ) );
             return;
         }
 
         $api_key   = isset( $_POST['api_key'] ) ? sanitize_text_field( wp_unslash( $_POST['api_key'] ) ) : '';
         $test_text = '測試文字';
 
-        // 如果沒填 key，測試公開免 Key 端點
+        // With no key provided, test the keyless public endpoint
         if ( '' === $api_key ) {
             $response = $this->call_free_api( $test_text );
 
             if ( is_wp_error( $response ) ) {
-                wp_send_json_error( '免金鑰 API 測試連線失敗：' . esc_html( $response->get_error_message() ) );
+                wp_send_json_error( sprintf(
+                    /* translators: %s: error message */
+                    __( 'Keyless API connection test failed: %s', 'omni-webmaster-seo-suite' ),
+                    esc_html( $response->get_error_message() )
+                ) );
                 return;
             }
 
             $translated = $this->parse_free_response( $response );
             if ( false !== $translated ) {
-                wp_send_json_success( '免金鑰翻譯測試成功！翻譯結果：' . esc_html( $translated ) );
+                wp_send_json_success( sprintf(
+                    /* translators: %s: translated sample text */
+                    __( 'Keyless translation test succeeded! Result: %s', 'omni-webmaster-seo-suite' ),
+                    esc_html( $translated )
+                ) );
             } else {
-                wp_send_json_error( '免金鑰翻譯端點回傳異常資料' );
+                wp_send_json_error( __( 'The keyless translation endpoint returned unexpected data.', 'omni-webmaster-seo-suite' ) );
             }
             return;
         }
@@ -262,18 +278,30 @@ class Omni_Slug_Converter {
         $response = $this->call_cloud_api( $api_key, $test_text );
 
         if ( is_wp_error( $response ) ) {
-            wp_send_json_error( 'Cloud API 連線失敗：' . esc_html( $response->get_error_message() ) );
+            wp_send_json_error( sprintf(
+                /* translators: %s: error message */
+                __( 'Cloud API connection failed: %s', 'omni-webmaster-seo-suite' ),
+                esc_html( $response->get_error_message() )
+            ) );
             return;
         }
 
         $body = json_decode( wp_remote_retrieve_body( $response ), true );
 
         if ( isset( $body['data']['translations'][0]['translatedText'] ) ) {
-            wp_send_json_success( 'Cloud API 測試成功！翻譯結果：' . esc_html( $body['data']['translations'][0]['translatedText'] ) );
+            wp_send_json_success( sprintf(
+                /* translators: %s: translated sample text */
+                __( 'Cloud API test succeeded! Result: %s', 'omni-webmaster-seo-suite' ),
+                esc_html( $body['data']['translations'][0]['translatedText'] )
+            ) );
         } elseif ( isset( $body['error']['message'] ) ) {
-            wp_send_json_error( 'Cloud API 錯誤：' . esc_html( $body['error']['message'] ) );
+            wp_send_json_error( sprintf(
+                /* translators: %s: error message */
+                __( 'Cloud API error: %s', 'omni-webmaster-seo-suite' ),
+                esc_html( $body['error']['message'] )
+            ) );
         } else {
-            wp_send_json_error( '無法取得翻譯結果，請檢查 API Key 是否正確' );
+            wp_send_json_error( __( 'Could not retrieve a translation. Please check that the API key is correct.', 'omni-webmaster-seo-suite' ) );
         }
     }
 }

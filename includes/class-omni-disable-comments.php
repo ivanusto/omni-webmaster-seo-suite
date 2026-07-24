@@ -12,47 +12,47 @@ class Omni_Disable_Comments {
     public function __construct() {
         $settings = get_option( 'omni_webmaster_settings', [] );
 
-        // 僅在勾選啟用時執行
+        // Only run when the option is enabled
         if ( ! empty( $settings['disable_comments'] ) ) {
-            // 在 WordPress 初始化時執行
+            // Run on WordPress init
             add_action( 'init', [ $this, 'disable_comments_support' ] );
             
-            // 關閉現有文章的留言功能
+            // Close comments on existing content
             add_filter( 'comments_open', '__return_false', 20, 2 );
             add_filter( 'pings_open', '__return_false', 20, 2 );
             
-            // 隱藏現有留言
+            // Hide existing comments
             add_filter( 'comments_array', '__return_empty_array', 10, 2 );
             
-            // 移除管理選單中的留言選項
+            // Remove the Comments item from the admin menu
             add_action( 'admin_menu', [ $this, 'remove_comments_menu' ] );
             
-            // 移除管理工具欄中的留言選項
+            // Remove the Comments item from the admin bar
             add_action( 'admin_bar_menu', [ $this, 'remove_comments_admin_bar' ], 999 );
             
-            // 移除儀表板上的留言小工具
+            // Remove the comments widget from the dashboard
             add_action( 'wp_dashboard_setup', [ $this, 'remove_comments_dashboard_widget' ] );
             
-            // 修改後台文章管理頁面
+            // Adjust the admin post list tables
             add_filter( 'manage_posts_columns', [ $this, 'remove_comments_column' ] );
             add_filter( 'manage_pages_columns', [ $this, 'remove_comments_column' ] );
 
-            // 移除前端留言回覆 JavaScript (優化加載效能)
+            // Remove the front-end comment-reply JavaScript (improves load performance)
             add_action( 'wp_print_scripts', [ $this, 'dequeue_comment_reply_script' ], 100 );
 
-            // 禁用 REST API 留言端點
+            // Disable the REST API comment endpoints
             add_filter( 'rest_endpoints', [ $this, 'disable_comments_rest_endpoints' ] );
 
-            // 禁用 XML-RPC pingback 方法
+            // Disable the XML-RPC pingback methods
             add_filter( 'xmlrpc_methods', [ $this, 'disable_pingback_xmlrpc_methods' ] );
 
-            // 移除 X-Pingback HTTP 標頭
+            // Remove the X-Pingback HTTP header
             add_filter( 'wp_headers', [ $this, 'remove_pingback_header' ] );
         }
     }
 
     /**
-     * 為所有文章類型禁用留言支援
+     * Disable comment support for all post types
      */
     public function disable_comments_support() {
         $post_types = get_post_types();
@@ -65,28 +65,28 @@ class Omni_Disable_Comments {
     }
 
     /**
-     * 移除管理選單中的留言選項
+     * Remove the Comments item from the admin menu
      */
     public function remove_comments_menu() {
         remove_menu_page( 'edit-comments.php' );
     }
 
     /**
-     * 移除管理工具欄中的留言選項
+     * Remove the Comments item from the admin bar
      */
     public function remove_comments_admin_bar( $wp_admin_bar ) {
         $wp_admin_bar->remove_node( 'comments' );
     }
 
     /**
-     * 移除儀表板上的留言小工具
+     * Remove the comments widget from the dashboard
      */
     public function remove_comments_dashboard_widget() {
         remove_meta_box( 'dashboard_recent_comments', 'dashboard', 'normal' );
     }
 
     /**
-     * 移除文章管理頁面中的留言列
+     * Remove the comments column from post list tables
      */
     public function remove_comments_column( $columns ) {
         unset( $columns['comments'] );
@@ -94,14 +94,14 @@ class Omni_Disable_Comments {
     }
 
     /**
-     * 移除前端 comment-reply 腳本
+     * Dequeue the front-end comment-reply script
      */
     public function dequeue_comment_reply_script() {
         wp_dequeue_script( 'comment-reply' );
     }
 
     /**
-     * 禁用 REST API 留言端點 (阻止繞過前端直接發送垃圾留言)
+     * Disable the REST API comment endpoints (prevents spam comments that bypass the front end)
      */
     public function disable_comments_rest_endpoints( $endpoints ) {
         if ( isset( $endpoints['/wp/v2/comments'] ) ) {
@@ -114,7 +114,7 @@ class Omni_Disable_Comments {
     }
 
     /**
-     * 移除 XML-RPC 中的 Pingback 方法 (減少 API 被惡意利用機會)
+     * Remove the pingback methods from XML-RPC (reduces the chance of API abuse)
      */
     public function disable_pingback_xmlrpc_methods( $methods ) {
         unset( $methods['pingback.ping'] );
@@ -123,7 +123,7 @@ class Omni_Disable_Comments {
     }
 
     /**
-     * 移除 HTTP 回應標頭中的 X-Pingback (乾淨的 Header)
+     * Remove X-Pingback from the HTTP response headers (cleaner headers)
      */
     public function remove_pingback_header( $headers ) {
         unset( $headers['X-Pingback'] );

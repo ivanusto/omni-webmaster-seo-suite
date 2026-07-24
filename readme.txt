@@ -4,11 +4,11 @@ Tags: seo, performance, comments, thumbnails, translation
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 2.0
+Stable tag: 2.1
 License: Apache-2.0
 License URI: https://opensource.org/license/apache-2-0
 
-An all-in-one performance & SEO suite: cleans HTML head, restricts RSS, disables comments/thumbnails, and translates Chinese URL slugs.
+An all-in-one performance & SEO suite: cleans HTML head, restricts RSS, disables comments/thumbnails, and translates Asian-language URL slugs.
 
 == Description ==
 
@@ -31,7 +31,7 @@ This plugin incorporates the following major components:
    AJAX Thumbnail Cleanup: A safe, batch-based AJAX cleanup tool (50 attachments per run) to recursively delete historical thumbnail files with a live progress bar.
 
 4. Slug Translator
-   Auto Chinese Title to English Slug: Integrates with Google Cloud Translation API to translate Chinese titles into clean, lowercase English URL slugs, preventing duplicate URLs and character overflow.
+   Auto Asian Title to English Slug: Integrates with Google Cloud Translation API to translate Asian-language titles (Chinese, Japanese, Korean, Thai) into clean, lowercase English URL slugs, preventing duplicate URLs and character overflow. The source language is auto-detected.
    This module shares its core logic with the standalone plugin Chinese to English Slug Converter (zh-to-en-slug): https://github.com/ivanusto/zh-to-en-slug — use the standalone plugin if slug translation is the only feature you need.
 
 5. Meta Pixel Tracking
@@ -59,8 +59,8 @@ This suite grew out of six standalone plugins previously written by the author, 
 This plugin utilizes third-party and external services to provide specific functionalities:
 
 1. Google Cloud Translation API & Google Translate Public Endpoint:
-   * What it is: Used to translate Chinese post titles into English lowercase slugs.
-   * Data sent: The text of the post title is sent to Google's translation endpoints when a post with a Chinese title is created or updated. No personally identifiable information (PII) or user data is transmitted.
+   * What it is: Used to translate Asian-language post titles into English lowercase slugs.
+   * Data sent: The text of the post title is sent to Google's translation endpoints when a post whose title contains Asian-script characters (Chinese, Japanese, Korean, Thai) is created or updated. No personally identifiable information (PII) or user data is transmitted.
    * Terms and Privacy:
      * Google Terms of Service: https://policies.google.com/terms
      * Google Privacy Policy: https://policies.google.com/privacy
@@ -78,6 +78,11 @@ This plugin utilizes third-party and external services to provide specific funct
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 3. Configure the settings under 'Settings > Omni Webmaster'.
 
+== Screenshots ==
+
+1. SEO & Site Optimization settings tab with toggles for RSS control, HTML head cleanup, robots meta, sitemap sanitization, and XML-RPC hardening.
+2. Batch thumbnail cleanup tool with safe-mode options, live progress bar, and per-batch log console.
+
 == Frequently Asked Questions ==
 
 = Does translation require an API Key? =
@@ -90,6 +95,11 @@ No. It only deletes resized sub-sizes. Your original uploaded images remain comp
 No. This plugin uses a clean, unified settings array (`omni_webmaster_settings`) to prevent database clutter. You will need to check the desired options in the new admin settings panel.
 
 == Changelog ==
+
+= 2.1 =
+* Interface is now English by default with full internationalization (i18n) support; Traditional Chinese (zh_TW) translation is bundled so existing Chinese sites keep their localized UI.
+* Slug Translator generalized beyond Chinese: now detects Chinese, Japanese, Korean, and Thai titles, and lets Google Translate auto-detect the source language.
+* Added directory screenshots and screenshot captions.
 
 = 2.0 =
 * Resolved official WordPress.org Plugin Directory review feedback: removed persistent database updates to core media size options (thumbnail_size_w/h) so core media settings remain intact.

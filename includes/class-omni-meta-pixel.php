@@ -12,28 +12,28 @@ class Omni_Meta_Pixel {
     private $noscript_printed = false;
 
     /**
-     * 設定值快取，避免同一請求內重複讀取 option
+     * Settings cache to avoid re-reading the option within the same request
      */
     private $settings = null;
 
     public function __construct() {
         if ( ! empty( $this->get_settings()['meta_pixel_enable'] ) && '' !== $this->get_pixel_id() ) {
-            // 在 wp_head 插入主追蹤程式碼
+            // Insert the main tracking code in wp_head
             add_action( 'wp_head', [ $this, 'insert_pixel_script' ], 20 );
 
-            // 在 wp_body_open 插入 noscript 像素代碼
+            // Insert the noscript pixel code at wp_body_open
             add_action( 'wp_body_open', [ $this, 'insert_pixel_noscript' ] );
 
-            // 若佈景主題較舊不支援 wp_body_open，作為後備在 wp_footer 載入
+            // Fallback: load in wp_footer for older themes that do not support wp_body_open
             add_action( 'wp_footer', [ $this, 'insert_pixel_noscript_fallback' ] );
 
-            // 提前與 Facebook 網域建立連線，加速 fbevents.js 載入
+            // Preconnect to the Facebook domain early to speed up fbevents.js loading
             add_filter( 'wp_resource_hints', [ $this, 'add_resource_hints' ], 10, 2 );
         }
     }
 
     /**
-     * 取得外掛設定值（同一請求內快取）
+     * Get the plugin settings (cached within the same request)
      */
     private function get_settings() {
         if ( null === $this->settings ) {
@@ -49,37 +49,37 @@ class Omni_Meta_Pixel {
     }
 
     /**
-     * 取得純數字的 Pixel ID（Meta 像素編號僅由數字組成）
+     * Get the digits-only Pixel ID (Meta Pixel IDs consist of digits only)
      */
     private function get_pixel_id() {
         return preg_replace( '/\D/', '', (string) $this->get_settings()['meta_pixel_id'] );
     }
 
     /**
-     * 判斷目前請求是否應輸出追蹤碼
+     * Determine whether the current request should output the tracking code
      */
     private function should_track() {
-        // 排除非一般前台頁面：Feed、文章預覽、佈景自訂器預覽與 oEmbed 嵌入頁
+        // Exclude non-standard front-end pages: feeds, post previews, Customizer previews, and oEmbed pages
         if ( is_admin() || is_feed() || is_preview() || is_customize_preview() || is_embed() ) {
             return false;
         }
 
-        // 排除登入中的網站管理人員，避免自身瀏覽污染廣告受眾數據
+        // Exclude logged-in site staff so their own browsing does not pollute ad audience data
         $settings = $this->get_settings();
         if ( ! empty( $settings['meta_pixel_exclude_admins'] ) && current_user_can( 'edit_posts' ) ) {
             return false;
         }
 
         /**
-         * 允許佈景主題或其他外掛（如 Cookie 同意機制）條件式停用 Pixel 追蹤。
+         * Allow themes or other plugins (e.g. cookie consent mechanisms) to conditionally disable Pixel tracking.
          *
-         * @param bool $enabled 是否輸出 Meta Pixel 追蹤碼。
+         * @param bool $enabled Whether to output the Meta Pixel tracking code.
          */
         return (bool) apply_filters( 'omni_meta_pixel_enabled', true );
     }
 
     /**
-     * 加入 preconnect / dns-prefetch 資源提示
+     * Add preconnect / dns-prefetch resource hints
      */
     public function add_resource_hints( $urls, $relation_type ) {
         if ( ! $this->should_track() ) {
@@ -95,7 +95,7 @@ class Omni_Meta_Pixel {
     }
 
     /**
-     * 插入 Meta Pixel 主 JavaScript 程式碼
+     * Insert the main Meta Pixel JavaScript code
      */
     public function insert_pixel_script() {
         $pixel_id = $this->get_pixel_id();
@@ -125,7 +125,7 @@ class Omni_Meta_Pixel {
     }
 
     /**
-     * 依目前頁面組出進階標準事件的 JavaScript 片段
+     * Build the advanced standard-event JavaScript snippet for the current page
      */
     private function build_advanced_events_js() {
         if ( is_singular() ) {
@@ -155,7 +155,7 @@ class Omni_Meta_Pixel {
     }
 
     /**
-     * 插入 noscript 像素代碼
+     * Insert the noscript pixel code
      */
     public function insert_pixel_noscript() {
         if ( $this->noscript_printed ) {
@@ -180,7 +180,7 @@ src="<?php echo esc_url( $src ); ?>"
     }
 
     /**
-     * noscript 後備機制 (用於不支援 wp_body_open 的主題)
+     * Noscript fallback (for themes that do not support wp_body_open)
      */
     public function insert_pixel_noscript_fallback() {
         $this->insert_pixel_noscript();

@@ -1,0 +1,528 @@
+# Translation template for Omni Webmaster & SEO Suite.
+msgid ""
+msgstr ""
+"Project-Id-Version: Omni Webmaster & SEO Suite 2.1\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: hand-merged\n"
+msgid "%1$d-%2$02d"
+msgstr ""
+
+msgid "(Optional) A common short name for your site, provided to Google as an alternate identifier for the site name."
+msgstr ""
+
+msgid "(Optional) AIzaSy..."
+msgstr ""
+
+msgid ", "
+msgstr ""
+
+msgid "[Warning] Are you sure you want to delete ALL thumbnails? This removes every image size variant and may cause broken or slow-loading images on the front end. This action cannot be undone!"
+msgstr ""
+
+msgid "<strong>Search results (Search)</strong>: sent when a visitor performs an internal site search, including the search keyword the visitor entered."
+msgstr ""
+
+msgid "<strong>Single post/page (ViewContent)</strong>: sent when a visitor views a single post or page, including the post title, all category names, post ID, and post type."
+msgstr ""
+
+msgid "1536px (1536x1536)"
+msgstr ""
+
+msgid "2048px (2048x2048)"
+msgstr ""
+
+msgid "Advanced RSS Feed Control"
+msgstr ""
+
+msgid "All images processed! Scanned %1$s image attachments in total and removed %2$s thumbnail files."
+msgstr ""
+
+msgid "An error occurred. Please try again."
+msgstr ""
+
+msgid "Angle / Topics"
+msgstr ""
+
+msgid "Applies dark styling to the iframe blocks of native WordPress post embeds, ideal for dark-background sites or dark themes."
+msgstr ""
+
+msgid "Apply Dark Background and Style Fixes"
+msgstr ""
+
+msgid "Are you sure you want to clear all oEmbed preview card caches for the entire site? This forces WordPress to re-fetch embed preview cards on page load (no posts are deleted; only the cache is reset)."
+msgstr ""
+
+msgid "Are you sure you want to delete the thumbnail sizes checked as disabled? Only the sizes selected for disabling will be deleted; all other sizes are safely kept. This action cannot be undone!"
+msgstr ""
+
+msgid "Automatic Slug Translation"
+msgstr ""
+
+msgid "Automatically Track Single Content Views and Search Behavior"
+msgstr ""
+
+msgid "Batch %1$s complete: scanned %2$s images, deleted %3$s thumbnail files."
+msgstr ""
+
+msgid "Batch %1$s: no thumbnails needed deleting."
+msgstr ""
+
+msgid "Batch Clean Existing Thumbnails"
+msgstr ""
+
+msgid "Batch processing in progress. Please do not close this window..."
+msgstr ""
+
+msgid "Block every WordPress comment entry point with a single switch, simplifying maintenance for non-community sites while preventing comment spam and improving security."
+msgstr ""
+
+msgid "Cache clearing failed due to a database query error."
+msgstr ""
+
+msgid "Check a thumbnail size below and newly uploaded images will <strong>no longer</strong> generate physical thumbnails at that size:"
+msgstr ""
+
+msgid "Choose Cleanup Scope and Mode"
+msgstr ""
+
+msgid "clean all sizes"
+msgstr ""
+
+msgid "clean disabled sizes only"
+msgstr ""
+
+msgid "Clean thumbnails of all sizes (not recommended)"
+msgstr ""
+
+msgid "Clean Up HTML Head"
+msgstr ""
+
+msgid "Clean WordPress Sitemap"
+msgstr ""
+
+msgid "Cleaning up: %1$s / %2$s images"
+msgstr ""
+
+msgid "Cleanup complete! All image files have been processed."
+msgstr ""
+
+msgid "Cleanup process interrupted"
+msgstr ""
+
+msgid "Clear Cache Now"
+msgstr ""
+
+msgid "Clearing cache..."
+msgstr ""
+
+msgid "Cloud API connection failed: %s"
+msgstr ""
+
+msgid "Cloud API error: %s"
+msgstr ""
+
+msgid "Cloud API test succeeded! Result: %s"
+msgstr ""
+
+msgid "Comments are now fully locked down across the entire site."
+msgstr ""
+
+msgid "Comments Control"
+msgstr ""
+
+msgid "Completely Disable Comments"
+msgstr ""
+
+msgid "Completely removes the `post_tag` entries from the native WordPress sitemap while keeping the main post and author listings for a leaner sitemap."
+msgstr ""
+
+msgid "Completely Turn Off Site Comments"
+msgstr ""
+
+msgid "Connection error. Please try again."
+msgstr ""
+
+msgid "Copy failed. Please select the table manually and copy it."
+msgstr ""
+
+msgid "Copy to Clipboard (Paste into Sheets/Excel)"
+msgstr ""
+
+msgid "Could not retrieve a translation. Please check that the API key is correct."
+msgstr ""
+
+msgid "Custom Robots Meta"
+msgstr ""
+
+msgid "Custom size: %s"
+msgstr ""
+
+msgid "Data Preview"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Default Social Share Image (og:image)"
+msgstr ""
+
+msgid "Defaults to <code>views</code> (used by WP-PostViews). Enter the view count custom field name (meta key) used on your site."
+msgstr ""
+
+msgid "Disable Generation"
+msgstr ""
+
+msgid "Disable Non-Essential RSS Feeds"
+msgstr ""
+
+msgid "Disable specific thumbnail sizes to keep a single upload from generating dozens of unused copies that eat up your hosting disk space."
+msgstr ""
+
+msgid "Disabled thumbnail settings only affect newly uploaded images. To free up disk space, use the tool below to batch delete thumbnail files already generated for existing images."
+msgstr ""
+
+msgid "Do Not Track Logged-In Administrators and Editors"
+msgstr ""
+
+msgid "Download CSV File (Excel)"
+msgstr ""
+
+msgid "e.g. 123456789012345"
+msgstr ""
+
+msgid "e.g. yBlog"
+msgstr ""
+
+msgid "e.g. yBlog shares website building tutorials, software reviews, and everyday notes, offering practical guides and hands-on webmaster experience."
+msgstr ""
+
+msgid "Enable Advanced Event Tracking"
+msgstr ""
+
+msgid "Enable Homepage Meta Tags"
+msgstr ""
+
+msgid "Enable Meta Pixel Tracking"
+msgstr ""
+
+msgid "Enter a Cloud Translation API key created in the Google Cloud console.<br/><strong>Fallback (no key required)</strong>: leave this field empty and the plugin automatically uses the keyless public Google Translate endpoint for effortless slug translation!"
+msgstr ""
+
+msgid "Enter a numbers-only Meta Pixel ID"
+msgstr ""
+
+msgid "Enter your Meta (Facebook) Pixel ID (numbers only). You can find it on the settings page of Facebook Events Manager."
+msgstr ""
+
+msgid "Exclude Site Staff"
+msgstr ""
+
+msgid "Failed to load the media library. Please paste the image URL directly."
+msgstr ""
+
+msgid "Failed to load: %1$s"
+msgstr ""
+
+msgid "Filter published posts by month and export their dates, titles, category and tag topics, permalinks, and view count statistics."
+msgstr ""
+
+msgid "Fixes the white background of JavaScript-rendered GitHub Gist table blocks so they blend into dark themes."
+msgstr ""
+
+msgid "Force GitHub Gist Code Blocks into Dark Mode"
+msgstr ""
+
+msgid "Full cleanup: deletes every thumbnail of each image (e.g. 150x150, 300x300), which may cause 404 broken images on the front end or slow pages that have to load the original image."
+msgstr ""
+
+msgid "GitHub Gist Dark Mode Fix"
+msgstr ""
+
+msgid "Global Comment Blocking Switch"
+msgstr ""
+
+msgid "Helps Google display the correct <strong>site name</strong> (instead of the domain name) and site logo in search results (the Site Icon is used first, falling back to the share image above when not set). Requires \"Enable Homepage Meta Tags\" above to be turned on as well."
+msgstr ""
+
+msgid "Homepage Meta Description"
+msgstr ""
+
+msgid "Homepage Meta Tags & Structured Data"
+msgstr ""
+
+msgid "If enabling \"Clean Up HTML Head\" previously turned your embed cards into plain links, then after <strong>turning \"Clean Up HTML Head\" off</strong> you need to click this button to clear the failed oEmbed cache from the database so post pages can re-fetch and restore the rich preview cards."
+msgstr ""
+
+msgid "If you still use Jetpack or a legacy offline editor that relies on XML-RPC, do not enable this option."
+msgstr ""
+
+msgid "In addition to the base <code>PageView</code>, the system automatically sends the following standard events on the appropriate pages for advanced ad audience optimization:"
+msgstr ""
+
+msgid "Insufficient permissions"
+msgstr ""
+
+msgid "Insufficient permissions."
+msgstr ""
+
+msgid "Integrates the Meta (Facebook) Pixel tracking code, automatically loading the base PageView event plus advanced marketing tracking events on the front end to improve ad conversion rates and audience optimization accuracy."
+msgstr ""
+
+msgid "Invalid month format."
+msgstr ""
+
+msgid "Invalid security check (nonce validation failed)"
+msgstr ""
+
+msgid "Keyless API connection test failed: %s"
+msgstr ""
+
+msgid "Keyless translation test succeeded! Result: %s"
+msgstr ""
+
+msgid "Large"
+msgstr ""
+
+msgid "Link"
+msgstr ""
+
+msgid "Load the Meta Pixel Tracking Code on the Front End"
+msgstr ""
+
+msgid "Loading post data, please wait..."
+msgstr ""
+
+msgid "Manage your WordPress site optimization and SEO essentials in one place, including comment control, thumbnail optimization, and slug translation."
+msgstr ""
+
+msgid "Marks tag archives, date archives, internal search pages, and deep post pagination (page 3 and beyond) as `noindex, follow` to focus crawl priority and keep the site from generating large amounts of low-quality or duplicate content."
+msgstr ""
+
+msgid "Maximum number of characters for generated English slugs (30 to 50 recommended). The system automatically reserves 12 characters for appending the post ID as duplicate protection."
+msgstr ""
+
+msgid "Maximum Slug Length"
+msgstr ""
+
+msgid "Media & Thumbnail Generation Optimization"
+msgstr ""
+
+msgid "Media & Thumbnails"
+msgstr ""
+
+msgid "Medium"
+msgstr ""
+
+msgid "Medium Large"
+msgstr ""
+
+msgid "Meta Pixel Conversion Tracking"
+msgstr ""
+
+msgid "Meta Pixel Tracking"
+msgstr ""
+
+msgid "Monthly Post Data Export"
+msgstr ""
+
+msgid "Network error. Unable to load preview data."
+msgstr ""
+
+msgid "Network request failed. Please check your server status."
+msgstr ""
+
+msgid "No month specified."
+msgstr ""
+
+msgid "No published posts"
+msgstr ""
+
+msgid "No published posts found for this month."
+msgstr ""
+
+msgid "Omni Webmaster"
+msgstr ""
+
+msgid "Omni Webmaster & SEO Suite"
+msgstr ""
+
+msgid "Omni Webmaster & SEO Suite Settings"
+msgstr ""
+
+msgid "One-Click oEmbed Cache Clearing"
+msgstr ""
+
+msgid "Only clean the thumbnail sizes checked as disabled (recommended)"
+msgstr ""
+
+msgid "Only the homepage, category, and author RSS feeds are kept; all other unused feeds return a 410 response to stop crawlers from putting useless request load on your server."
+msgstr ""
+
+msgid "Optimize HTML head tags, manage RSS feed sources, and clean up the sitemap to prevent unnecessary exposure of your site structure."
+msgstr ""
+
+msgid "Output Meta Description and Open Graph Tags on the Homepage"
+msgstr ""
+
+msgid "Output only on the first page of the homepage (not repeated on paginated pages), including <code>description</code>, <code>og:title</code>, <code>og:description</code>, <code>og:url</code>, <code>og:image</code>, <code>og:locale</code>, and <code>twitter:card</code>."
+msgstr ""
+
+msgid "Output WebSite and Organization JSON-LD"
+msgstr ""
+
+msgid "Please enter an API key first."
+msgstr ""
+
+msgid "Please select a month to export."
+msgstr ""
+
+msgid "Please specify a month to export."
+msgstr ""
+
+msgid "Post data copied to clipboard! You can paste it directly into Google Sheets or Excel."
+msgstr ""
+
+msgid "Post Data Export"
+msgstr ""
+
+msgid "Post Title"
+msgstr ""
+
+msgid "Preparing cleanup..."
+msgstr ""
+
+msgid "Preview Data"
+msgstr ""
+
+msgid "Recommended length is 90 to 160 characters; longer descriptions get truncated in search results. Current count:"
+msgstr ""
+
+msgid "Remove All WordPress XML-RPC Methods"
+msgstr ""
+
+msgid "Remove Redundant HTML Tags"
+msgstr ""
+
+msgid "Remove Tags from the Sitemap"
+msgstr ""
+
+msgid "Removes all WordPress methods from <code>xmlrpc.php</code> (<code>wp.*</code>, <code>metaWeblog.*</code>, <code>pingback.*</code>, and so on), keeping only three harmless system methods. This blocks the <strong>brute-force</strong> and pingback abuse attack surface that bypasses login page protection, and also removes the <code>X-Pingback</code> response header. It does not rely on .htaccess and is compatible with any server."
+msgstr ""
+
+msgid "Removes redundant feed links and REST API markup from the `<head>` section, keeping your source code clean and improving privacy."
+msgstr ""
+
+msgid "Reset Site-Wide Embed Preview Cards"
+msgstr ""
+
+msgid "Safe mode: only deletes the sizes you checked as disabled above, keeping every other thumbnail size intact to avoid broken images on the front end."
+msgstr ""
+
+msgid "Save Changes"
+msgstr ""
+
+msgid "Scanning media library image attachments and starting cleanup (mode: %1$s)..."
+msgstr ""
+
+msgid "Schema.org Structured Data"
+msgstr ""
+
+msgid "Security check failed. Please try again."
+msgstr ""
+
+msgid "Select a social share image (1200 × 630 recommended)"
+msgstr ""
+
+msgid "Select Export Month"
+msgstr ""
+
+msgid "Select from Media Library"
+msgstr ""
+
+msgid "Select Thumbnail Sizes to Disable"
+msgstr ""
+
+msgid "SEO & Site Optimization"
+msgstr ""
+
+msgid "SEO Optimization & HTML Cleanup"
+msgstr ""
+
+msgid "Server returned an error: %1$s"
+msgstr ""
+
+msgid "Set noindex on Search, Tag, and Paginated Pages"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Site Name Abbreviation (alternateName)"
+msgstr ""
+
+msgid "Site-wide oEmbed cache cleared successfully (%d cache records deleted). Refresh your pages to see the result."
+msgstr ""
+
+msgid "Slug Translator"
+msgstr ""
+
+msgid "Start Batch Cleanup"
+msgstr ""
+
+msgid "Test API Key Connection"
+msgstr ""
+
+msgid "Testing connection..."
+msgstr ""
+
+msgid "The \"%s\" plugin was detected. To avoid conflicts from duplicate meta tag output, the settings in this section are kept but <strong>front-end output is automatically disabled</strong> until that plugin is deactivated."
+msgstr ""
+
+msgid "The keyless translation endpoint returned unexpected data."
+msgstr ""
+
+msgid "The preview image shown when your homepage is shared on Facebook, LINE, or Telegram. Recommended size: <strong>1200 × 630</strong> pixels. If left empty, social platforms will pick an image on their own (possibly an author avatar or a random image)."
+msgstr ""
+
+msgid "This scans every image attachment in the media library and removes the corresponding thumbnail files (original full-size images are kept). This is a destructive action; back up your site first."
+msgstr ""
+
+msgid "Thumbnail"
+msgstr ""
+
+msgid "Use this image"
+msgstr ""
+
+msgid "View Count Custom Field (Meta Key)"
+msgstr ""
+
+msgid "View Post"
+msgstr ""
+
+msgid "Views"
+msgstr ""
+
+msgid "When enabled, logged-in users with post editing capability (<code>edit_posts</code>) will not load the Pixel tracking code when browsing the front end, keeping staff browsing behavior from polluting your ad audiences and conversion data (recommended to keep on)."
+msgstr ""
+
+msgid "When enabled, the Meta Pixel tracking script is inserted into the `<head>` section of every public front-end page and the base <code>PageView</code> event fires automatically."
+msgstr ""
+
+msgid "When enabled, this turns off comment and trackback support for all post types, hides existing comments, closes comments on new posts, and hides the admin comments menu and the dashboard comments widget."
+msgstr ""
+
+msgid "When no full-featured SEO plugin is installed, outputs a meta description, Open Graph social sharing tags, and Schema.org (WebSite / Organization) structured data on the homepage. OG tags for single posts are left to your theme; this section only affects the homepage."
+msgstr ""
+
+msgid "When you publish or save a post with an Asian-language title (Chinese, Japanese, Korean, Thai, etc.), the title is automatically translated into a clean English URL slug via the Google Translate API, improving SEO friendliness and preventing garbled characters when non-Latin URLs are copied."
+msgstr ""
+
+msgid "WP Embed Block Dark Mode Fix (Embed Card)"
+msgstr ""
+
+msgid "XML-RPC Security Hardening"
+msgstr ""
+

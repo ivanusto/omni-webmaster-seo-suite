@@ -13,11 +13,11 @@ class Omni_Disable_Thumbnails {
     private $sizes_option_name = 'omni_webmaster_known_sizes';
     
     public function __construct() {
-        // 核心縮圖停用鉤子
+        // Core thumbnail-disabling hooks
         add_action( 'init', [ $this, 'disable_existing_image_sizes' ], 999 );
         add_filter( 'intermediate_image_sizes_advanced', [ $this, 'disable_image_sizes' ], 999 );
         
-        // 管理介面相關（由 Admin 類別載入，這裡先註冊 AJAX 端點）
+        // Admin-related (the Admin class loads the UI; register the AJAX endpoints here)
         if ( is_admin() ) {
             add_action( 'admin_init', [ $this, 'update_known_sizes' ] );
             add_action( 'wp_ajax_omni_delete_thumbnails', [ $this, 'handle_delete_thumbnails' ] );
@@ -25,7 +25,7 @@ class Omni_Disable_Thumbnails {
     }
 
     /**
-     * 更新已知圖片尺寸清單（避免外掛/佈景停用後，歷史尺寸被遺漏）
+     * Update the list of known image sizes (so historical sizes are not missed after a plugin/theme is deactivated)
      */
     public function update_known_sizes() {
         $current_sizes = $this->get_current_image_sizes();
@@ -36,16 +36,16 @@ class Omni_Disable_Thumbnails {
     }
 
     /**
-     * 獲取當前系統中的所有圖片尺寸
+     * Get all image sizes currently registered in the system
      */
     public function get_current_image_sizes() {
         global $_wp_additional_image_sizes;
         $sizes = [];
         
-        // 獲取所有已註冊的圖片尺寸
+        // Get all registered image sizes
         $registered_sizes = wp_get_registered_image_subsizes();
         
-        // 內建尺寸列表
+        // Built-in size list
         $builtin_sizes = [ 'thumbnail', 'medium', 'medium_large', 'large', '1536x1536', '2048x2048' ];
         
         foreach ( $builtin_sizes as $size ) {
@@ -91,7 +91,7 @@ class Omni_Disable_Thumbnails {
     }
 
     /**
-     * 獲取所有已知的圖片尺寸（包括已停用的歷史尺寸）
+     * Get all known image sizes (including disabled historical sizes)
      */
     public function get_all_image_sizes() {
         $known_sizes   = get_option( $this->sizes_option_name, [] );
@@ -106,7 +106,7 @@ class Omni_Disable_Thumbnails {
     }
 
     /**
-     * 排序圖片尺寸
+     * Sort image sizes
      */
     private function sort_sizes( $sizes ) {
         $builtin_order = [
@@ -141,16 +141,16 @@ class Omni_Disable_Thumbnails {
     }
 
     /**
-     * 獲取圖片尺寸的中文顯示名稱
+     * Get the display name for an image size
      */
     private function get_size_name( $size ) {
         $names = [
-            'thumbnail'    => '縮圖 (Thumbnail)',
-            'medium'       => '中尺寸 (Medium)',
-            'medium_large' => '中大尺寸 (Medium Large)',
-            'large'        => '大尺寸 (Large)',
-            '1536x1536'    => '1536 像素 (1536x1536)',
-            '2048x2048'    => '2048 像素 (2048x2048)'
+            'thumbnail'    => __( 'Thumbnail', 'omni-webmaster-seo-suite' ),
+            'medium'       => __( 'Medium', 'omni-webmaster-seo-suite' ),
+            'medium_large' => __( 'Medium Large', 'omni-webmaster-seo-suite' ),
+            'large'        => __( 'Large', 'omni-webmaster-seo-suite' ),
+            '1536x1536'    => __( '1536px (1536x1536)', 'omni-webmaster-seo-suite' ),
+            '2048x2048'    => __( '2048px (2048x2048)', 'omni-webmaster-seo-suite' )
         ];
 
         if ( isset( $names[$size] ) ) {
@@ -159,11 +159,11 @@ class Omni_Disable_Thumbnails {
 
         $size_name = str_replace( [ '-', '_' ], ' ', $size );
         $size_name = ucwords( $size_name );
-        return '自訂尺寸：' . $size_name;
+        return sprintf( __( 'Custom size: %s', 'omni-webmaster-seo-suite' ), $size_name );
     }
 
     /**
-     * 停用所勾選的圖片尺寸生成
+     * Disable generation of the selected image sizes
      */
     public function disable_existing_image_sizes() {
         $settings = get_option( $this->option_name, [] );
@@ -179,7 +179,7 @@ class Omni_Disable_Thumbnails {
     }
 
     /**
-     * 阻止圖片上傳時的特定尺寸縮圖生成
+     * Prevent generation of specific thumbnail sizes on image upload
      */
     public function disable_image_sizes( $sizes ) {
         $settings = get_option( $this->option_name, [] );
@@ -199,15 +199,15 @@ class Omni_Disable_Thumbnails {
     }
 
     /**
-     * 處理 AJAX 批次刪除縮圖請求
+     * Handle the AJAX batch thumbnail deletion request
      */
     public function handle_delete_thumbnails() {
         if ( ! check_ajax_referer( 'omni_delete_thumbnails_nonce', 'nonce', false ) ) {
-            wp_send_json_error( '無效的安全性權限檢查 (Nonce validation failed)' );
+            wp_send_json_error( __( 'Invalid security check (nonce validation failed)', 'omni-webmaster-seo-suite' ) );
         }
 
         if ( ! current_user_can( 'manage_options' ) ) {
-            wp_send_json_error( '權限不足' );
+            wp_send_json_error( __( 'Insufficient permissions', 'omni-webmaster-seo-suite' ) );
         }
 
         $page        = isset( $_POST['page'] ) ? absint( $_POST['page'] ) : 1;
@@ -216,7 +216,7 @@ class Omni_Disable_Thumbnails {
             $delete_mode = 'disabled_only';
         }
 
-        $batch_size = 50; // 批次處理數量
+        $batch_size = 50; // Number of items per batch
 
         global $wpdb;
         $cache_key    = 'omni_total_images_count';
@@ -268,7 +268,7 @@ class Omni_Disable_Thumbnails {
                 $metadata_changed = false;
                 
                 foreach ( $metadata['sizes'] as $size => $size_info ) {
-                    // 如果為「僅刪除已停用尺寸」模式，但此尺寸未被停用，則跳過不處理
+                    // In "disabled sizes only" mode, skip sizes that are not disabled
                     if ( 'disabled_only' === $delete_mode && ! in_array( $size, $disabled_sizes, true ) ) {
                         continue;
                     }
@@ -283,14 +283,14 @@ class Omni_Disable_Thumbnails {
                         $deleted_count++;
                     }
                     
-                    // 刪除對應的 WebP 版本 (.webp)
+                    // Delete the corresponding WebP version (.webp)
                     $webp_path = preg_replace( '/\.(jpg|jpeg|png)$/i', '.webp', $file_path );
                     if ( file_exists( $webp_path ) ) {
                         wp_delete_file( $webp_path );
                         $deleted_count++;
                     }
                     
-                    // 刪除附加的 .webp 檔案 (如 file.jpg.webp)
+                    // Delete appended .webp files (e.g. file.jpg.webp)
                     $alt_webp_path = $file_path . '.webp';
                     if ( file_exists( $alt_webp_path ) ) {
                         wp_delete_file( $alt_webp_path );
