@@ -4,7 +4,7 @@ Tags: seo, performance, comments, thumbnails, translation
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 2.1.1
+Stable tag: 2.1.2
 License: Apache-2.0
 License URI: https://opensource.org/license/apache-2-0
 
@@ -95,6 +95,11 @@ No. It only deletes resized sub-sizes. Your original uploaded images remain comp
 No. This plugin uses a clean, unified settings array (`omni_webmaster_settings`) to prevent database clutter. You will need to check the desired options in the new admin settings panel.
 
 == Changelog ==
+
+= 2.1.2 =
+* Plugin Check compliance: admin-page strings containing markup are now output through wp_kses_post() instead of _e(), and the two dynamic notices are escaped the same way (fixes 17 escaping errors).
+* Added the missing translators comment for the custom image size label.
+* GitHub release packages no longer bundle the zh-TW README; removed a legacy zip from the repository.
 
 = 2.1.1 =
 * Slug Translator settings now recommend using a Google Cloud Translation API key: the keyless fallback endpoint can produce lower-quality slugs (e.g. `how-was-it-able-9`), and the description links to Google's API key setup guide.

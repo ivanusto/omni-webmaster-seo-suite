@@ -159,6 +159,7 @@ class Omni_Disable_Thumbnails {
 
         $size_name = str_replace( [ '-', '_' ], ' ', $size );
         $size_name = ucwords( $size_name );
+        /* translators: %s: image size slug converted to words (e.g. "Shop Catalog") */
         return sprintf( __( 'Custom size: %s', 'omni-webmaster-seo-suite' ), $size_name );
     }
 

@@ -3,7 +3,7 @@
  * Plugin Name: Omni Webmaster & SEO Suite
  * Plugin URI:  https://github.com/ivanusto/omni-webmaster-seo-suite
  * Description: All-in-one WordPress optimization & SEO toolkit: SEO markup cleanup, advanced RSS control, automatic Asian-title slug translation, complete comment disabling, and selective thumbnail disabling with one-click batch cleanup.
- * Version:     2.1.1
+ * Version:     2.1.2
  * Author:      Ivan Lin
  * Text Domain: omni-webmaster-seo-suite
  * Domain Path: /languages
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin constants
-define( 'OMNI_WEBMASTER_VERSION', '2.1.1' );
+define( 'OMNI_WEBMASTER_VERSION', '2.1.2' );
 define( 'OMNI_WEBMASTER_DIR', plugin_dir_path( __FILE__ ) );
 define( 'OMNI_WEBMASTER_URL', plugin_dir_url( __FILE__ ) );
 define( 'OMNI_WEBMASTER_BASENAME', plugin_basename( __FILE__ ) );
@@ -33,7 +33,10 @@ require_once OMNI_WEBMASTER_DIR . 'includes/class-omni-admin.php';
 add_action( 'plugins_loaded', 'omni_webmaster_seo_suite_init' );
 
 function omni_webmaster_seo_suite_init() {
-    // Load bundled translations (WordPress.org also serves them automatically)
+    // Load the bundled zh_TW translation from /languages. WordPress.org's automatic
+    // loading only covers translations hosted on translate.wordpress.org, so this
+    // call is still required for the .mo files shipped with the plugin.
+    // phpcs:ignore PluginCheck.CodeAnalysis.DiscouragedFunctions.load_plugin_textdomainFound
     load_plugin_textdomain( 'omni-webmaster-seo-suite', false, dirname( OMNI_WEBMASTER_BASENAME ) . '/languages' );
 
     // Instantiate each module

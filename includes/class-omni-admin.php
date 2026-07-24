@@ -326,7 +326,7 @@ class Omni_Admin {
                                             </label>
                                             <div class="omni-field-desc">
                                                 <strong><?php esc_html_e( 'Remove Redundant HTML Tags', 'omni-webmaster-seo-suite' ); ?></strong>
-                                                <p><?php _e( 'Removes redundant feed links and REST API markup from the `<head>` section, keeping your source code clean and improving privacy.', 'omni-webmaster-seo-suite' ); ?></p>
+                                                <p><?php echo wp_kses_post( __( 'Removes redundant feed links and REST API markup from the `<head>` section, keeping your source code clean and improving privacy.', 'omni-webmaster-seo-suite' ) ); ?></p>
                                             </div>
                                         </div>
                                     </td>
@@ -341,7 +341,7 @@ class Omni_Admin {
                                             </label>
                                             <div class="omni-field-desc">
                                                 <strong><?php esc_html_e( 'Set noindex on Search, Tag, and Paginated Pages', 'omni-webmaster-seo-suite' ); ?></strong>
-                                                <p><?php _e( 'Marks tag archives, date archives, internal search pages, and deep post pagination (page 3 and beyond) as `noindex, follow` to focus crawl priority and keep the site from generating large amounts of low-quality or duplicate content.', 'omni-webmaster-seo-suite' ); ?></p>
+                                                <p><?php echo wp_kses_post( __( 'Marks tag archives, date archives, internal search pages, and deep post pagination (page 3 and beyond) as `noindex, follow` to focus crawl priority and keep the site from generating large amounts of low-quality or duplicate content.', 'omni-webmaster-seo-suite' ) ); ?></p>
                                             </div>
                                         </div>
                                     </td>
@@ -356,7 +356,7 @@ class Omni_Admin {
                                             </label>
                                             <div class="omni-field-desc">
                                                 <strong><?php esc_html_e( 'Remove Tags from the Sitemap', 'omni-webmaster-seo-suite' ); ?></strong>
-                                                <p><?php _e( 'Completely removes the `post_tag` entries from the native WordPress sitemap while keeping the main post and author listings for a leaner sitemap.', 'omni-webmaster-seo-suite' ); ?></p>
+                                                <p><?php echo wp_kses_post( __( 'Completely removes the `post_tag` entries from the native WordPress sitemap while keeping the main post and author listings for a leaner sitemap.', 'omni-webmaster-seo-suite' ) ); ?></p>
                                             </div>
                                         </div>
                                     </td>
@@ -371,7 +371,7 @@ class Omni_Admin {
                                             </label>
                                             <div class="omni-field-desc">
                                                 <strong><?php esc_html_e( 'Remove All WordPress XML-RPC Methods', 'omni-webmaster-seo-suite' ); ?></strong>
-                                                <p><?php _e( 'Removes all WordPress methods from <code>xmlrpc.php</code> (<code>wp.*</code>, <code>metaWeblog.*</code>, <code>pingback.*</code>, and so on), keeping only three harmless system methods. This blocks the <strong>brute-force</strong> and pingback abuse attack surface that bypasses login page protection, and also removes the <code>X-Pingback</code> response header. It does not rely on .htaccess and is compatible with any server.', 'omni-webmaster-seo-suite' ); ?></p>
+                                                <p><?php echo wp_kses_post( __( 'Removes all WordPress methods from <code>xmlrpc.php</code> (<code>wp.*</code>, <code>metaWeblog.*</code>, <code>pingback.*</code>, and so on), keeping only three harmless system methods. This blocks the <strong>brute-force</strong> and pingback abuse attack surface that bypasses login page protection, and also removes the <code>X-Pingback</code> response header. It does not rely on .htaccess and is compatible with any server.', 'omni-webmaster-seo-suite' ) ); ?></p>
                                                 <p style="color: #d97706;"><span class="dashicons dashicons-info-outline" style="font-size: 15px; width: 15px; height: 15px; vertical-align: text-top;"></span> <?php esc_html_e( 'If you still use Jetpack or a legacy offline editor that relies on XML-RPC, do not enable this option.', 'omni-webmaster-seo-suite' ); ?></p>
                                             </div>
                                         </div>
@@ -416,7 +416,7 @@ class Omni_Admin {
                                             </button>
                                             <div class="omni-field-desc">
                                                 <strong><?php esc_html_e( 'Reset Site-Wide Embed Preview Cards', 'omni-webmaster-seo-suite' ); ?></strong>
-                                                <p><?php _e( 'If enabling "Clean Up HTML Head" previously turned your embed cards into plain links, then after <strong>turning "Clean Up HTML Head" off</strong> you need to click this button to clear the failed oEmbed cache from the database so post pages can re-fetch and restore the rich preview cards.', 'omni-webmaster-seo-suite' ); ?></p>
+                                                <p><?php echo wp_kses_post( __( 'If enabling "Clean Up HTML Head" previously turned your embed cards into plain links, then after <strong>turning "Clean Up HTML Head" off</strong> you need to click this button to clear the failed oEmbed cache from the database so post pages can re-fetch and restore the rich preview cards.', 'omni-webmaster-seo-suite' ) ); ?></p>
                                             </div>
                                         </div>
                                         <div id="omni-oembed-clear-result" style="margin-top: 10px; font-weight: 500; display: none;"></div>
@@ -433,11 +433,11 @@ class Omni_Admin {
                             <?php if ( '' !== $seo_conflict ) : ?>
                                 <div class="omni-alert omni-alert-warning" style="margin-bottom: 15px;">
                                     <span class="dashicons dashicons-warning"></span> <?php
-                                    printf(
+                                    echo wp_kses_post( sprintf(
                                         /* translators: %s: name of the detected SEO plugin. */
                                         __( 'The "%s" plugin was detected. To avoid conflicts from duplicate meta tag output, the settings in this section are kept but <strong>front-end output is automatically disabled</strong> until that plugin is deactivated.', 'omni-webmaster-seo-suite' ),
                                         esc_html( $seo_conflict )
-                                    );
+                                    ) );
                                     ?>
                                 </div>
                             <?php endif; ?>
@@ -453,7 +453,7 @@ class Omni_Admin {
                                             </label>
                                             <div class="omni-field-desc">
                                                 <strong><?php esc_html_e( 'Output Meta Description and Open Graph Tags on the Homepage', 'omni-webmaster-seo-suite' ); ?></strong>
-                                                <p><?php _e( 'Output only on the first page of the homepage (not repeated on paginated pages), including <code>description</code>, <code>og:title</code>, <code>og:description</code>, <code>og:url</code>, <code>og:image</code>, <code>og:locale</code>, and <code>twitter:card</code>.', 'omni-webmaster-seo-suite' ); ?></p>
+                                                <p><?php echo wp_kses_post( __( 'Output only on the first page of the homepage (not repeated on paginated pages), including <code>description</code>, <code>og:title</code>, <code>og:description</code>, <code>og:url</code>, <code>og:image</code>, <code>og:locale</code>, and <code>twitter:card</code>.', 'omni-webmaster-seo-suite' ) ); ?></p>
                                             </div>
                                         </div>
                                     </td>
@@ -484,7 +484,7 @@ class Omni_Admin {
                                                 <span class="dashicons dashicons-format-image" style="vertical-align: text-bottom;"></span> <?php esc_html_e( 'Select from Media Library', 'omni-webmaster-seo-suite' ); ?>
                                             </button>
                                         </div>
-                                        <p class="description"><?php _e( 'The preview image shown when your homepage is shared on Facebook, LINE, or Telegram. Recommended size: <strong>1200 × 630</strong> pixels. If left empty, social platforms will pick an image on their own (possibly an author avatar or a random image).', 'omni-webmaster-seo-suite' ); ?></p>
+                                        <p class="description"><?php echo wp_kses_post( __( 'The preview image shown when your homepage is shared on Facebook, LINE, or Telegram. Recommended size: <strong>1200 × 630</strong> pixels. If left empty, social platforms will pick an image on their own (possibly an author avatar or a random image).', 'omni-webmaster-seo-suite' ) ); ?></p>
                                         <?php if ( ! empty( $settings['og_default_image'] ) ) : ?>
                                             <img id="omni-og-image-preview" src="<?php echo esc_url( $settings['og_default_image'] ); ?>" alt="" style="margin-top: 10px; max-width: 300px; height: auto; border-radius: 8px; border: 1px solid #e5e7eb;" />
                                         <?php else : ?>
@@ -502,7 +502,7 @@ class Omni_Admin {
                                             </label>
                                             <div class="omni-field-desc">
                                                 <strong><?php esc_html_e( 'Output WebSite and Organization JSON-LD', 'omni-webmaster-seo-suite' ); ?></strong>
-                                                <p><?php _e( 'Helps Google display the correct <strong>site name</strong> (instead of the domain name) and site logo in search results (the Site Icon is used first, falling back to the share image above when not set). Requires "Enable Homepage Meta Tags" above to be turned on as well.', 'omni-webmaster-seo-suite' ); ?></p>
+                                                <p><?php echo wp_kses_post( __( 'Helps Google display the correct <strong>site name</strong> (instead of the domain name) and site logo in search results (the Site Icon is used first, falling back to the share image above when not set). Requires "Enable Homepage Meta Tags" above to be turned on as well.', 'omni-webmaster-seo-suite' ) ); ?></p>
                                             </div>
                                         </div>
                                     </td>
@@ -563,7 +563,7 @@ class Omni_Admin {
                                 <tr>
                                     <th scope="row"><?php esc_html_e( 'Select Thumbnail Sizes to Disable', 'omni-webmaster-seo-suite' ); ?></th>
                                     <td>
-                                        <p class="description" style="margin-bottom: 15px;"><?php _e( 'Check a thumbnail size below and newly uploaded images will <strong>no longer</strong> generate physical thumbnails at that size:', 'omni-webmaster-seo-suite' ); ?></p>
+                                        <p class="description" style="margin-bottom: 15px;"><?php echo wp_kses_post( __( 'Check a thumbnail size below and newly uploaded images will <strong>no longer</strong> generate physical thumbnails at that size:', 'omni-webmaster-seo-suite' ) ); ?></p>
                                         <div class="omni-sizes-grid">
                                             <?php
                                             $all_sizes = $this->disable_thumbnails->get_all_image_sizes();
@@ -656,11 +656,11 @@ class Omni_Admin {
                                                class="regular-text omni-input-key"
                                                placeholder="<?php esc_attr_e( '(Optional) AIzaSy...', 'omni-webmaster-seo-suite' ); ?>" />
                                         <p class="description"><?php
-                                        printf(
+                                        echo wp_kses_post( sprintf(
                                             /* translators: %s: URL of the Google Cloud Translation API setup guide */
                                             __( 'Enter a Cloud Translation API key created in the Google Cloud console (<a href="%s" target="_blank" rel="noopener noreferrer">how to get an API key</a>).<br/><strong>Fallback (no key required)</strong>: leave this field empty and the plugin automatically falls back to the keyless public Google Translate endpoint.<br/><strong>An API key is recommended</strong>: the keyless endpoint often produces lower-quality slugs (e.g. <code>how-was-it-able-9</code>), while the official Cloud API returns noticeably more accurate translations and includes a monthly free quota.', 'omni-webmaster-seo-suite' ),
                                             esc_url( 'https://cloud.google.com/translate/docs/setup' )
-                                        );
+                                        ) );
                                         ?></p>
 
                                         <div class="omni-api-tester" style="margin-top: 15px;">
@@ -704,7 +704,7 @@ class Omni_Admin {
                                             </label>
                                             <div class="omni-field-desc">
                                                 <strong><?php esc_html_e( 'Load the Meta Pixel Tracking Code on the Front End', 'omni-webmaster-seo-suite' ); ?></strong>
-                                                <p><?php _e( 'When enabled, the Meta Pixel tracking script is inserted into the `<head>` section of every public front-end page and the base <code>PageView</code> event fires automatically.', 'omni-webmaster-seo-suite' ); ?></p>
+                                                <p><?php echo wp_kses_post( __( 'When enabled, the Meta Pixel tracking script is inserted into the `<head>` section of every public front-end page and the base <code>PageView</code> event fires automatically.', 'omni-webmaster-seo-suite' ) ); ?></p>
                                             </div>
                                         </div>
                                     </td>
@@ -733,10 +733,10 @@ class Omni_Admin {
                                             </label>
                                             <div class="omni-field-desc">
                                                 <strong><?php esc_html_e( 'Automatically Track Single Content Views and Search Behavior', 'omni-webmaster-seo-suite' ); ?></strong>
-                                                <p><?php _e( 'In addition to the base <code>PageView</code>, the system automatically sends the following standard events on the appropriate pages for advanced ad audience optimization:', 'omni-webmaster-seo-suite' ); ?></p>
+                                                <p><?php echo wp_kses_post( __( 'In addition to the base <code>PageView</code>, the system automatically sends the following standard events on the appropriate pages for advanced ad audience optimization:', 'omni-webmaster-seo-suite' ) ); ?></p>
                                                 <ul style="list-style-type: disc; margin-left: 20px; margin-top: 6px; color: #6b7280; line-height: 1.5;">
-                                                    <li><?php _e( '<strong>Single post/page (ViewContent)</strong>: sent when a visitor views a single post or page, including the post title, all category names, post ID, and post type.', 'omni-webmaster-seo-suite' ); ?></li>
-                                                    <li><?php _e( '<strong>Search results (Search)</strong>: sent when a visitor performs an internal site search, including the search keyword the visitor entered.', 'omni-webmaster-seo-suite' ); ?></li>
+                                                    <li><?php echo wp_kses_post( __( '<strong>Single post/page (ViewContent)</strong>: sent when a visitor views a single post or page, including the post title, all category names, post ID, and post type.', 'omni-webmaster-seo-suite' ) ); ?></li>
+                                                    <li><?php echo wp_kses_post( __( '<strong>Search results (Search)</strong>: sent when a visitor performs an internal site search, including the search keyword the visitor entered.', 'omni-webmaster-seo-suite' ) ); ?></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -752,7 +752,7 @@ class Omni_Admin {
                                             </label>
                                             <div class="omni-field-desc">
                                                 <strong><?php esc_html_e( 'Do Not Track Logged-In Administrators and Editors', 'omni-webmaster-seo-suite' ); ?></strong>
-                                                <p><?php _e( 'When enabled, logged-in users with post editing capability (<code>edit_posts</code>) will not load the Pixel tracking code when browsing the front end, keeping staff browsing behavior from polluting your ad audiences and conversion data (recommended to keep on).', 'omni-webmaster-seo-suite' ); ?></p>
+                                                <p><?php echo wp_kses_post( __( 'When enabled, logged-in users with post editing capability (<code>edit_posts</code>) will not load the Pixel tracking code when browsing the front end, keeping staff browsing behavior from polluting your ad audiences and conversion data (recommended to keep on).', 'omni-webmaster-seo-suite' ) ); ?></p>
                                             </div>
                                         </div>
                                     </td>
@@ -809,7 +809,7 @@ class Omni_Admin {
                                         <label for="omni_export_views_meta" style="font-weight: 600; color: #374151;"><strong><?php esc_html_e( 'View Count Custom Field (Meta Key)', 'omni-webmaster-seo-suite' ); ?></strong></label>
                                         <div style="display: flex; flex-direction: column; gap: 4px;">
                                             <input type="text" id="omni_export_views_meta" name="<?php echo esc_attr( $this->option_name ); ?>[views_meta_key]" value="<?php echo esc_attr( $settings['views_meta_key'] ); ?>" class="regular-text" style="width: 150px; padding: 6px 12px; border-radius: 6px; border: 1.5px solid #d1d5db;" placeholder="views" />
-                                            <span class="description" style="font-size: 11px; color: #6b7280;"><?php _e( 'Defaults to <code>views</code> (used by WP-PostViews). Enter the view count custom field name (meta key) used on your site.', 'omni-webmaster-seo-suite' ); ?></span>
+                                            <span class="description" style="font-size: 11px; color: #6b7280;"><?php echo wp_kses_post( __( 'Defaults to <code>views</code> (used by WP-PostViews). Enter the view count custom field name (meta key) used on your site.', 'omni-webmaster-seo-suite' ) ); ?></span>
                                         </div>
                                     </div>
                                 </div>
