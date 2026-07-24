@@ -3,7 +3,7 @@
  * Plugin Name: Omni Webmaster & SEO Suite
  * Plugin URI:  https://github.com/ivanusto/omni-webmaster-seo-suite
  * Description: All-in-one WordPress optimization & SEO toolkit: SEO markup cleanup, advanced RSS control, automatic Asian-title slug translation, complete comment disabling, and selective thumbnail disabling with one-click batch cleanup.
- * Version:     2.1
+ * Version:     2.1.1
  * Author:      Ivan Lin
  * Text Domain: omni-webmaster-seo-suite
  * Domain Path: /languages
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin constants
-define( 'OMNI_WEBMASTER_VERSION', '2.1' );
+define( 'OMNI_WEBMASTER_VERSION', '2.1.1' );
 define( 'OMNI_WEBMASTER_DIR', plugin_dir_path( __FILE__ ) );
 define( 'OMNI_WEBMASTER_URL', plugin_dir_url( __FILE__ ) );
 define( 'OMNI_WEBMASTER_BASENAME', plugin_basename( __FILE__ ) );

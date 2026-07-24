@@ -209,8 +209,8 @@ msgstr "啟用首頁 Meta 標籤"
 msgid "Enable Meta Pixel Tracking"
 msgstr "啟用 Meta Pixel 追蹤"
 
-msgid "Enter a Cloud Translation API key created in the Google Cloud console.<br/><strong>Fallback (no key required)</strong>: leave this field empty and the plugin automatically uses the keyless public Google Translate endpoint for effortless slug translation!"
-msgstr "請填寫 Google Cloud 主控台申請的 Cloud Translation API Key。<br/><strong>備用方案 (免金鑰)</strong>：若欄位留空，系統將自動啟用免金鑰的 Google Translate 公開端點，無痛進行網址翻譯！"
+msgid "Enter a Cloud Translation API key created in the Google Cloud console (<a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">how to get an API key</a>).<br/><strong>Fallback (no key required)</strong>: leave this field empty and the plugin automatically falls back to the keyless public Google Translate endpoint.<br/><strong>An API key is recommended</strong>: the keyless endpoint often produces lower-quality slugs (e.g. <code>how-was-it-able-9</code>), while the official Cloud API returns noticeably more accurate translations and includes a monthly free quota."
+msgstr "請輸入於 Google Cloud 主控台建立的 Cloud Translation API 金鑰（<a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">如何申請 API 金鑰</a>）。<br/><strong>免金鑰備援</strong>：此欄留空時，系統會自動改用免金鑰的 Google Translate 公開端點。<br/><strong>建議使用 API 金鑰</strong>：免金鑰端點翻譯品質較差，可能產生如 <code>how-was-it-able-9</code> 的網址字串；官方 Cloud API 翻譯明顯較精準，且每月提供免費額度。"
 
 msgid "Enter a numbers-only Meta Pixel ID"
 msgstr "請輸入純數字的 Meta Pixel ID"
@@ -519,7 +519,7 @@ msgid "When no full-featured SEO plugin is installed, outputs a meta description
 msgstr "在未安裝大型 SEO 外掛時，於首頁輸出 Meta Description、Open Graph 社群分享標籤與 Schema.org（WebSite / Organization）結構化資料。單篇文章頁的 OG 標籤請交由佈景主題處理，本區僅作用於首頁。"
 
 msgid "When you publish or save a post with an Asian-language title (Chinese, Japanese, Korean, Thai, etc.), the title is automatically translated into a clean English URL slug via the Google Translate API, improving SEO friendliness and preventing garbled characters when non-Latin URLs are copied."
-msgstr "當發布或儲存含中文的文章標題時，自動呼叫 Google 翻譯 API 翻譯為英文 URL Slug，增強 SEO 搜尋友好度與中文網址複製時產生亂碼的問題。"
+msgstr "當發布或儲存含亞洲語言（中、日、韓、泰文等）標題的文章時，自動呼叫 Google 翻譯 API 翻譯為英文 URL Slug，增強 SEO 搜尋友好度，並避免非拉丁字母網址複製時產生亂碼。"
 
 msgid "WP Embed Block Dark Mode Fix (Embed Card)"
 msgstr "WP 嵌入區塊深色修正 (Embed Card)"

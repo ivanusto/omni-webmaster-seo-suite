@@ -208,7 +208,7 @@ msgstr ""
 msgid "Enable Meta Pixel Tracking"
 msgstr ""
 
-msgid "Enter a Cloud Translation API key created in the Google Cloud console.<br/><strong>Fallback (no key required)</strong>: leave this field empty and the plugin automatically uses the keyless public Google Translate endpoint for effortless slug translation!"
+msgid "Enter a Cloud Translation API key created in the Google Cloud console (<a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">how to get an API key</a>).<br/><strong>Fallback (no key required)</strong>: leave this field empty and the plugin automatically falls back to the keyless public Google Translate endpoint.<br/><strong>An API key is recommended</strong>: the keyless endpoint often produces lower-quality slugs (e.g. <code>how-was-it-able-9</code>), while the official Cloud API returns noticeably more accurate translations and includes a monthly free quota."
 msgstr ""
 
 msgid "Enter a numbers-only Meta Pixel ID"

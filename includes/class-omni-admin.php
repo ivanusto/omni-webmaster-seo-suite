@@ -655,7 +655,13 @@ class Omni_Admin {
                                                value="<?php echo esc_attr( $settings['slug_api_key'] ); ?>"
                                                class="regular-text omni-input-key"
                                                placeholder="<?php esc_attr_e( '(Optional) AIzaSy...', 'omni-webmaster-seo-suite' ); ?>" />
-                                        <p class="description"><?php _e( 'Enter a Cloud Translation API key created in the Google Cloud console.<br/><strong>Fallback (no key required)</strong>: leave this field empty and the plugin automatically uses the keyless public Google Translate endpoint for effortless slug translation!', 'omni-webmaster-seo-suite' ); ?></p>
+                                        <p class="description"><?php
+                                        printf(
+                                            /* translators: %s: URL of the Google Cloud Translation API setup guide */
+                                            __( 'Enter a Cloud Translation API key created in the Google Cloud console (<a href="%s" target="_blank" rel="noopener noreferrer">how to get an API key</a>).<br/><strong>Fallback (no key required)</strong>: leave this field empty and the plugin automatically falls back to the keyless public Google Translate endpoint.<br/><strong>An API key is recommended</strong>: the keyless endpoint often produces lower-quality slugs (e.g. <code>how-was-it-able-9</code>), while the official Cloud API returns noticeably more accurate translations and includes a monthly free quota.', 'omni-webmaster-seo-suite' ),
+                                            esc_url( 'https://cloud.google.com/translate/docs/setup' )
+                                        );
+                                        ?></p>
 
                                         <div class="omni-api-tester" style="margin-top: 15px;">
                                             <button type="button" id="omni-btn-test-api" class="button">
