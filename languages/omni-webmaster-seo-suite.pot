@@ -301,7 +301,7 @@ msgstr ""
 msgid "Marks tag archives, date archives, internal search pages, and deep post pagination (page 3 and beyond) as `noindex, follow` to focus crawl priority and keep the site from generating large amounts of low-quality or duplicate content."
 msgstr ""
 
-msgid "Maximum number of characters for generated English slugs (30 to 50 recommended). The system automatically reserves 12 characters for appending the post ID as duplicate protection."
+msgid "Maximum number of characters for generated English slugs (30 to 50 recommended). Truncation happens at word boundaries, and duplicate slugs are handled automatically by WordPress."
 msgstr ""
 
 msgid "Maximum Slug Length"

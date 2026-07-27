@@ -4,7 +4,7 @@ Tags: seo, performance, comments, thumbnails, translation
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 2.1.2
+Stable tag: 2.2.0
 License: Apache-2.0
 License URI: https://opensource.org/license/apache-2-0
 
@@ -96,6 +96,11 @@ No. It only deletes resized sub-sizes. Your original uploaded images remain comp
 No. This plugin uses a clean, unified settings array (`omni_webmaster_settings`) to prevent database clutter. You will need to check the desired options in the new admin settings panel.
 
 == Changelog ==
+
+= 2.2.0 =
+* Slug Translator no longer appends the post ID to every generated slug (e.g. `-13663`); slug uniqueness is delegated to WordPress core, which only adds a numeric suffix on an actual collision. Existing published slugs are not modified.
+* The full configured maximum length is now available for the slug itself (previously 12 characters were reserved for the ID suffix, leaving only 18 of the default 30).
+* Smarter truncation: cuts at whole-word boundaries without discarding a word that fit exactly, and trims trailing function words (of, and, the, ...) so slugs end on a meaningful word.
 
 = 2.1.2 =
 * Plugin Check compliance: admin-page strings containing markup are now output through wp_kses_post() instead of _e(), and the two dynamic notices are escaped the same way (fixes 17 escaping errors).

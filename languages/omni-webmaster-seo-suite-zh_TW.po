@@ -302,8 +302,8 @@ msgstr "一站式管理您的 WordPress 網站優化與 SEO 基礎配置，整�
 msgid "Marks tag archives, date archives, internal search pages, and deep post pagination (page 3 and beyond) as `noindex, follow` to focus crawl priority and keep the site from generating large amounts of low-quality or duplicate content."
 msgstr "將標籤存檔頁、日期封存頁、內部搜尋頁與第 3 頁以上的深層文章分頁，標記為 `noindex, follow`，聚焦爬蟲權重，避免網站產生大量低質量或重複內容。"
 
-msgid "Maximum number of characters for generated English slugs (30 to 50 recommended). The system automatically reserves 12 characters for appending the post ID as duplicate protection."
-msgstr "產生的英文網址最大字元數（建議為 30 至 50 之間）。系統會自動預留 12 個字元供後續追加文章 ID 做防重複保護。"
+msgid "Maximum number of characters for generated English slugs (30 to 50 recommended). Truncation happens at word boundaries, and duplicate slugs are handled automatically by WordPress."
+msgstr "產生的英文網址最大字元數（建議為 30 至 50 之間）。截斷會落在完整單字邊界，重複網址由 WordPress 自動處理。"
 
 msgid "Maximum Slug Length"
 msgstr "最大字元長度"

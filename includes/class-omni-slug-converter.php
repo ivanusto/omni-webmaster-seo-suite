@@ -79,14 +79,10 @@ class Omni_Slug_Converter {
         $translated = $this->translate_title( $data['post_title'] );
         if ( $translated ) {
             $base_slug = $this->create_slug( $translated );
-            $post_id   = isset( $postarr['ID'] ) ? $postarr['ID'] : 0;
 
-            // Posts that already have an ID get it appended to avoid slug collisions
-            if ( $post_id > 0 ) {
-                $data['post_name'] = $base_slug . '-' . $post_id;
-            } else {
-                // New posts have no ID yet; use the translated slug directly.
-                // Uniqueness is guaranteed by core's wp_unique_post_slug
+            // Uniqueness is guaranteed by core's wp_unique_post_slug, which
+            // only appends "-2" on an actual collision — no ID suffix needed
+            if ( '' !== $base_slug ) {
                 $data['post_name'] = $base_slug;
             }
         }
@@ -217,22 +213,32 @@ class Omni_Slug_Converter {
         // The keyless endpoint may return HTML entities; decode before filtering
         $text = html_entity_decode( $text, ENT_QUOTES, 'UTF-8' );
         $text = preg_replace( '/[^a-z0-9\s-]/', '', $text );
-        $text = preg_replace( '/\s+/', '-', $text );
+        $text = preg_replace( '/[\s-]+/', '-', $text );
         $text = trim( $text, '-' );
 
-        // Apply the configured max length, reserving room for the post ID suffix
-        $options         = $this->get_options();
-        $max_length      = absint( $options['max_length'] );
-        $reserved_length = 12; // room for an ID suffix like "-123456"
-        // Floor of 8 chars so a tiny setting can't truncate the slug to nothing
-        $actual_max_length = max( 8, $max_length - $reserved_length );
+        // Apply the configured max length; the full budget is available now
+        // that no post-ID suffix is appended
+        $options    = $this->get_options();
+        $max_length = max( 20, absint( $options['max_length'] ) );
 
-        if ( strlen( $text ) > $actual_max_length ) {
-            $text = substr( $text, 0, $actual_max_length );
-            $text = preg_replace( '/-[^-]*$/', '', $text ); // drop the trailing partial word
+        if ( strlen( $text ) > $max_length ) {
+            $cut = substr( $text, 0, $max_length );
+            // Only drop the last segment when the cut landed mid-word
+            if ( '-' !== substr( $text, $max_length, 1 ) && false !== strpos( $cut, '-' ) ) {
+                $cut = substr( $cut, 0, strrpos( $cut, '-' ) );
+            }
+            $text = rtrim( $cut, '-' );
         }
 
-        return $text;
+        // Trailing function words read as truncation artifacts ("...-of") —
+        // trim them so the slug ends on a content word
+        $stopwords = [ 'a', 'an', 'the', 'of', 'and', 'or', 'to', 'in', 'on', 'at', 'for', 'with', 'by', 'from', 'is', 'are', 'was', 'were', 'be', 'as', 'that', 'this', 'its' ];
+        $parts     = explode( '-', $text );
+        while ( count( $parts ) > 1 && in_array( end( $parts ), $stopwords, true ) ) {
+            array_pop( $parts );
+        }
+
+        return implode( '-', $parts );
     }
 
     /**

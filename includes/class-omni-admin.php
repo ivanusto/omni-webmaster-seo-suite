@@ -100,7 +100,7 @@ class Omni_Admin {
 
         // Slug translator options
         $sanitized['slug_api_key']    = isset( $input['slug_api_key'] ) ? sanitize_text_field( $input['slug_api_key'] ) : '';
-        // Clamp to 20-200 so the slug length never drops to zero after reserving space for the post ID
+        // Clamp to 20-200 so the slug always keeps a usable length
         $sanitized['slug_max_length'] = isset( $input['slug_max_length'] ) ? max( 20, min( 200, absint( $input['slug_max_length'] ) ) ) : 30;
 
         // View count custom field (meta key)
@@ -680,7 +680,7 @@ class Omni_Admin {
                                                class="small-text"
                                                min="20"
                                                max="200" />
-                                        <p class="description"><?php esc_html_e( 'Maximum number of characters for generated English slugs (30 to 50 recommended). The system automatically reserves 12 characters for appending the post ID as duplicate protection.', 'omni-webmaster-seo-suite' ); ?></p>
+                                        <p class="description"><?php esc_html_e( 'Maximum number of characters for generated English slugs (30 to 50 recommended). Truncation happens at word boundaries, and duplicate slugs are handled automatically by WordPress.', 'omni-webmaster-seo-suite' ); ?></p>
                                     </td>
                                 </tr>
                             </table>
