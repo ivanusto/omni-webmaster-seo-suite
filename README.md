@@ -96,4 +96,4 @@ If you only need a single feature, the standalone plugins remain available.
 
 ## License
 
-[Apache-2.0](LICENSE)
+[GPL-2.0-or-later](LICENSE)
