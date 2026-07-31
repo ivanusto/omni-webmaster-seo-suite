@@ -94,6 +94,6 @@ This suite grew out of six standalone plugins previously written by the author. 
 
 If you only need a single feature, the standalone plugins remain available.
 
-## License
+## License / 授權條款
 
-[GPL-2.0-or-later](LICENSE)
+This project is licensed under the [GNU General Public License v2.0 or later (GPL-2.0-or-later)](LICENSE).
