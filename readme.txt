@@ -54,6 +54,10 @@ This suite grew out of six standalone plugins previously written by the author, 
 * smart-file-renamer: https://github.com/ivanusto/smart-file-renamer
 * modern-rss-image-feed: https://github.com/ivanusto/modern-rss-image-feed
 
+= Sister Project =
+
+* Omni Performance Hardening: https://github.com/ivanusto/omni-wp-perf-hardening - High-performance hardening toolkit for WordPress to reduce server load from search scans, archive queries, and low-value feeds.
+
 == External Services ==
 
 This plugin utilizes third-party and external services to provide specific functionalities:

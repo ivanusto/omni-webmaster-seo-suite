@@ -94,6 +94,10 @@ This suite grew out of six standalone plugins previously written by the author. 
 
 If you only need a single feature, the standalone plugins remain available.
 
+## Sister Project
+
+- [Omni Performance Hardening](https://github.com/ivanusto/omni-wp-perf-hardening) — High-performance hardening toolkit for WordPress to reduce server load from full-table search scans, archive queries, low-value feeds, and oEmbed endpoints while tuning CDN cache headers. Complements this suite by handling server resource optimization and crawl mitigation.
+
 ## License / 授權條款
 
 This project is licensed under the [GNU General Public License v2.0 or later (GPL-2.0-or-later)](LICENSE).

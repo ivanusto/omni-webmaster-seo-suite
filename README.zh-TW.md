@@ -94,6 +94,10 @@
 
 若您只需要單一功能，這些獨立外掛皆可繼續使用。
 
+## 姊妹作品
+
+- [Omni Performance Hardening](https://github.com/ivanusto/omni-wp-perf-hardening)——專為高流量與大內容 WordPress 站台打造的效能強化與爬取收斂外掛，用以收斂站內搜尋全表掃描、`SQL_CALC_FOUND_ROWS`、低價值 Feed 與 oEmbed 端點，並優化 CDN 快取標頭。與本套件形成互補（本套件負責曝光與 SEO 索引，該套件負責伺服器效能與負載收斂）。
+
 ## 授權條款
 
 本專案採用 [Apache-2.0](LICENSE) 授權條款。
