@@ -1,7 +1,7 @@
 # Translation template for Omni Webmaster & SEO Suite.
 msgid ""
 msgstr ""
-"Project-Id-Version: Omni Webmaster & SEO Suite 2.1\n"
+"Project-Id-Version: Omni Webmaster & SEO Suite 2.3.0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -9,7 +9,6 @@ msgstr ""
 "X-Generator: hand-merged\n"
 msgid "%1$d-%2$02d"
 msgstr ""
-
 msgid "(Optional) A common short name for your site, provided to Google as an alternate identifier for the site name."
 msgstr ""
 
@@ -32,6 +31,9 @@ msgid "1536px (1536x1536)"
 msgstr ""
 
 msgid "2048px (2048x2048)"
+msgstr ""
+
+msgid "Add Date Prefix"
 msgstr ""
 
 msgid "Advanced RSS Feed Control"
@@ -59,6 +61,15 @@ msgid "Are you sure you want to delete the thumbnail sizes checked as disabled? 
 msgstr ""
 
 msgid "Automatic Slug Translation"
+msgstr ""
+
+msgid "Automatic Upload Image Resizing"
+msgstr ""
+
+msgid "Automatically Downscale Oversized Images on Upload"
+msgstr ""
+
+msgid "Automatically normalizes file names during upload: Latin accented characters are transliterated to ASCII, spaces and underscores become hyphens, remaining non-ASCII characters (CJK, symbols) are stripped, and the result is lowercased for clean, SEO-friendly media URLs."
 msgstr ""
 
 msgid "Automatically Track Single Content Views and Search Behavior"
@@ -142,6 +153,9 @@ msgstr ""
 msgid "Completely Turn Off Site Comments"
 msgstr ""
 
+msgid "Compression quality used when re-saving resized JPEG/WebP/AVIF images (80 recommended; PNG compression is derived from this value)."
+msgstr ""
+
 msgid "Connection error. Please try again."
 msgstr ""
 
@@ -208,6 +222,12 @@ msgstr ""
 msgid "Enable Meta Pixel Tracking"
 msgstr ""
 
+msgid "Enable Upload File Renaming"
+msgstr ""
+
+msgid "Enable Upload Image Resizing"
+msgstr ""
+
 msgid "Enter a Cloud Translation API key created in the Google Cloud console (<a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">how to get an API key</a>).<br/><strong>Fallback (no key required)</strong>: leave this field empty and the plugin automatically falls back to the keyless public Google Translate endpoint.<br/><strong>An API key is recommended</strong>: the keyless endpoint often produces lower-quality slugs (e.g. <code>how-was-it-able-9</code>), while the official Cloud API returns noticeably more accurate translations and includes a monthly free quota."
 msgstr ""
 
@@ -215,6 +235,12 @@ msgid "Enter a numbers-only Meta Pixel ID"
 msgstr ""
 
 msgid "Enter your Meta (Facebook) Pixel ID (numbers only). You can find it on the settings page of Facebook Events Manager."
+msgstr ""
+
+msgid "Example: <code>cafe-menu.jpg</code> becomes <code>2026-08-04-cafe-menu.jpg</code>, which helps keep large media libraries chronologically organized."
+msgstr ""
+
+msgid "Example: <code>Café Menü 2024.jpg</code> becomes <code>cafe-menu-2024.jpg</code>. Only newly uploaded files are affected; existing media files are never renamed."
 msgstr ""
 
 msgid "Exclude Site Staff"
@@ -259,6 +285,12 @@ msgstr ""
 msgid "If you still use Jetpack or a legacy offline editor that relies on XML-RPC, do not enable this option."
 msgstr ""
 
+msgid "Image Quality"
+msgstr ""
+
+msgid "Images larger than the maximum width or height below are proportionally resized to fit (aspect ratio is preserved; transparency in PNG/GIF is kept). Images already within bounds are left untouched, and if resizing ever fails the original file is uploaded unchanged."
+msgstr ""
+
 msgid "In addition to the base <code>PageView</code>, the system automatically sends the following standard events on the appropriate pages for advanced ad audience optimization:"
 msgstr ""
 
@@ -301,10 +333,16 @@ msgstr ""
 msgid "Marks tag archives, date archives, internal search pages, and deep post pagination (page 3 and beyond) as `noindex, follow` to focus crawl priority and keep the site from generating large amounts of low-quality or duplicate content."
 msgstr ""
 
+msgid "Maximum Height"
+msgstr ""
+
 msgid "Maximum number of characters for generated English slugs (30 to 50 recommended). Truncation happens at word boundaries, and duplicate slugs are handled automatically by WordPress."
 msgstr ""
 
 msgid "Maximum Slug Length"
+msgstr ""
+
+msgid "Maximum Width"
 msgstr ""
 
 msgid "Media & Thumbnail Generation Optimization"
@@ -391,6 +429,9 @@ msgstr ""
 msgid "Post Title"
 msgstr ""
 
+msgid "Prefix File Names with the Upload Date (YYYY-MM-DD)"
+msgstr ""
+
 msgid "Preparing cleanup..."
 msgstr ""
 
@@ -413,6 +454,9 @@ msgid "Removes all WordPress methods from <code>xmlrpc.php</code> (<code>wp.*</c
 msgstr ""
 
 msgid "Removes redundant feed links and REST API markup from the `<head>` section, keeping your source code clean and improving privacy."
+msgstr ""
+
+msgid "Rename Files with Accents and Special Characters on Upload"
 msgstr ""
 
 msgid "Reset Site-Wide Embed Preview Cards"
@@ -451,6 +495,9 @@ msgstr ""
 msgid "SEO Optimization & HTML Cleanup"
 msgstr ""
 
+msgid "SEO-Friendly Upload File Renaming"
+msgstr ""
+
 msgid "Server returned an error: %1$s"
 msgstr ""
 
@@ -458,6 +505,9 @@ msgid "Set noindex on Search, Tag, and Paginated Pages"
 msgstr ""
 
 msgid "Settings"
+msgstr ""
+
+msgid "Shrinks oversized images (JPEG, PNG, GIF, WebP, AVIF) down to your configured maximum dimensions at upload time, before WordPress stores the original and generates thumbnails, saving disk space and bandwidth from the start."
 msgstr ""
 
 msgid "Site Name Abbreviation (alternateName)"
@@ -484,13 +534,28 @@ msgstr ""
 msgid "The keyless translation endpoint returned unexpected data."
 msgstr ""
 
+msgid "The PHP GD extension is not available on this server, so image resizing is skipped. Ask your hosting provider to enable GD to use this feature."
+msgstr ""
+
 msgid "The preview image shown when your homepage is shared on Facebook, LINE, or Telegram. Recommended size: <strong>1200 × 630</strong> pixels. If left empty, social platforms will pick an image on their own (possibly an author avatar or a random image)."
+msgstr ""
+
+msgid "The standalone \"Smart File Renamer\" plugin is active. To avoid renaming files twice, this module is <strong>automatically disabled</strong> until that plugin is deactivated."
+msgstr ""
+
+msgid "The standalone \"Smart Image Upload Resizer\" plugin is active. To avoid resizing images twice, this module is <strong>automatically disabled</strong> until that plugin is deactivated."
 msgstr ""
 
 msgid "This scans every image attachment in the media library and removes the corresponding thumbnail files (original full-size images are kept). This is a destructive action; back up your site first."
 msgstr ""
 
 msgid "Thumbnail"
+msgstr ""
+
+msgid "Uploaded images taller than this are scaled down (hard cap: %s px)."
+msgstr ""
+
+msgid "Uploaded images wider than this are scaled down (hard cap: %s px)."
 msgstr ""
 
 msgid "Use this image"
@@ -525,4 +590,3 @@ msgstr ""
 
 msgid "XML-RPC Security Hardening"
 msgstr ""
-

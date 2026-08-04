@@ -98,6 +98,16 @@ class Omni_Admin {
             }
         }
 
+        // Upload file renaming options
+        $sanitized['file_rename_enable']      = isset( $input['file_rename_enable'] ) ? '1' : '0';
+        $sanitized['file_rename_date_prefix'] = isset( $input['file_rename_date_prefix'] ) ? '1' : '0';
+
+        // Upload image resizing options (dimensions clamped to the hard 2560px cap)
+        $sanitized['image_resize_enable']     = isset( $input['image_resize_enable'] ) ? '1' : '0';
+        $sanitized['image_resize_max_width']  = isset( $input['image_resize_max_width'] ) ? max( 1, min( Omni_Image_Resizer::MAX_DIMENSION, absint( $input['image_resize_max_width'] ) ) ) : Omni_Image_Resizer::DEFAULT_MAX_WIDTH;
+        $sanitized['image_resize_max_height'] = isset( $input['image_resize_max_height'] ) ? max( 1, min( Omni_Image_Resizer::MAX_DIMENSION, absint( $input['image_resize_max_height'] ) ) ) : Omni_Image_Resizer::DEFAULT_MAX_HEIGHT;
+        $sanitized['image_resize_quality']    = isset( $input['image_resize_quality'] ) ? max( 1, min( 100, absint( $input['image_resize_quality'] ) ) ) : Omni_Image_Resizer::DEFAULT_QUALITY;
+
         // Slug translator options
         $sanitized['slug_api_key']    = isset( $input['slug_api_key'] ) ? sanitize_text_field( $input['slug_api_key'] ) : '';
         // Clamp to 20-200 so the slug always keeps a usable length
@@ -239,6 +249,12 @@ class Omni_Admin {
             'xmlrpc_hardening'    => '0',
             'disable_comments'    => '0',
             'disabled_sizes'      => [],
+            'file_rename_enable'      => '0',
+            'file_rename_date_prefix' => '0',
+            'image_resize_enable'     => '0',
+            'image_resize_max_width'  => Omni_Image_Resizer::DEFAULT_MAX_WIDTH,
+            'image_resize_max_height' => Omni_Image_Resizer::DEFAULT_MAX_HEIGHT,
+            'image_resize_quality'    => Omni_Image_Resizer::DEFAULT_QUALITY,
             'slug_api_key'        => '',
             'slug_max_length'     => 30,
             'views_meta_key'      => 'views',
@@ -556,6 +572,136 @@ class Omni_Admin {
                     <!-- Tab 3: Media & Thumbnails -->
                     <div class="omni-tab-panel <?php echo $active_tab === 'thumbnails' ? 'is-active' : ''; ?>">
                         <div class="omni-tab-content">
+                            <h3><?php esc_html_e( 'SEO-Friendly Upload File Renaming', 'omni-webmaster-seo-suite' ); ?></h3>
+                            <p class="section-desc"><?php esc_html_e( 'Automatically normalizes file names during upload: Latin accented characters are transliterated to ASCII, spaces and underscores become hyphens, remaining non-ASCII characters (CJK, symbols) are stripped, and the result is lowercased for clean, SEO-friendly media URLs.', 'omni-webmaster-seo-suite' ); ?></p>
+
+                            <?php if ( Omni_File_Renamer::standalone_plugin_active() ) : ?>
+                                <div class="omni-alert omni-alert-warning" style="margin-bottom: 15px;">
+                                    <span class="dashicons dashicons-warning"></span> <?php echo wp_kses_post( __( 'The standalone "Smart File Renamer" plugin is active. To avoid renaming files twice, this module is <strong>automatically disabled</strong> until that plugin is deactivated.', 'omni-webmaster-seo-suite' ) ); ?>
+                                </div>
+                            <?php endif; ?>
+
+                            <table class="form-table omni-form-table">
+                                <tr>
+                                    <th scope="row"><?php esc_html_e( 'Enable Upload File Renaming', 'omni-webmaster-seo-suite' ); ?></th>
+                                    <td>
+                                        <div class="omni-field-row">
+                                            <label class="omni-switch">
+                                                <input type="checkbox" name="<?php echo esc_attr( $this->option_name ); ?>[file_rename_enable]" value="1" <?php checked( '1', $settings['file_rename_enable'] ); ?> />
+                                                <span class="omni-slider"></span>
+                                            </label>
+                                            <div class="omni-field-desc">
+                                                <strong><?php esc_html_e( 'Rename Files with Accents and Special Characters on Upload', 'omni-webmaster-seo-suite' ); ?></strong>
+                                                <p><?php echo wp_kses_post( __( 'Example: <code>Café Menü 2024.jpg</code> becomes <code>cafe-menu-2024.jpg</code>. Only newly uploaded files are affected; existing media files are never renamed.', 'omni-webmaster-seo-suite' ) ); ?></p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><?php esc_html_e( 'Add Date Prefix', 'omni-webmaster-seo-suite' ); ?></th>
+                                    <td>
+                                        <div class="omni-field-row">
+                                            <label class="omni-switch">
+                                                <input type="checkbox" name="<?php echo esc_attr( $this->option_name ); ?>[file_rename_date_prefix]" value="1" <?php checked( '1', $settings['file_rename_date_prefix'] ); ?> />
+                                                <span class="omni-slider"></span>
+                                            </label>
+                                            <div class="omni-field-desc">
+                                                <strong><?php esc_html_e( 'Prefix File Names with the Upload Date (YYYY-MM-DD)', 'omni-webmaster-seo-suite' ); ?></strong>
+                                                <p><?php echo wp_kses_post( __( 'Example: <code>cafe-menu.jpg</code> becomes <code>2026-08-04-cafe-menu.jpg</code>, which helps keep large media libraries chronologically organized.', 'omni-webmaster-seo-suite' ) ); ?></p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <hr style="margin: 30px 0; border: 0; border-top: 1px solid #e5e7eb;" />
+
+                            <h3><?php esc_html_e( 'Automatic Upload Image Resizing', 'omni-webmaster-seo-suite' ); ?></h3>
+                            <p class="section-desc"><?php esc_html_e( 'Shrinks oversized images (JPEG, PNG, GIF, WebP, AVIF) down to your configured maximum dimensions at upload time, before WordPress stores the original and generates thumbnails, saving disk space and bandwidth from the start.', 'omni-webmaster-seo-suite' ); ?></p>
+
+                            <?php if ( Omni_Image_Resizer::standalone_plugin_active() ) : ?>
+                                <div class="omni-alert omni-alert-warning" style="margin-bottom: 15px;">
+                                    <span class="dashicons dashicons-warning"></span> <?php echo wp_kses_post( __( 'The standalone "Smart Image Upload Resizer" plugin is active. To avoid resizing images twice, this module is <strong>automatically disabled</strong> until that plugin is deactivated.', 'omni-webmaster-seo-suite' ) ); ?>
+                                </div>
+                            <?php endif; ?>
+
+                            <?php if ( ! Omni_Image_Resizer::gd_available() ) : ?>
+                                <div class="omni-alert omni-alert-warning" style="margin-bottom: 15px;">
+                                    <span class="dashicons dashicons-warning"></span> <?php esc_html_e( 'The PHP GD extension is not available on this server, so image resizing is skipped. Ask your hosting provider to enable GD to use this feature.', 'omni-webmaster-seo-suite' ); ?>
+                                </div>
+                            <?php endif; ?>
+
+                            <table class="form-table omni-form-table">
+                                <tr>
+                                    <th scope="row"><?php esc_html_e( 'Enable Upload Image Resizing', 'omni-webmaster-seo-suite' ); ?></th>
+                                    <td>
+                                        <div class="omni-field-row">
+                                            <label class="omni-switch">
+                                                <input type="checkbox" name="<?php echo esc_attr( $this->option_name ); ?>[image_resize_enable]" value="1" <?php checked( '1', $settings['image_resize_enable'] ); ?> />
+                                                <span class="omni-slider"></span>
+                                            </label>
+                                            <div class="omni-field-desc">
+                                                <strong><?php esc_html_e( 'Automatically Downscale Oversized Images on Upload', 'omni-webmaster-seo-suite' ); ?></strong>
+                                                <p><?php esc_html_e( 'Images larger than the maximum width or height below are proportionally resized to fit (aspect ratio is preserved; transparency in PNG/GIF is kept). Images already within bounds are left untouched, and if resizing ever fails the original file is uploaded unchanged.', 'omni-webmaster-seo-suite' ); ?></p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><?php esc_html_e( 'Maximum Width', 'omni-webmaster-seo-suite' ); ?></th>
+                                    <td>
+                                        <input type="number"
+                                               name="<?php echo esc_attr( $this->option_name ); ?>[image_resize_max_width]"
+                                               value="<?php echo esc_attr( $settings['image_resize_max_width'] ); ?>"
+                                               class="small-text"
+                                               min="1"
+                                               max="<?php echo esc_attr( Omni_Image_Resizer::MAX_DIMENSION ); ?>" />
+                                        <span> px</span>
+                                        <p class="description"><?php
+                                        printf(
+                                            /* translators: %s: hard maximum dimension in pixels. */
+                                            esc_html__( 'Uploaded images wider than this are scaled down (hard cap: %s px).', 'omni-webmaster-seo-suite' ),
+                                            esc_html( Omni_Image_Resizer::MAX_DIMENSION )
+                                        );
+                                        ?></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><?php esc_html_e( 'Maximum Height', 'omni-webmaster-seo-suite' ); ?></th>
+                                    <td>
+                                        <input type="number"
+                                               name="<?php echo esc_attr( $this->option_name ); ?>[image_resize_max_height]"
+                                               value="<?php echo esc_attr( $settings['image_resize_max_height'] ); ?>"
+                                               class="small-text"
+                                               min="1"
+                                               max="<?php echo esc_attr( Omni_Image_Resizer::MAX_DIMENSION ); ?>" />
+                                        <span> px</span>
+                                        <p class="description"><?php
+                                        printf(
+                                            /* translators: %s: hard maximum dimension in pixels. */
+                                            esc_html__( 'Uploaded images taller than this are scaled down (hard cap: %s px).', 'omni-webmaster-seo-suite' ),
+                                            esc_html( Omni_Image_Resizer::MAX_DIMENSION )
+                                        );
+                                        ?></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><?php esc_html_e( 'Image Quality', 'omni-webmaster-seo-suite' ); ?></th>
+                                    <td>
+                                        <input type="number"
+                                               name="<?php echo esc_attr( $this->option_name ); ?>[image_resize_quality]"
+                                               value="<?php echo esc_attr( $settings['image_resize_quality'] ); ?>"
+                                               class="small-text"
+                                               min="1"
+                                               max="100" />
+                                        <span> %</span>
+                                        <p class="description"><?php esc_html_e( 'Compression quality used when re-saving resized JPEG/WebP/AVIF images (80 recommended; PNG compression is derived from this value).', 'omni-webmaster-seo-suite' ); ?></p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <hr style="margin: 30px 0; border: 0; border-top: 1px solid #e5e7eb;" />
+
                             <h3><?php esc_html_e( 'Media & Thumbnail Generation Optimization', 'omni-webmaster-seo-suite' ); ?></h3>
                             <p class="section-desc"><?php esc_html_e( 'Disable specific thumbnail sizes to keep a single upload from generating dozens of unused copies that eat up your hosting disk space.', 'omni-webmaster-seo-suite' ); ?></p>
 

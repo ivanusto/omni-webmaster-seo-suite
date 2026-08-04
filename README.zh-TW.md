@@ -2,11 +2,11 @@
 
 [English Version README](README.md) | [WordPress.org 官方外掛頁面](https://wordpress.org/plugins/omni-webmaster-seo-suite/)
 
-一站式 WordPress 網站優化與 SEO 站長工具：清理 HTML head、進階 RSS 控制、完全停用留言、選擇性停用縮圖與批次清理、中文標題自動翻譯英文網址，以及 Meta Pixel 廣告追蹤整合——全部集中在單一設定面板管理。
+一站式 WordPress 網站優化與 SEO 站長工具：清理 HTML head、進階 RSS 控制、完全停用留言、選擇性停用縮圖與批次清理、上傳檔名自動優化、上傳圖片自動縮圖、中文標題自動翻譯英文網址，以及 Meta Pixel 廣告追蹤整合——全部集中在單一設定面板管理。
 
 > 🌟 **已通過 WordPress 官方審查並正式上架**：[WordPress.org 官方外掛頁面](https://wordpress.org/plugins/omni-webmaster-seo-suite/)
 
-![Version](https://img.shields.io/badge/version-2.1.2-blue) ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759b) ![PHP](https://img.shields.io/badge/PHP-7.4%2B-777bb4) ![License](https://img.shields.io/badge/license-Apache--2.0-green)
+![Version](https://img.shields.io/badge/version-2.3.0-blue) ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759b) ![PHP](https://img.shields.io/badge/PHP-7.4%2B-777bb4) ![License](https://img.shields.io/badge/license-GPL--2.0--or--later-green)
 
 ![Banner](.wordpress-org/banner-1544x500.png)
 
@@ -34,8 +34,11 @@
 - **全面停用留言**：一次關閉所有文章類型的留言、引用（trackback）與 pingback，隱藏歷史留言並移除後台的留言選單與小工具。
 
 ### 3. 媒體與縮圖優化
+- **上傳檔名 SEO 優化**：上傳時自動將重音字母轉為 ASCII、空格與底線轉為連字號、移除非 ASCII 字元並轉為小寫（例：`Café Menü 2024.jpg` → `cafe-menu-2024.jpg`），並可選擇加上 `YYYY-MM-DD` 日期前綴。與獨立外掛 [smart-file-renamer](https://github.com/ivanusto/smart-file-renamer) 共用核心邏輯。
+- **上傳圖片自動縮圖**：上傳時將過大的 JPEG/PNG/GIF/WebP/AVIF 圖片等比例縮小至設定的最大尺寸（上限 2560px），在原圖儲存與縮圖產生之前就完成，並可調整壓縮品質、保留 PNG/GIF 透明度。失敗時自動放行：若伺服器缺少 GD 或縮圖失敗，直接以原圖上傳、不會中斷。與獨立外掛 [smart-image-upload-resizer](https://github.com/ivanusto/smart-image-upload-resizer) 共用核心邏輯。
 - **選擇性停用縮圖**：上傳圖片時停止產生指定尺寸的縮圖，節省儲存空間。
 - **AJAX 縮圖批次清理**：安全的批次清理工具（每次處理 50 個附件），遞迴刪除歷史縮圖檔案並即時顯示進度條。
+- **防衝突機制**：偵測到獨立版 Smart File Renamer 或 Smart Image Upload Resizer 外掛啟用時，對應模組自動停用並在設定頁顯示提示，避免檔案被重複改名或重複縮圖。
 
 ### 4. 網址代稱翻譯（Slug Translator）
 - **中文標題自動轉英文網址**：透過 Google Cloud Translation API 將中文文章標題翻譯為乾淨的小寫英文網址代稱（Slug）；未設定金鑰時自動改用免金鑰公開端點。
@@ -100,4 +103,4 @@
 
 ## 授權條款
 
-本專案採用 [Apache-2.0](LICENSE) 授權條款。
+本專案採用 [GNU General Public License v2.0 or later（GPL-2.0-or-later）](LICENSE) 授權條款。

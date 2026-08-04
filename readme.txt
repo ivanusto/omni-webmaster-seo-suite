@@ -4,11 +4,11 @@ Tags: seo, performance, comments, thumbnails, translation
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 2.2.0
-License: Apache-2.0
-License URI: https://opensource.org/license/apache-2-0
+Stable tag: 2.3.0
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-An all-in-one performance & SEO suite: cleans HTML head, restricts RSS, disables comments/thumbnails, and translates Asian-language URL slugs.
+All-in-one performance & SEO suite: cleans HTML head, restricts RSS, disables comments/thumbnails, renames/resizes uploads, translates Asian slugs.
 
 == Description ==
 
@@ -27,6 +27,8 @@ This plugin incorporates the following major components:
    Disable Comments Everywhere: Completely turn off comments, trackbacks, and pingbacks across all post types. Hides historical comments and removes comment menus and widgets from the WordPress dashboard.
 
 3. Media & Thumbnail Optimization
+   SEO-Friendly Upload File Renaming: Automatically transliterates accented characters to ASCII, converts spaces/underscores to hyphens, strips non-ASCII characters, and lowercases file names on upload, with an optional YYYY-MM-DD date prefix.
+   Automatic Upload Image Resizing: Downscales oversized JPEG/PNG/GIF/WebP/AVIF images to configurable maximum dimensions (up to 2560px) at upload time, before thumbnails are generated, with adjustable compression quality and preserved transparency.
    Selective Thumbnail Disabling: Stop WordPress from generating specific sizes on upload to save storage space.
    AJAX Thumbnail Cleanup: A safe, batch-based AJAX cleanup tool (50 attachments per run) to recursively delete historical thumbnail files with a live progress bar.
 
@@ -100,6 +102,13 @@ No. It only deletes resized sub-sizes. Your original uploaded images remain comp
 No. This plugin uses a clean, unified settings array (`omni_webmaster_settings`) to prevent database clutter. You will need to check the desired options in the new admin settings panel.
 
 == Changelog ==
+
+= 2.3.0 =
+* New: SEO-Friendly Upload File Renaming module (from the standalone smart-file-renamer plugin) — normalizes uploaded file names to clean ASCII lowercase slugs, with an optional date prefix. Off by default; found in the Media & Thumbnails tab.
+* New: Automatic Upload Image Resizing module (from the standalone smart-image-upload-resizer plugin) — downscales oversized JPEG/PNG/GIF/WebP/AVIF uploads to configurable maximum dimensions with adjustable quality. Off by default; found in the Media & Thumbnails tab.
+* Both modules automatically yield (with a settings-page notice) when their standalone counterpart plugin is active, so files are never renamed or resized twice.
+* Image resizing fails safe: if the server lacks GD or a resize step fails, the original image is uploaded unchanged instead of blocking the upload.
+* Fixed readme license metadata still referencing Apache-2.0; the plugin is licensed GPLv2 or later.
 
 = 2.2.0 =
 * Slug Translator no longer appends the post ID to every generated slug (e.g. `-13663`); slug uniqueness is delegated to WordPress core, which only adds a numeric suffix on an actual collision. Existing published slugs are not modified.

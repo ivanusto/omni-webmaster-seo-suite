@@ -1,7 +1,7 @@
 # Traditional Chinese translation for Omni Webmaster & SEO Suite.
 msgid ""
 msgstr ""
-"Project-Id-Version: Omni Webmaster & SEO Suite 2.1\n"
+"Project-Id-Version: Omni Webmaster & SEO Suite 2.3.0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,7 +10,6 @@ msgstr ""
 "X-Generator: hand-merged\n"
 msgid "%1$d-%2$02d"
 msgstr "%1$d 年 %2$02d 月"
-
 msgid "(Optional) A common short name for your site, provided to Google as an alternate identifier for the site name."
 msgstr "（選填）網站的常用簡稱，提供給 Google 作為站名的替代識別。"
 
@@ -34,6 +33,9 @@ msgstr "1536 像素 (1536x1536)"
 
 msgid "2048px (2048x2048)"
 msgstr "2048 像素 (2048x2048)"
+
+msgid "Add Date Prefix"
+msgstr "加上日期前綴"
 
 msgid "Advanced RSS Feed Control"
 msgstr "進階 RSS Feed 控制"
@@ -61,6 +63,15 @@ msgstr "您確定要刪除已勾選停用的縮圖尺寸嗎？這只會刪除被
 
 msgid "Automatic Slug Translation"
 msgstr "中英網址自動翻譯"
+
+msgid "Automatic Upload Image Resizing"
+msgstr "上傳圖片自動縮圖"
+
+msgid "Automatically Downscale Oversized Images on Upload"
+msgstr "上傳時自動縮小過大的圖片"
+
+msgid "Automatically normalizes file names during upload: Latin accented characters are transliterated to ASCII, spaces and underscores become hyphens, remaining non-ASCII characters (CJK, symbols) are stripped, and the result is lowercased for clean, SEO-friendly media URLs."
+msgstr "上傳時自動優化檔案名稱：拉丁重音字母轉為 ASCII、空格與底線轉為連字號、移除其餘非 ASCII 字元（中日韓文字、符號等），並轉為小寫，產生乾淨且 SEO 友善的媒體網址。"
 
 msgid "Automatically Track Single Content Views and Search Behavior"
 msgstr "自動追蹤單一內容瀏覽與搜尋行為"
@@ -143,6 +154,9 @@ msgstr "從 WP 原生 Sitemap 結構中徹底拔除 `post_tag` 項目，保留�
 msgid "Completely Turn Off Site Comments"
 msgstr "完全關閉網站留言功能"
 
+msgid "Compression quality used when re-saving resized JPEG/WebP/AVIF images (80 recommended; PNG compression is derived from this value)."
+msgstr "重新儲存縮圖後的 JPEG/WebP/AVIF 影像時使用的壓縮品質（建議 80；PNG 壓縮率由此值換算）。"
+
 msgid "Connection error. Please try again."
 msgstr "連線錯誤，請重試。"
 
@@ -209,6 +223,12 @@ msgstr "啟用首頁 Meta 標籤"
 msgid "Enable Meta Pixel Tracking"
 msgstr "啟用 Meta Pixel 追蹤"
 
+msgid "Enable Upload File Renaming"
+msgstr "啟用上傳檔名優化"
+
+msgid "Enable Upload Image Resizing"
+msgstr "啟用上傳圖片縮圖"
+
 msgid "Enter a Cloud Translation API key created in the Google Cloud console (<a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">how to get an API key</a>).<br/><strong>Fallback (no key required)</strong>: leave this field empty and the plugin automatically falls back to the keyless public Google Translate endpoint.<br/><strong>An API key is recommended</strong>: the keyless endpoint often produces lower-quality slugs (e.g. <code>how-was-it-able-9</code>), while the official Cloud API returns noticeably more accurate translations and includes a monthly free quota."
 msgstr "請輸入於 Google Cloud 主控台建立的 Cloud Translation API 金鑰（<a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">如何申請 API 金鑰</a>）。<br/><strong>免金鑰備援</strong>：此欄留空時，系統會自動改用免金鑰的 Google Translate 公開端點。<br/><strong>建議使用 API 金鑰</strong>：免金鑰端點翻譯品質較差，可能產生如 <code>how-was-it-able-9</code> 的網址字串；官方 Cloud API 翻譯明顯較精準，且每月提供免費額度。"
 
@@ -217,6 +237,12 @@ msgstr "請輸入純數字的 Meta Pixel ID"
 
 msgid "Enter your Meta (Facebook) Pixel ID (numbers only). You can find it on the settings page of Facebook Events Manager."
 msgstr "請輸入您的 Meta (Facebook) 像素編號（純數字）。可在 Facebook 事件管理工具的設定頁中找到。"
+
+msgid "Example: <code>cafe-menu.jpg</code> becomes <code>2026-08-04-cafe-menu.jpg</code>, which helps keep large media libraries chronologically organized."
+msgstr "範例：<code>cafe-menu.jpg</code> 會變成 <code>2026-08-04-cafe-menu.jpg</code>，有助於大型媒體庫依時間排序管理。"
+
+msgid "Example: <code>Café Menü 2024.jpg</code> becomes <code>cafe-menu-2024.jpg</code>. Only newly uploaded files are affected; existing media files are never renamed."
+msgstr "範例：<code>Café Menü 2024.jpg</code> 會變成 <code>cafe-menu-2024.jpg</code>。僅影響新上傳的檔案，既有媒體檔案不會被改名。"
 
 msgid "Exclude Site Staff"
 msgstr "排除網站管理人員"
@@ -260,6 +286,12 @@ msgstr "若您先前啟用過「清理 HTML Head」導致嵌入卡片變成普�
 msgid "If you still use Jetpack or a legacy offline editor that relies on XML-RPC, do not enable this option."
 msgstr "若您仍在使用 Jetpack 或依賴 XML-RPC 的舊版離線編輯器，請勿啟用此選項。"
 
+msgid "Image Quality"
+msgstr "圖片品質"
+
+msgid "Images larger than the maximum width or height below are proportionally resized to fit (aspect ratio is preserved; transparency in PNG/GIF is kept). Images already within bounds are left untouched, and if resizing ever fails the original file is uploaded unchanged."
+msgstr "寬度或高度超過下方設定值的圖片會等比例縮小至範圍內（保留長寬比與 PNG/GIF 透明度）；尺寸已符合的圖片不會被更動，若縮圖失敗則直接以原始檔案上傳。"
+
 msgid "In addition to the base <code>PageView</code>, the system automatically sends the following standard events on the appropriate pages for advanced ad audience optimization:"
 msgstr "除了基礎的 <code>PageView</code> 外，系統會自動在適當的頁面發送以下標準事件以做進階廣告受眾優化："
 
@@ -302,11 +334,17 @@ msgstr "一站式管理您的 WordPress 網站優化與 SEO 基礎配置，整�
 msgid "Marks tag archives, date archives, internal search pages, and deep post pagination (page 3 and beyond) as `noindex, follow` to focus crawl priority and keep the site from generating large amounts of low-quality or duplicate content."
 msgstr "將標籤存檔頁、日期封存頁、內部搜尋頁與第 3 頁以上的深層文章分頁，標記為 `noindex, follow`，聚焦爬蟲權重，避免網站產生大量低質量或重複內容。"
 
+msgid "Maximum Height"
+msgstr "最大高度"
+
 msgid "Maximum number of characters for generated English slugs (30 to 50 recommended). Truncation happens at word boundaries, and duplicate slugs are handled automatically by WordPress."
 msgstr "產生的英文網址最大字元數（建議為 30 至 50 之間）。截斷會落在完整單字邊界，重複網址由 WordPress 自動處理。"
 
 msgid "Maximum Slug Length"
 msgstr "最大字元長度"
+
+msgid "Maximum Width"
+msgstr "最大寬度"
 
 msgid "Media & Thumbnail Generation Optimization"
 msgstr "媒體與縮圖生成優化"
@@ -392,6 +430,9 @@ msgstr "文章數據匯出"
 msgid "Post Title"
 msgstr "文章標題"
 
+msgid "Prefix File Names with the Upload Date (YYYY-MM-DD)"
+msgstr "檔名加上上傳日期前綴（YYYY-MM-DD）"
+
 msgid "Preparing cleanup..."
 msgstr "準備進行清理..."
 
@@ -415,6 +456,9 @@ msgstr "清除 <code>xmlrpc.php</code> 中全部 WordPress 方法（<code>wp.*</
 
 msgid "Removes redundant feed links and REST API markup from the `<head>` section, keeping your source code clean and improving privacy."
 msgstr "移除 `<head>` 中冗餘的 Feed 連結與 REST API 頭部標記，保持源碼乾淨度並增強隱私。"
+
+msgid "Rename Files with Accents and Special Characters on Upload"
+msgstr "上傳時自動重新命名含重音與特殊字元的檔案"
 
 msgid "Reset Site-Wide Embed Preview Cards"
 msgstr "重設全站嵌入預覽卡片"
@@ -452,6 +496,9 @@ msgstr "SEO 與網站優化"
 msgid "SEO Optimization & HTML Cleanup"
 msgstr "SEO 優化與 HTML 清理"
 
+msgid "SEO-Friendly Upload File Renaming"
+msgstr "上傳檔名 SEO 優化"
+
 msgid "Server returned an error: %1$s"
 msgstr "伺服器回傳失敗：%1$s"
 
@@ -460,6 +507,9 @@ msgstr "搜尋、標籤與分頁設定 noindex"
 
 msgid "Settings"
 msgstr "設定"
+
+msgid "Shrinks oversized images (JPEG, PNG, GIF, WebP, AVIF) down to your configured maximum dimensions at upload time, before WordPress stores the original and generates thumbnails, saving disk space and bandwidth from the start."
+msgstr "上傳時將過大的圖片（JPEG、PNG、GIF、WebP、AVIF）自動縮小至您設定的最大尺寸，在 WordPress 儲存原圖與產生縮圖之前完成，從源頭節省磁碟空間與頻寬。"
 
 msgid "Site Name Abbreviation (alternateName)"
 msgstr "站名簡稱 (alternateName)"
@@ -485,14 +535,29 @@ msgstr "偵測到「%s」外掛。為避免重複輸出 meta 標籤造成衝突�
 msgid "The keyless translation endpoint returned unexpected data."
 msgstr "免金鑰翻譯端點回傳異常資料"
 
+msgid "The PHP GD extension is not available on this server, so image resizing is skipped. Ask your hosting provider to enable GD to use this feature."
+msgstr "此伺服器未啟用 PHP GD 擴充功能，圖片縮圖將被略過。請聯絡主機商啟用 GD 後再使用本功能。"
+
 msgid "The preview image shown when your homepage is shared on Facebook, LINE, or Telegram. Recommended size: <strong>1200 × 630</strong> pixels. If left empty, social platforms will pick an image on their own (possibly an author avatar or a random image)."
 msgstr "FB / LINE / Telegram 分享首頁時顯示的預覽圖，建議尺寸 <strong>1200 × 630</strong> 像素。留空時社群平台將自行抓圖（可能抓到作者頭像或隨機圖片）。"
+
+msgid "The standalone \"Smart File Renamer\" plugin is active. To avoid renaming files twice, this module is <strong>automatically disabled</strong> until that plugin is deactivated."
+msgstr "偵測到獨立版「Smart File Renamer」外掛已啟用。為避免檔案被重複改名，本模組已<strong>自動停用</strong>，停用該外掛後即可恢復。"
+
+msgid "The standalone \"Smart Image Upload Resizer\" plugin is active. To avoid resizing images twice, this module is <strong>automatically disabled</strong> until that plugin is deactivated."
+msgstr "偵測到獨立版「Smart Image Upload Resizer」外掛已啟用。為避免圖片被重複縮圖，本模組已<strong>自動停用</strong>，停用該外掛後即可恢復。"
 
 msgid "This scans every image attachment in the media library and removes the corresponding thumbnail files (original full-size images are kept). This is a destructive action; back up your site first."
 msgstr "這將掃描媒體庫中所有的圖片附件，並移除對應的縮圖實體檔案（保留原始大圖）。此為破壞性動作，建議先進行網站備份。"
 
 msgid "Thumbnail"
 msgstr "縮圖 (Thumbnail)"
+
+msgid "Uploaded images taller than this are scaled down (hard cap: %s px)."
+msgstr "上傳圖片高度超過此值時將被縮小（硬性上限：%s px）。"
+
+msgid "Uploaded images wider than this are scaled down (hard cap: %s px)."
+msgstr "上傳圖片寬度超過此值時將被縮小（硬性上限：%s px）。"
 
 msgid "Use this image"
 msgstr "使用這張圖片"
@@ -526,4 +591,3 @@ msgstr "WP 嵌入區塊深色修正 (Embed Card)"
 
 msgid "XML-RPC Security Hardening"
 msgstr "XML-RPC 安全強化"
-
