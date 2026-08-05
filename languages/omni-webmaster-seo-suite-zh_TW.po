@@ -1,15 +1,17 @@
 # Traditional Chinese translation for Omni Webmaster & SEO Suite.
 msgid ""
 msgstr ""
-"Project-Id-Version: Omni Webmaster & SEO Suite 2.3.0\n"
+"Project-Id-Version: Omni Webmaster & SEO Suite 2.4.0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: hand-merged\n"
+
 msgid "%1$d-%2$02d"
 msgstr "%1$d 年 %2$02d 月"
+
 msgid "(Optional) A common short name for your site, provided to Google as an alternate identifier for the site name."
 msgstr "（選填）網站的常用簡稱，提供給 Google 作為站名的替代識別。"
 
@@ -18,6 +20,9 @@ msgstr "（選填）AIzaSy..."
 
 msgid ", "
 msgstr "、"
+
+msgid "<strong>Check your theme first.</strong> Most modern themes already output Open Graph tags on single posts. If you turn this on while your theme does the same, every post will carry duplicate tags and social platforms may pick the wrong title or image. View the page source of any post and search for <code>og:title</code> before enabling."
+msgstr "<strong>開啟前請先確認佈景主題。</strong>多數現代佈景主題已在單篇文章輸出 Open Graph 標籤，若兩邊同時輸出會造成標籤重複，社群平台可能抓到錯誤的標題或圖片。建議先檢視任一篇文章的網頁原始碼，搜尋 <code>og:title</code> 確認後再啟用。"
 
 msgid "[Warning] Are you sure you want to delete ALL thumbnails? This removes every image size variant and may cause broken or slow-loading images on the front end. This action cannot be undone!"
 msgstr "【警告】您確定要刪除所有的縮圖嗎？這會清除所有圖片版本，可能會導致前端頁面圖片損壞或載入緩慢。此動作無法復原！"
@@ -60,6 +65,9 @@ msgstr "您確定要清除全站所有的 oEmbed 預覽卡片快取嗎？這會�
 
 msgid "Are you sure you want to delete the thumbnail sizes checked as disabled? Only the sizes selected for disabling will be deleted; all other sizes are safely kept. This action cannot be undone!"
 msgstr "您確定要刪除已勾選停用的縮圖尺寸嗎？這只會刪除被選定停用的縮圖規格，其餘規格會被安全保留。此動作無法復原！"
+
+msgid "Article Structured Data"
+msgstr "單篇結構化資料"
 
 msgid "Automatic Slug Translation"
 msgstr "中英網址自動翻譯"
@@ -223,6 +231,9 @@ msgstr "啟用首頁 Meta 標籤"
 msgid "Enable Meta Pixel Tracking"
 msgstr "啟用 Meta Pixel 追蹤"
 
+msgid "Enable Single Post OG Tags"
+msgstr "啟用單篇 OG 標籤"
+
 msgid "Enable Upload File Renaming"
 msgstr "啟用上傳檔名優化"
 
@@ -277,8 +288,8 @@ msgstr "協助 Google 在搜尋結果顯示正確的<strong>站名</strong>（�
 msgid "Homepage Meta Description"
 msgstr "首頁 Meta Description"
 
-msgid "Homepage Meta Tags & Structured Data"
-msgstr "首頁 Meta 標籤與結構化資料"
+msgid "Meta Tags & Structured Data"
+msgstr "Meta 標籤與結構化資料"
 
 msgid "If enabling \"Clean Up HTML Head\" previously turned your embed cards into plain links, then after <strong>turning \"Clean Up HTML Head\" off</strong> you need to click this button to clear the failed oEmbed cache from the database so post pages can re-fetch and restore the rich preview cards."
 msgstr "若您先前啟用過「清理 HTML Head」導致嵌入卡片變成普通連結，在<strong>關閉「清理 HTML Head」</strong>後，您需要點擊此按鈕清除資料庫中的 oEmbed 失敗快取，文章頁面才會重新抓取並還原精美的預覽卡片。"
@@ -403,6 +414,12 @@ msgstr "僅放行首頁、文章分類與作者的 RSS Feed，阻斷其他無用
 msgid "Optimize HTML head tags, manage RSS feed sources, and clean up the sitemap to prevent unnecessary exposure of your site structure."
 msgstr "優化 HTML 頭部標籤，管理 RSS 訂閱來源並清洗 Sitemap 以防網站結構不必要地暴露。"
 
+msgid "Output BlogPosting / WebPage JSON-LD"
+msgstr "輸出 BlogPosting / WebPage JSON-LD"
+
+msgid "Output Meta Description and Open Graph Tags on Single Posts and Pages"
+msgstr "於單篇文章與頁面輸出 Meta Description 與 Open Graph 標籤"
+
 msgid "Output Meta Description and Open Graph Tags on the Homepage"
 msgstr "於首頁輸出 Meta Description 與 Open Graph 標籤"
 
@@ -411,6 +428,9 @@ msgstr "僅在首頁第一頁輸出（分頁不重複），包含 <code>descript
 
 msgid "Output WebSite and Organization JSON-LD"
 msgstr "輸出 WebSite 與 Organization JSON-LD"
+
+msgid "Outputs <code>og:type=article</code>, <code>og:title</code>, <code>og:description</code>, <code>og:url</code>, <code>og:image</code> (with width, height, and alt text), <code>article:published_time</code>, <code>article:modified_time</code>, and the Twitter Card tags. The description uses the manual excerpt when set, otherwise the first 160 characters of the content. The share image falls back in order: <strong>featured image → first image in the content → the default image above</strong>."
+msgstr "輸出 <code>og:type=article</code>、<code>og:title</code>、<code>og:description</code>、<code>og:url</code>、<code>og:image</code>（含寬高與替代文字）、<code>article:published_time</code>、<code>article:modified_time</code> 與 Twitter Card 標籤。描述優先使用手動填寫的摘要，未填寫時取內文前 160 字。分享圖依序退回：<strong>精選圖片 → 內文第一張圖片 → 上方預設分享圖</strong>。"
 
 msgid "Please enter an API key first."
 msgstr "請先輸入 API 金鑰。"
@@ -438,6 +458,9 @@ msgstr "準備進行清理..."
 
 msgid "Preview Data"
 msgstr "即時預覽數據"
+
+msgid "Provides Google with the headline, publication and modification dates, author, and image of each post, helping search results show the correct date and author. Requires \"Enable Single Post OG Tags\" above to be turned on as well."
+msgstr "提供 Google 每篇文章的標題、發布與修改時間、作者與圖片，協助搜尋結果顯示正確的日期與作者。需同時開啟上方「啟用單篇 OG 標籤」。"
 
 msgid "Recommended length is 90 to 160 characters; longer descriptions get truncated in search results. Current count:"
 msgstr "建議 90 至 160 個字元，過長會在搜尋結果中被截斷。目前字數："
@@ -511,6 +534,9 @@ msgstr "設定"
 msgid "Shrinks oversized images (JPEG, PNG, GIF, WebP, AVIF) down to your configured maximum dimensions at upload time, before WordPress stores the original and generates thumbnails, saving disk space and bandwidth from the start."
 msgstr "上傳時將過大的圖片（JPEG、PNG、GIF、WebP、AVIF）自動縮小至您設定的最大尺寸，在 WordPress 儲存原圖與產生縮圖之前完成，從源頭節省磁碟空間與頻寬。"
 
+msgid "Single Posts & Pages"
+msgstr "單篇文章與頁面"
+
 msgid "Site Name Abbreviation (alternateName)"
 msgstr "站名簡稱 (alternateName)"
 
@@ -538,8 +564,8 @@ msgstr "免金鑰翻譯端點回傳異常資料"
 msgid "The PHP GD extension is not available on this server, so image resizing is skipped. Ask your hosting provider to enable GD to use this feature."
 msgstr "此伺服器未啟用 PHP GD 擴充功能，圖片縮圖將被略過。請聯絡主機商啟用 GD 後再使用本功能。"
 
-msgid "The preview image shown when your homepage is shared on Facebook, LINE, or Telegram. Recommended size: <strong>1200 × 630</strong> pixels. If left empty, social platforms will pick an image on their own (possibly an author avatar or a random image)."
-msgstr "FB / LINE / Telegram 分享首頁時顯示的預覽圖，建議尺寸 <strong>1200 × 630</strong> 像素。留空時社群平台將自行抓圖（可能抓到作者頭像或隨機圖片）。"
+msgid "The preview image shown when your homepage is shared on Facebook, LINE, or Telegram. Recommended size: <strong>1200 × 630</strong> pixels. If left empty, social platforms will pick an image on their own (possibly an author avatar or a random image). Also used as the last-resort fallback for single posts that have neither a featured image nor an image in their content."
+msgstr "FB / LINE / Telegram 分享首頁時顯示的預覽圖，建議尺寸 <strong>1200 × 630</strong> 像素。留空時社群平台將自行抓圖（可能抓到作者頭像或隨機圖片）。單篇文章若沒有精選圖片、內文也沒有圖片，同樣會退回使用此圖。"
 
 msgid "The standalone \"Smart File Renamer\" plugin is active. To avoid renaming files twice, this module is <strong>automatically disabled</strong> until that plugin is deactivated."
 msgstr "偵測到獨立版「Smart File Renamer」外掛已啟用。為避免檔案被重複改名，本模組已<strong>自動停用</strong>，停用該外掛後即可恢復。"
@@ -580,8 +606,8 @@ msgstr "啟用後會在網站所有公開前端頁面的 `<head>` 區域插入 M
 msgid "When enabled, this turns off comment and trackback support for all post types, hides existing comments, closes comments on new posts, and hides the admin comments menu and the dashboard comments widget."
 msgstr "啟用後會關閉所有文章類型的留言及跟蹤支援、隱藏現有留言、關閉新文章留言入口、並隱藏後台留言選單與儀表板上的留言小工具。"
 
-msgid "When no full-featured SEO plugin is installed, outputs a meta description, Open Graph social sharing tags, and Schema.org (WebSite / Organization) structured data on the homepage. OG tags for single posts are left to your theme; this section only affects the homepage."
-msgstr "在未安裝大型 SEO 外掛時，於首頁輸出 Meta Description、Open Graph 社群分享標籤與 Schema.org（WebSite / Organization）結構化資料。單篇文章頁的 OG 標籤請交由佈景主題處理，本區僅作用於首頁。"
+msgid "When no full-featured SEO plugin is installed, outputs a meta description, Open Graph social sharing tags, and Schema.org structured data. The homepage and single posts/pages are controlled by separate switches, so you can leave single posts to your theme if it already handles them."
+msgstr "在未安裝大型 SEO 外掛時，輸出 Meta Description、Open Graph 社群分享標籤與 Schema.org 結構化資料。首頁與單篇文章／頁面分別由獨立開關控制，若佈景主題已處理單篇，可只開啟首頁。"
 
 msgid "When you publish or save a post with an Asian-language title (Chinese, Japanese, Korean, Thai, etc.), the title is automatically translated into a clean English URL slug via the Google Translate API, improving SEO friendliness and preventing garbled characters when non-Latin URLs are copied."
 msgstr "當發布或儲存含亞洲語言（中、日、韓、泰文等）標題的文章時，自動呼叫 Google 翻譯 API 翻譯為英文 URL Slug，增強 SEO 搜尋友好度，並避免非拉丁字母網址複製時產生亂碼。"

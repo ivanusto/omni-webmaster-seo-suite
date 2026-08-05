@@ -4,7 +4,7 @@ Tags: seo, performance, comments, thumbnails, translation
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 2.3.0
+Stable tag: 2.4.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,8 +42,8 @@ This plugin incorporates the following major components:
 6. Post Data Export
    Preview and export monthly post data (including a configurable page-view meta key) as CSV from the admin panel.
 
-7. Homepage Meta Tags & Structured Data
-   Outputs Meta Description, Open Graph social sharing tags (og:title, og:description, og:image, twitter:card), and Schema.org WebSite/Organization JSON-LD on the homepage — a lightweight alternative when no full SEO plugin is installed. Automatically disables its output when a major SEO plugin (Yoast SEO, Rank Math, All in One SEO, SEOPress, The SEO Framework) is detected to prevent duplicate tags.
+7. Meta Tags & Structured Data
+   Outputs Meta Description, Open Graph social sharing tags (og:title, og:description, og:image, twitter:card), and Schema.org WebSite/Organization JSON-LD on the homepage — a lightweight alternative when no full SEO plugin is installed. A separate switch (off by default) extends the same output to single posts and pages with og:type=article, image width/height/alt, article:published_time, article:modified_time, Twitter Card tags, and BlogPosting/WebPage JSON-LD; the share image falls back from featured image to the first image in the content to the site-wide default image. Automatically disables its output when a major SEO plugin (Yoast SEO, Rank Math, All in One SEO, SEOPress, The SEO Framework) is detected to prevent duplicate tags.
 
 = Origin Projects =
 
@@ -98,10 +98,21 @@ No, an API key is optional. With a Google Cloud Translation API key configured, 
 = Does deleting thumbnails delete my original images? =
 No. It only deletes resized sub-sizes. Your original uploaded images remain completely safe.
 
+= Should I enable Open Graph tags on single posts? =
+Only if your theme does not already output them. Open any post, view its page source, and search for `og:title`. If it is already there, leave the switch off — duplicate tags make Facebook, LINE, and X pick the wrong title or image. The homepage switch and the single-post switch are independent, so you can run one without the other.
+
 = Will settings from separate legacy plugins be migrated? =
 No. This plugin uses a clean, unified settings array (`omni_webmaster_settings`) to prevent database clutter. You will need to check the desired options in the new admin settings panel.
 
 == Changelog ==
+
+= 2.4.0 =
+* New: the Meta Tags module can now output Open Graph tags on single posts and pages, not just the homepage — og:type=article, og:title, og:description, og:url, og:image (with width, height, and alt text), article:published_time, article:modified_time, and the Twitter Card tags.
+* The single-post share image falls back in order: featured image, first image in the post content, then the site-wide default image. Resolving a content image to its attachment is cached in a transient keyed by the post's modified time.
+* New: optional BlogPosting / WebPage JSON-LD on single posts, carrying the headline, publication and modification dates, author, image, and a self-contained Organization publisher node.
+* Descriptions use the manual excerpt when set, otherwise the first 160 characters of the content (filterable via omni_og_description_length); password-protected posts never expose their content.
+* Single-post output is off by default and carries an in-panel warning, because most themes already print their own OG tags and duplicates break share previews.
+* A static front page is always treated as the homepage, so it never receives article markup.
 
 = 2.3.0 =
 * New: SEO-Friendly Upload File Renaming module (from the standalone smart-file-renamer plugin) — normalizes uploaded file names to clean ASCII lowercase slugs, with an optional date prefix. Off by default; found in the Media & Thumbnails tab.

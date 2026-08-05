@@ -1,14 +1,16 @@
 # Translation template for Omni Webmaster & SEO Suite.
 msgid ""
 msgstr ""
-"Project-Id-Version: Omni Webmaster & SEO Suite 2.3.0\n"
+"Project-Id-Version: Omni Webmaster & SEO Suite 2.4.0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: hand-merged\n"
+
 msgid "%1$d-%2$02d"
 msgstr ""
+
 msgid "(Optional) A common short name for your site, provided to Google as an alternate identifier for the site name."
 msgstr ""
 
@@ -16,6 +18,9 @@ msgid "(Optional) AIzaSy..."
 msgstr ""
 
 msgid ", "
+msgstr ""
+
+msgid "<strong>Check your theme first.</strong> Most modern themes already output Open Graph tags on single posts. If you turn this on while your theme does the same, every post will carry duplicate tags and social platforms may pick the wrong title or image. View the page source of any post and search for <code>og:title</code> before enabling."
 msgstr ""
 
 msgid "[Warning] Are you sure you want to delete ALL thumbnails? This removes every image size variant and may cause broken or slow-loading images on the front end. This action cannot be undone!"
@@ -58,6 +63,9 @@ msgid "Are you sure you want to clear all oEmbed preview card caches for the ent
 msgstr ""
 
 msgid "Are you sure you want to delete the thumbnail sizes checked as disabled? Only the sizes selected for disabling will be deleted; all other sizes are safely kept. This action cannot be undone!"
+msgstr ""
+
+msgid "Article Structured Data"
 msgstr ""
 
 msgid "Automatic Slug Translation"
@@ -222,6 +230,9 @@ msgstr ""
 msgid "Enable Meta Pixel Tracking"
 msgstr ""
 
+msgid "Enable Single Post OG Tags"
+msgstr ""
+
 msgid "Enable Upload File Renaming"
 msgstr ""
 
@@ -276,7 +287,7 @@ msgstr ""
 msgid "Homepage Meta Description"
 msgstr ""
 
-msgid "Homepage Meta Tags & Structured Data"
+msgid "Meta Tags & Structured Data"
 msgstr ""
 
 msgid "If enabling \"Clean Up HTML Head\" previously turned your embed cards into plain links, then after <strong>turning \"Clean Up HTML Head\" off</strong> you need to click this button to clear the failed oEmbed cache from the database so post pages can re-fetch and restore the rich preview cards."
@@ -402,6 +413,12 @@ msgstr ""
 msgid "Optimize HTML head tags, manage RSS feed sources, and clean up the sitemap to prevent unnecessary exposure of your site structure."
 msgstr ""
 
+msgid "Output BlogPosting / WebPage JSON-LD"
+msgstr ""
+
+msgid "Output Meta Description and Open Graph Tags on Single Posts and Pages"
+msgstr ""
+
 msgid "Output Meta Description and Open Graph Tags on the Homepage"
 msgstr ""
 
@@ -409,6 +426,9 @@ msgid "Output only on the first page of the homepage (not repeated on paginated 
 msgstr ""
 
 msgid "Output WebSite and Organization JSON-LD"
+msgstr ""
+
+msgid "Outputs <code>og:type=article</code>, <code>og:title</code>, <code>og:description</code>, <code>og:url</code>, <code>og:image</code> (with width, height, and alt text), <code>article:published_time</code>, <code>article:modified_time</code>, and the Twitter Card tags. The description uses the manual excerpt when set, otherwise the first 160 characters of the content. The share image falls back in order: <strong>featured image → first image in the content → the default image above</strong>."
 msgstr ""
 
 msgid "Please enter an API key first."
@@ -436,6 +456,9 @@ msgid "Preparing cleanup..."
 msgstr ""
 
 msgid "Preview Data"
+msgstr ""
+
+msgid "Provides Google with the headline, publication and modification dates, author, and image of each post, helping search results show the correct date and author. Requires \"Enable Single Post OG Tags\" above to be turned on as well."
 msgstr ""
 
 msgid "Recommended length is 90 to 160 characters; longer descriptions get truncated in search results. Current count:"
@@ -510,6 +533,9 @@ msgstr ""
 msgid "Shrinks oversized images (JPEG, PNG, GIF, WebP, AVIF) down to your configured maximum dimensions at upload time, before WordPress stores the original and generates thumbnails, saving disk space and bandwidth from the start."
 msgstr ""
 
+msgid "Single Posts & Pages"
+msgstr ""
+
 msgid "Site Name Abbreviation (alternateName)"
 msgstr ""
 
@@ -537,7 +563,7 @@ msgstr ""
 msgid "The PHP GD extension is not available on this server, so image resizing is skipped. Ask your hosting provider to enable GD to use this feature."
 msgstr ""
 
-msgid "The preview image shown when your homepage is shared on Facebook, LINE, or Telegram. Recommended size: <strong>1200 × 630</strong> pixels. If left empty, social platforms will pick an image on their own (possibly an author avatar or a random image)."
+msgid "The preview image shown when your homepage is shared on Facebook, LINE, or Telegram. Recommended size: <strong>1200 × 630</strong> pixels. If left empty, social platforms will pick an image on their own (possibly an author avatar or a random image). Also used as the last-resort fallback for single posts that have neither a featured image nor an image in their content."
 msgstr ""
 
 msgid "The standalone \"Smart File Renamer\" plugin is active. To avoid renaming files twice, this module is <strong>automatically disabled</strong> until that plugin is deactivated."
@@ -579,7 +605,7 @@ msgstr ""
 msgid "When enabled, this turns off comment and trackback support for all post types, hides existing comments, closes comments on new posts, and hides the admin comments menu and the dashboard comments widget."
 msgstr ""
 
-msgid "When no full-featured SEO plugin is installed, outputs a meta description, Open Graph social sharing tags, and Schema.org (WebSite / Organization) structured data on the homepage. OG tags for single posts are left to your theme; this section only affects the homepage."
+msgid "When no full-featured SEO plugin is installed, outputs a meta description, Open Graph social sharing tags, and Schema.org structured data. The homepage and single posts/pages are controlled by separate switches, so you can leave single posts to your theme if it already handles them."
 msgstr ""
 
 msgid "When you publish or save a post with an Asian-language title (Chinese, Japanese, Korean, Thai, etc.), the title is automatically translated into a clean English URL slug via the Google Translate API, improving SEO friendliness and preventing garbled characters when non-Latin URLs are copied."

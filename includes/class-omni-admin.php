@@ -122,8 +122,10 @@ class Omni_Admin {
         $sanitized['meta_pixel_advanced']       = isset( $input['meta_pixel_advanced'] ) ? '1' : '0';
         $sanitized['meta_pixel_exclude_admins'] = isset( $input['meta_pixel_exclude_admins'] ) ? '1' : '0';
 
-        // Homepage meta tags and structured data options
+        // Meta tags and structured data options (homepage / single posts)
         $sanitized['meta_tags_enable']      = isset( $input['meta_tags_enable'] ) ? '1' : '0';
+        $sanitized['og_singular_enable']    = isset( $input['og_singular_enable'] ) ? '1' : '0';
+        $sanitized['og_singular_schema']    = isset( $input['og_singular_schema'] ) ? '1' : '0';
         $sanitized['home_meta_description'] = isset( $input['home_meta_description'] ) ? sanitize_textarea_field( $input['home_meta_description'] ) : '';
         $sanitized['og_default_image']      = isset( $input['og_default_image'] ) ? esc_url_raw( trim( $input['og_default_image'] ) ) : '';
         $sanitized['site_alternate_name']   = isset( $input['site_alternate_name'] ) ? sanitize_text_field( trim( $input['site_alternate_name'] ) ) : '';
@@ -267,6 +269,8 @@ class Omni_Admin {
             'og_default_image'      => '',
             'site_alternate_name'   => '',
             'schema_website_enable' => '1',
+            'og_singular_enable'    => '0',
+            'og_singular_schema'    => '1',
         ];
         $settings = wp_parse_args( get_option( $this->option_name, [] ), $defaults );
 
@@ -442,8 +446,8 @@ class Omni_Admin {
 
                             <hr style="margin: 30px 0; border: 0; border-top: 1px solid #e5e7eb;" />
 
-                            <h3><?php esc_html_e( 'Homepage Meta Tags & Structured Data', 'omni-webmaster-seo-suite' ); ?></h3>
-                            <p class="section-desc"><?php esc_html_e( 'When no full-featured SEO plugin is installed, outputs a meta description, Open Graph social sharing tags, and Schema.org (WebSite / Organization) structured data on the homepage. OG tags for single posts are left to your theme; this section only affects the homepage.', 'omni-webmaster-seo-suite' ); ?></p>
+                            <h3><?php esc_html_e( 'Meta Tags & Structured Data', 'omni-webmaster-seo-suite' ); ?></h3>
+                            <p class="section-desc"><?php esc_html_e( 'When no full-featured SEO plugin is installed, outputs a meta description, Open Graph social sharing tags, and Schema.org structured data. The homepage and single posts/pages are controlled by separate switches, so you can leave single posts to your theme if it already handles them.', 'omni-webmaster-seo-suite' ); ?></p>
 
                             <?php $seo_conflict = Omni_Meta_Tags::detect_seo_plugin(); ?>
                             <?php if ( '' !== $seo_conflict ) : ?>
@@ -500,7 +504,7 @@ class Omni_Admin {
                                                 <span class="dashicons dashicons-format-image" style="vertical-align: text-bottom;"></span> <?php esc_html_e( 'Select from Media Library', 'omni-webmaster-seo-suite' ); ?>
                                             </button>
                                         </div>
-                                        <p class="description"><?php echo wp_kses_post( __( 'The preview image shown when your homepage is shared on Facebook, LINE, or Telegram. Recommended size: <strong>1200 × 630</strong> pixels. If left empty, social platforms will pick an image on their own (possibly an author avatar or a random image).', 'omni-webmaster-seo-suite' ) ); ?></p>
+                                        <p class="description"><?php echo wp_kses_post( __( 'The preview image shown when your homepage is shared on Facebook, LINE, or Telegram. Recommended size: <strong>1200 × 630</strong> pixels. If left empty, social platforms will pick an image on their own (possibly an author avatar or a random image). Also used as the last-resort fallback for single posts that have neither a featured image nor an image in their content.', 'omni-webmaster-seo-suite' ) ); ?></p>
                                         <?php if ( ! empty( $settings['og_default_image'] ) ) : ?>
                                             <img id="omni-og-image-preview" src="<?php echo esc_url( $settings['og_default_image'] ); ?>" alt="" style="margin-top: 10px; max-width: 300px; height: auto; border-radius: 8px; border: 1px solid #e5e7eb;" />
                                         <?php else : ?>
@@ -532,6 +536,47 @@ class Omni_Admin {
                                                class="regular-text"
                                                placeholder="<?php esc_attr_e( 'e.g. yBlog', 'omni-webmaster-seo-suite' ); ?>" />
                                         <p class="description"><?php esc_html_e( '(Optional) A common short name for your site, provided to Google as an alternate identifier for the site name.', 'omni-webmaster-seo-suite' ); ?></p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <h4 style="margin-top: 25px;"><?php esc_html_e( 'Single Posts & Pages', 'omni-webmaster-seo-suite' ); ?></h4>
+
+                            <div class="omni-alert omni-alert-warning" style="margin-bottom: 15px;">
+                                <span class="dashicons dashicons-warning"></span> <?php
+                                echo wp_kses_post( __( '<strong>Check your theme first.</strong> Most modern themes already output Open Graph tags on single posts. If you turn this on while your theme does the same, every post will carry duplicate tags and social platforms may pick the wrong title or image. View the page source of any post and search for <code>og:title</code> before enabling.', 'omni-webmaster-seo-suite' ) );
+                                ?>
+                            </div>
+
+                            <table class="form-table omni-form-table">
+                                <tr>
+                                    <th scope="row"><?php esc_html_e( 'Enable Single Post OG Tags', 'omni-webmaster-seo-suite' ); ?></th>
+                                    <td>
+                                        <div class="omni-field-row">
+                                            <label class="omni-switch">
+                                                <input type="checkbox" name="<?php echo esc_attr( $this->option_name ); ?>[og_singular_enable]" value="1" <?php checked( '1', $settings['og_singular_enable'] ); ?> />
+                                                <span class="omni-slider"></span>
+                                            </label>
+                                            <div class="omni-field-desc">
+                                                <strong><?php esc_html_e( 'Output Meta Description and Open Graph Tags on Single Posts and Pages', 'omni-webmaster-seo-suite' ); ?></strong>
+                                                <p><?php echo wp_kses_post( __( 'Outputs <code>og:type=article</code>, <code>og:title</code>, <code>og:description</code>, <code>og:url</code>, <code>og:image</code> (with width, height, and alt text), <code>article:published_time</code>, <code>article:modified_time</code>, and the Twitter Card tags. The description uses the manual excerpt when set, otherwise the first 160 characters of the content. The share image falls back in order: <strong>featured image → first image in the content → the default image above</strong>.', 'omni-webmaster-seo-suite' ) ); ?></p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><?php esc_html_e( 'Article Structured Data', 'omni-webmaster-seo-suite' ); ?></th>
+                                    <td>
+                                        <div class="omni-field-row">
+                                            <label class="omni-switch">
+                                                <input type="checkbox" name="<?php echo esc_attr( $this->option_name ); ?>[og_singular_schema]" value="1" <?php checked( '1', $settings['og_singular_schema'] ); ?> />
+                                                <span class="omni-slider"></span>
+                                            </label>
+                                            <div class="omni-field-desc">
+                                                <strong><?php esc_html_e( 'Output BlogPosting / WebPage JSON-LD', 'omni-webmaster-seo-suite' ); ?></strong>
+                                                <p><?php echo wp_kses_post( __( 'Provides Google with the headline, publication and modification dates, author, and image of each post, helping search results show the correct date and author. Requires "Enable Single Post OG Tags" above to be turned on as well.', 'omni-webmaster-seo-suite' ) ); ?></p>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             </table>

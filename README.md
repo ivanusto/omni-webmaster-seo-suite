@@ -6,7 +6,7 @@ An all-in-one WordPress performance & SEO suite for webmasters: cleans the HTML 
 
 > 🌟 **Officially approved & published on WordPress.org**: [omni-webmaster-seo-suite on WordPress.org](https://wordpress.org/plugins/omni-webmaster-seo-suite/)
 
-![Version](https://img.shields.io/badge/version-2.3.0-blue) ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759b) ![PHP](https://img.shields.io/badge/PHP-7.4%2B-777bb4) ![License](https://img.shields.io/badge/license-GPL--2.0--or--later-green)
+![Version](https://img.shields.io/badge/version-2.4.0-blue) ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759b) ![PHP](https://img.shields.io/badge/PHP-7.4%2B-777bb4) ![License](https://img.shields.io/badge/license-GPL--2.0--or--later-green)
 
 ![Banner](.wordpress-org/banner-1544x500.png)
 
@@ -51,9 +51,10 @@ An all-in-one WordPress performance & SEO suite for webmasters: cleans the HTML 
 ### 6. Post Data Export
 - **Monthly CSV export**: Preview and export post data by month — including a configurable page-view meta key — straight from the admin panel.
 
-### 7. Homepage Meta Tags & Structured Data
-- **Homepage-only output**: Meta Description, Open Graph social sharing tags (`og:title`, `og:description`, `og:image`, `twitter:card`), and Schema.org WebSite/Organization JSON-LD — a lightweight alternative when no full SEO plugin is installed.
-- **Conflict-safe**: Output is automatically suppressed when a major SEO plugin (Yoast SEO, Rank Math, All in One SEO, SEOPress, The SEO Framework) is active, so tags are never duplicated.
+### 7. Meta Tags & Structured Data
+- **Homepage output**: Meta Description, Open Graph social sharing tags (`og:title`, `og:description`, `og:image`, `twitter:card`), and Schema.org WebSite/Organization JSON-LD — a lightweight alternative when no full SEO plugin is installed.
+- **Single post & page output** (off by default): `og:type=article`, title, description, `og:image` with width/height/alt, `article:published_time`, `article:modified_time`, Twitter Card tags, and BlogPosting/WebPage JSON-LD. The share image falls back from featured image → first image in the content → the site-wide default image; the description uses the manual excerpt, falling back to the first 160 characters of the content.
+- **Conflict-safe**: Output is automatically suppressed when a major SEO plugin (Yoast SEO, Rank Math, All in One SEO, SEOPress, The SEO Framework) is active, so tags are never duplicated. Leave the single-post switch off if your theme already prints its own OG tags.
 - **Media library picker**: Choose the `og:image` share image (recommended 1200 × 630) directly from the media library, with live preview and a character counter for the description.
 
 ## Requirements
