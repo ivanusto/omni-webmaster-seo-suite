@@ -15,7 +15,28 @@ class Omni_File_Renamer {
     private $options = null;
 
     public function __construct() {
-        add_filter( 'sanitize_file_name', [ $this, 'rename_file' ] );
+        // Only rename files that are actually being uploaded or sideloaded.
+        //
+        // The obvious hook here is 'sanitize_file_name', but that filter is global:
+        // WordPress, themes and plugins run it over every name they treat as a file
+        // name, including generated CSS caches and temp files. Renaming those breaks
+        // whichever code wrote the file under its original name (for example
+        // "custom-frontend.min.css" would come back as "custom-frontendmin.css").
+        add_filter( 'wp_handle_upload_prefilter', [ $this, 'rename_upload' ] );
+        add_filter( 'wp_handle_sideload_prefilter', [ $this, 'rename_upload' ] );
+    }
+
+    /**
+     * Normalize the file name of an upload in progress
+     *
+     * @param array $file Upload array as passed by WordPress ('name', 'type', 'tmp_name', ...).
+     * @return array
+     */
+    public function rename_upload( $file ) {
+        if ( ! empty( $file['name'] ) ) {
+            $file['name'] = $this->rename_file( $file['name'] );
+        }
+        return $file;
     }
 
     /**
@@ -44,6 +65,8 @@ class Omni_File_Renamer {
     /**
      * Normalize an uploaded file name to a clean, ASCII-only,
      * hyphen-separated lowercase slug for better SEO
+     *
+     * Kept public so the transformation can be reused and tested on its own.
      */
     public function rename_file( $filename ) {
         $options = $this->get_options();

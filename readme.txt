@@ -4,7 +4,7 @@ Tags: seo, performance, comments, thumbnails, translation
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 2.4.0
+Stable tag: 2.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,11 @@ Only if your theme does not already output them. Open any post, view its page so
 No. This plugin uses a clean, unified settings array (`omni_webmaster_settings`) to prevent database clutter. You will need to check the desired options in the new admin settings panel.
 
 == Changelog ==
+
+= 2.4.1 =
+* Fixed: the SEO-Friendly Upload File Renaming module hooked the global `sanitize_file_name` filter, so it rewrote every string WordPress, themes, and plugins sanitize as a file name — not just uploads. Generated cache files such as `trx_addons-layout-2728.css` or `style_dynamic_ann.css` came back with underscores turned into hyphens, and names containing non-Latin characters lost them entirely, so any code that writes a file under one name and reads it back under another silently failed. This was reported as a theme's header and main menu disappearing on a site using a ThemeREX theme with Elementor.
+* Renaming now runs on `wp_handle_upload_prefilter` and `wp_handle_sideload_prefilter`, so only files that are genuinely being uploaded or sideloaded are touched. The renaming rules themselves, the date prefix option, and the standalone-plugin conflict detection are unchanged.
+* If you had turned the file renaming module off to work around a broken theme, it is safe to turn it back on after updating.
 
 = 2.4.0 =
 * New: the Meta Tags module can now output Open Graph tags on single posts and pages, not just the homepage — og:type=article, og:title, og:description, og:url, og:image (with width, height, and alt text), article:published_time, article:modified_time, and the Twitter Card tags.

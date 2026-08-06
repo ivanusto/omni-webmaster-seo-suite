@@ -1,7 +1,7 @@
 # Translation template for Omni Webmaster & SEO Suite.
 msgid ""
 msgstr ""
-"Project-Id-Version: Omni Webmaster & SEO Suite 2.4.0\n"
+"Project-Id-Version: Omni Webmaster & SEO Suite 2.4.1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
