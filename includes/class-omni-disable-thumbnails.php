@@ -59,19 +59,39 @@ class Omni_Disable_Thumbnails {
         // Built-in size list
         $builtin_sizes = [ 'thumbnail', 'medium', 'medium_large', 'large', '1536x1536', '2048x2048' ];
         
+        // WordPress registers 1536x1536 and 2048x2048 with add_image_size() and
+        // gives them no *_size_w / *_size_h options, so their dimensions have to
+        // come from somewhere else. They are also the only built-in sizes that
+        // remove_image_size() can take out of the registry, which is what happens
+        // once the user disables them here, so keep the fixed dimensions core
+        // names them after as a fallback for that case.
+        $registry_only_sizes = [
+            '1536x1536' => 1536,
+            '2048x2048' => 2048,
+        ];
+
         foreach ( $builtin_sizes as $size ) {
-            if ( isset( $registered_sizes[$size] ) || in_array( $size, [ '1536x1536', '2048x2048' ] ) ) {
-                $width  = get_option( "{$size}_size_w" );
-                $height = get_option( "{$size}_size_h" );
-                $crop   = get_option( "{$size}_crop" );
-                
-                $sizes[$size] = [
-                    'width'   => $width,
-                    'height'  => $height,
-                    'crop'    => $crop,
-                    'builtin' => true
-                ];
+            if ( isset( $registered_sizes[$size] ) ) {
+                // Prefer the registered sub-size: it is authoritative and, unlike
+                // the options, is present for every built-in size.
+                $width  = (int) $registered_sizes[$size]['width'];
+                $height = (int) $registered_sizes[$size]['height'];
+                $crop   = $registered_sizes[$size]['crop'];
+            } elseif ( isset( $registry_only_sizes[$size] ) ) {
+                // Currently disabled, so no longer registered.
+                $width  = $registry_only_sizes[$size];
+                $height = $registry_only_sizes[$size];
+                $crop   = false;
+            } else {
+                continue;
             }
+
+            $sizes[$size] = [
+                'width'   => $width,
+                'height'  => $height,
+                'crop'    => $crop,
+                'builtin' => true
+            ];
         }
         
         foreach ( $registered_sizes as $size => $data ) {

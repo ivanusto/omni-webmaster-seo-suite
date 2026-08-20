@@ -4,7 +4,7 @@ Tags: seo, performance, comments, thumbnails, translation
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.5.0
+Stable tag: 2.5.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -107,6 +107,11 @@ Only if your theme does not already output them. Open any post, view its page so
 No. This plugin uses a clean, unified settings array (`omni_webmaster_settings`) to prevent database clutter. You will need to check the desired options in the new admin settings panel.
 
 == Changelog ==
+
+= 2.5.1 =
+* Fixed: the thumbnail size cards showed no dimensions for the built-in 1536x1536 and 2048x2048 sizes. WordPress registers those two with add_image_size() and gives them no size options, but the plugin was reading the dimensions from those non-existent options. They are now read from the registered sub-sizes, with the fixed dimensions core names them after as a fallback for when the size is disabled and therefore no longer registered.
+* An unconstrained dimension now reads as "auto" instead of 0, so the built-in Medium Large size shows as "768 x auto" rather than "768 x 0". That size is 768px wide at whatever height preserves the aspect ratio.
+* Display only: which thumbnails get generated, and the batch cleanup, are unchanged.
 
 = 2.5.0 =
 * WordPress 7.1 compatibility for the new client-side media processing pipeline, where the browser uploads the original via REST, generates sub-sizes locally, and sideloads them through /wp/v2/media/{id}/sideload.

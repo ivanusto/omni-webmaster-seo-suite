@@ -233,6 +233,25 @@ class Omni_Admin {
     }
 
     /**
+     * Format an image size's dimensions for display
+     *
+     * A zero on either axis means that side is unconstrained rather than
+     * literally zero pixels: WordPress registers medium_large as 768 x 0, for
+     * example, meaning 768px wide at whatever height preserves the ratio.
+     */
+    private function format_size_dimensions( $width, $height ) {
+        $width  = (int) $width;
+        $height = (int) $height;
+
+        /* translators: shown in place of an image dimension that is unconstrained, e.g. "768 x auto" */
+        $unconstrained = __( 'auto', 'omni-webmaster-seo-suite' );
+
+        return ( $width > 0 ? (string) $width : $unconstrained )
+            . ' × '
+            . ( $height > 0 ? (string) $height : $unconstrained );
+    }
+
+    /**
      * Render the admin settings page
      */
     public function render_settings_page() {
@@ -767,10 +786,10 @@ class Omni_Admin {
                                                         <code class="omni-size-key"><?php echo esc_html( $size_key ); ?></code>
                                                     </div>
                                                     <div class="omni-size-card-body">
-                                                        <?php if ( isset( $size_data['width'] ) && isset( $size_data['height'] ) ) : ?>
+                                                        <?php if ( isset( $size_data['width'], $size_data['height'] ) ) : ?>
                                                             <span class="omni-dimensions">
                                                                 <span class="dashicons dashicons-format-image"></span>
-                                                                <?php echo esc_html( $size_data['width'] ) . ' &times; ' . esc_html( $size_data['height'] ); ?>
+                                                                <?php echo esc_html( $this->format_size_dimensions( $size_data['width'], $size_data['height'] ) ); ?>
                                                             </span>
                                                         <?php endif; ?>
                                                         <label class="omni-checkbox-label">
