@@ -155,13 +155,17 @@ class Omni_SEO_Cleanup {
 
     /**
      * Remove Emoji-related DNS prefetch hints
+     *
+     * WordPress 7.1 no longer prints an emoji dns-prefetch hint at all, but
+     * older supported versions still do. Match the core emoji CDN path
+     * instead of the full remote URL, and handle the array form a resource
+     * hint entry may take.
      */
     public function disable_emojis_dns_prefetch( $urls, $relation_type ) {
         if ( 'dns-prefetch' === $relation_type ) {
-            // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
-            $emoji_svg_url = apply_filters( 'emoji_svg_url', 'https://s.w.org/images/core/emoji/' );
             foreach ( $urls as $key => $url ) {
-                if ( false !== strpos( $url, $emoji_svg_url ) ) {
+                $href = is_array( $url ) && isset( $url['href'] ) ? $url['href'] : $url;
+                if ( is_string( $href ) && false !== strpos( $href, '/images/core/emoji/' ) ) {
                     unset( $urls[ $key ] );
                 }
             }

@@ -2,9 +2,9 @@
 Contributors: ivanusto
 Tags: seo, performance, comments, thumbnails, translation
 Requires at least: 6.0
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.4.1
+Stable tag: 2.5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,14 @@ Only if your theme does not already output them. Open any post, view its page so
 No. This plugin uses a clean, unified settings array (`omni_webmaster_settings`) to prevent database clutter. You will need to check the desired options in the new admin settings panel.
 
 == Changelog ==
+
+= 2.5.0 =
+* WordPress 7.1 compatibility for the new client-side media processing pipeline, where the browser uploads the original via REST, generates sub-sizes locally, and sideloads them through /wp/v2/media/{id}/sideload.
+* Image Resizing: keeps media processing server-side while the module is enabled (via the wp_client_side_media_processing_enabled filter), because in the client-side flow a server-side resize of the original either fails core's dimension validation with a 400 error or is silently replaced by the client's own 2560px scaled copy. As defense in depth, the resizer also refuses to touch files arriving on the sideload endpoint or on a media create with generate_sub_sizes=false.
+* File Renaming: no longer renames files uploaded to the sub-size sideload endpoint. Those names must derive from the attachment's existing (already renamed) file name, otherwise core's naming workaround stops matching and every sub-size lands on a numeric-suffix name. The optional date prefix is now idempotent, so a name already carrying one is never double-prefixed.
+* Thumbnail Disabling: disabled sizes are now also removed from wp_get_missing_image_subsizes(), which WordPress 7.1 uses to tell the browser which sub-sizes to generate client-side (and which the post-upload recovery has always used). Previously, disabled built-in sizes could quietly come back through those paths.
+* Thumbnail Cleanup: since WordPress 7.1 one physical file can be registered under several size names when sizes share dimensions. The batch cleanup now tracks which files are still referenced by kept sizes, the main file, and the new companion files (source_image, animated_video, animated_video_poster) and never deletes a file that a surviving entry still points to.
+* SEO Cleanup: the emoji dns-prefetch removal no longer hardcodes the emoji CDN URL (flagged by Plugin Check) and now handles resource hint entries passed as arrays, which previously raised a PHP 8 TypeError. WordPress 7.1 itself no longer prints this hint; the filter remains for older supported versions.
 
 = 2.4.1 =
 * Fixed: the SEO-Friendly Upload File Renaming module hooked the global `sanitize_file_name` filter, so it rewrote every string WordPress, themes, and plugins sanitize as a file name — not just uploads. Generated cache files such as `trx_addons-layout-2728.css` or `style_dynamic_ann.css` came back with underscores turned into hyphens, and names containing non-Latin characters lost them entirely, so any code that writes a file under one name and reads it back under another silently failed. This was reported as a theme's header and main menu disappearing on a site using a ThemeREX theme with Elementor.

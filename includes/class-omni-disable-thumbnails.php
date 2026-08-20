@@ -16,6 +16,17 @@ class Omni_Disable_Thumbnails {
         // Core thumbnail-disabling hooks
         add_action( 'init', [ $this, 'disable_existing_image_sizes' ], 999 );
         add_filter( 'intermediate_image_sizes_advanced', [ $this, 'disable_image_sizes' ], 999 );
+
+        // The intermediate_image_sizes_advanced filter only covers server-side
+        // generation (wp_create_image_subsizes). Two other paths ask
+        // wp_get_missing_image_subsizes() what still needs generating and skip
+        // that filter entirely: the post-upload recovery in
+        // wp_update_image_subsizes(), and — since WordPress 7.1 — client-side
+        // media processing, where the browser reads missing_image_sizes from
+        // the REST create response, generates those sizes locally, and
+        // sideloads them. Filtering the "missing" list keeps disabled sizes
+        // out of both.
+        add_filter( 'wp_get_missing_image_subsizes', [ $this, 'filter_missing_image_subsizes' ], 999 );
         
         // Admin-related (the Admin class loads the UI; register the AJAX endpoints here)
         if ( is_admin() ) {
@@ -164,17 +175,18 @@ class Omni_Disable_Thumbnails {
     }
 
     /**
+     * Get the size names the user has disabled
+     */
+    private function get_disabled_sizes() {
+        $settings = get_option( $this->option_name, [] );
+        return isset( $settings['disabled_sizes'] ) && is_array( $settings['disabled_sizes'] ) ? $settings['disabled_sizes'] : [];
+    }
+
+    /**
      * Disable generation of the selected image sizes
      */
     public function disable_existing_image_sizes() {
-        $settings = get_option( $this->option_name, [] );
-        $disabled_sizes = isset( $settings['disabled_sizes'] ) && is_array( $settings['disabled_sizes'] ) ? $settings['disabled_sizes'] : [];
-        
-        if ( empty( $disabled_sizes ) ) {
-            return;
-        }
-        
-        foreach ( $disabled_sizes as $size ) {
+        foreach ( $this->get_disabled_sizes() as $size ) {
             remove_image_size( $size );
         }
     }
@@ -183,20 +195,30 @@ class Omni_Disable_Thumbnails {
      * Prevent generation of specific thumbnail sizes on image upload
      */
     public function disable_image_sizes( $sizes ) {
-        $settings = get_option( $this->option_name, [] );
-        $disabled_sizes = isset( $settings['disabled_sizes'] ) && is_array( $settings['disabled_sizes'] ) ? $settings['disabled_sizes'] : [];
-        
-        if ( empty( $disabled_sizes ) ) {
-            return $sizes;
-        }
-        
-        foreach ( $disabled_sizes as $size ) {
+        foreach ( $this->get_disabled_sizes() as $size ) {
             if ( isset( $sizes[$size] ) ) {
                 unset( $sizes[$size] );
             }
         }
-        
+
         return $sizes;
+    }
+
+    /**
+     * Keep disabled sizes out of the "missing sub-sizes" list, which drives
+     * both the post-upload recovery regeneration and (WordPress 7.1+)
+     * client-side sub-size generation in the browser
+     */
+    public function filter_missing_image_subsizes( $missing_sizes ) {
+        if ( ! is_array( $missing_sizes ) ) {
+            return $missing_sizes;
+        }
+
+        foreach ( $this->get_disabled_sizes() as $size ) {
+            unset( $missing_sizes[ $size ] );
+        }
+
+        return $missing_sizes;
     }
 
     /**
@@ -267,7 +289,30 @@ class Omni_Disable_Thumbnails {
             if ( isset( $metadata['file'] ) && isset( $metadata['sizes'] ) ) {
                 $file_dir = trailingslashit( dirname( $metadata['file'] ) );
                 $metadata_changed = false;
-                
+
+                // Since WordPress 7.1 one physical file can be registered under
+                // several size names (when registered sizes share dimensions),
+                // and the metadata can carry companion files next to the main
+                // file (source_image, animated_video, animated_video_poster).
+                // Build the set of file names that must survive this pass so a
+                // disabled size never deletes a file another kept entry still
+                // references.
+                $kept_files = [ wp_basename( $metadata['file'] ) ];
+
+                foreach ( [ 'original_image', 'source_image', 'animated_video', 'animated_video_poster' ] as $companion_key ) {
+                    if ( ! empty( $metadata[ $companion_key ] ) && is_string( $metadata[ $companion_key ] ) ) {
+                        $kept_files[] = $metadata[ $companion_key ];
+                    }
+                }
+
+                if ( 'disabled_only' === $delete_mode ) {
+                    foreach ( $metadata['sizes'] as $size => $size_info ) {
+                        if ( ! in_array( $size, $disabled_sizes, true ) && ! empty( $size_info['file'] ) ) {
+                            $kept_files[] = $size_info['file'];
+                        }
+                    }
+                }
+
                 foreach ( $metadata['sizes'] as $size => $size_info ) {
                     // In "disabled sizes only" mode, skip sizes that are not disabled
                     if ( 'disabled_only' === $delete_mode && ! in_array( $size, $disabled_sizes, true ) ) {
@@ -277,25 +322,29 @@ class Omni_Disable_Thumbnails {
                     if ( empty( $size_info['file'] ) ) {
                         continue;
                     }
-                    
-                    $file_path = $base_dir . $file_dir . $size_info['file'];
-                    if ( file_exists( $file_path ) ) {
-                        wp_delete_file( $file_path );
-                        $deleted_count++;
-                    }
-                    
-                    // Delete the corresponding WebP version (.webp)
-                    $webp_path = preg_replace( '/\.(jpg|jpeg|png)$/i', '.webp', $file_path );
-                    if ( file_exists( $webp_path ) ) {
-                        wp_delete_file( $webp_path );
-                        $deleted_count++;
-                    }
-                    
-                    // Delete appended .webp files (e.g. file.jpg.webp)
-                    $alt_webp_path = $file_path . '.webp';
-                    if ( file_exists( $alt_webp_path ) ) {
-                        wp_delete_file( $alt_webp_path );
-                        $deleted_count++;
+
+                    // Drop the size from the metadata, but only delete the file
+                    // when nothing that survives still references it.
+                    if ( ! in_array( $size_info['file'], $kept_files, true ) ) {
+                        $file_path = $base_dir . $file_dir . $size_info['file'];
+                        if ( file_exists( $file_path ) ) {
+                            wp_delete_file( $file_path );
+                            $deleted_count++;
+                        }
+
+                        // Delete the corresponding WebP version (.webp)
+                        $webp_path = preg_replace( '/\.(jpg|jpeg|png)$/i', '.webp', $file_path );
+                        if ( file_exists( $webp_path ) ) {
+                            wp_delete_file( $webp_path );
+                            $deleted_count++;
+                        }
+
+                        // Delete appended .webp files (e.g. file.jpg.webp)
+                        $alt_webp_path = $file_path . '.webp';
+                        if ( file_exists( $alt_webp_path ) ) {
+                            wp_delete_file( $alt_webp_path );
+                            $deleted_count++;
+                        }
                     }
 
                     unset( $metadata['sizes'][$size] );
