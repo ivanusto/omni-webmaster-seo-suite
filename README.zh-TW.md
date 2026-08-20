@@ -15,11 +15,17 @@
 ### 1. SEO 與網站優化設定面板
 ![SEO 與網站優化設定面板](.wordpress-org/screenshot-1.png)
 
-### 2. 媒體與縮圖控制
-![媒體與縮圖控制](.wordpress-org/screenshot-2.png)
+### 2. 上傳檔名優化與圖片自動縮圖
+![上傳檔名優化與圖片自動縮圖](.wordpress-org/screenshot-2.png)
 
-### 3. AJAX 縮圖批次清理工具
-![AJAX 縮圖批次清理工具](.wordpress-org/screenshot-3.png)
+### 3. 選擇性停用縮圖尺寸
+![選擇性停用縮圖尺寸](.wordpress-org/screenshot-3.png)
+
+### 4. AJAX 縮圖批次清理工具
+![AJAX 縮圖批次清理工具](.wordpress-org/screenshot-4.png)
+
+### 5. 內建繁體中文介面
+![內建繁體中文介面](.wordpress-org/screenshot-5.png)
 
 ## 功能模組
 

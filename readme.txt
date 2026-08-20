@@ -87,8 +87,10 @@ This plugin utilizes third-party and external services to provide specific funct
 == Screenshots ==
 
 1. SEO & Site Optimization settings tab with toggles for RSS control, HTML head cleanup, robots meta, sitemap sanitization, and XML-RPC hardening.
-2. Media & Thumbnails tab: selectively disable individual thumbnail sizes to stop them from being generated on upload.
-3. Batch thumbnail cleanup tool with safe-mode options, live progress bar, and per-batch log console (shown running in the bundled Traditional Chinese locale).
+2. Media & Thumbnails tab: SEO-friendly upload file renaming and automatic upload image resizing, with configurable maximum dimensions and quality.
+3. Media & Thumbnails tab: selectively disable individual thumbnail sizes, including the custom sizes registered by your theme, to stop them from being generated on upload.
+4. Batch thumbnail cleanup tool with safe-mode options, live progress bar, and per-batch log console.
+5. The whole settings panel is fully translated, shown here in the bundled Traditional Chinese (zh_TW) locale.
 
 == Frequently Asked Questions ==
 

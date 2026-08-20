@@ -15,11 +15,17 @@ An all-in-one WordPress performance & SEO suite for webmasters: cleans the HTML 
 ### 1. SEO & Site Optimization Settings
 ![SEO & Site Optimization Settings](.wordpress-org/screenshot-1.png)
 
-### 2. Media & Thumbnail Control
-![Media & Thumbnail Control](.wordpress-org/screenshot-2.png)
+### 2. Upload File Renaming & Image Resizing
+![Upload File Renaming & Image Resizing](.wordpress-org/screenshot-2.png)
 
-### 3. Batch Thumbnail Cleanup Tool
-![Batch Thumbnail Cleanup Tool](.wordpress-org/screenshot-3.png)
+### 3. Selective Thumbnail Size Control
+![Selective Thumbnail Size Control](.wordpress-org/screenshot-3.png)
+
+### 4. Batch Thumbnail Cleanup Tool
+![Batch Thumbnail Cleanup Tool](.wordpress-org/screenshot-4.png)
+
+### 5. Bundled Traditional Chinese Translation
+![Bundled Traditional Chinese Translation](.wordpress-org/screenshot-5.png)
 
 ## Modules
 

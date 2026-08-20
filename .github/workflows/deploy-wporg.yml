@@ -1,0 +1,84 @@
+name: Deploy to WordPress.org
+
+# Publishes a tagged release to the WordPress.org plugin repository (SVN trunk,
+# a matching tag, and the assets/ directory from .wordpress-org).
+#
+# Runs only on a v* tag push, never on pull requests, so the SVN credentials are
+# never exposed to code from a fork. Use the manual "Run workflow" button with
+# dry run enabled to rehearse a deploy without committing anything.
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing tag to deploy (e.g. v2.5.0)'
+        required: true
+      dry_run:
+        description: 'Rehearse without committing to SVN'
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-wporg
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Publish to WordPress.org
+    runs-on: ubuntu-latest
+    # Attach a GitHub Environment so required reviewers / branch restrictions can
+    # gate the SVN credentials. Without protection rules configured it is a no-op.
+    environment: wordpress-org
+
+    steps:
+      - name: Checkout the tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || github.ref }}
+
+      - name: Verify the tag matches the plugin version everywhere
+        id: version
+        run: |
+          set -euo pipefail
+          RAW="${{ inputs.tag || github.ref_name }}"
+          VERSION="${RAW#v}"
+
+          HEADER=$(sed -n 's/^[[:space:]]*\*[[:space:]]*Version:[[:space:]]*\([0-9.]*\).*/\1/p' omni-webmaster-seo-suite.php | head -1)
+          CONSTANT=$(sed -n "s/.*OMNI_WEBMASTER_VERSION'[[:space:]]*,[[:space:]]*'\([0-9.]*\)'.*/\1/p" omni-webmaster-seo-suite.php | head -1)
+          STABLE=$(sed -n 's/^Stable tag:[[:space:]]*\([0-9.]*\).*/\1/p' readme.txt | head -1)
+
+          echo "tag=$VERSION  header=$HEADER  constant=$CONSTANT  stable tag=$STABLE"
+
+          for found in "$HEADER" "$CONSTANT" "$STABLE"; do
+            if [ "$found" != "$VERSION" ]; then
+              echo "::error::Version mismatch - tag says $VERSION but the plugin says $found. Refusing to deploy."
+              exit 1
+            fi
+          done
+
+          if ! grep -q "^= $VERSION =" readme.txt; then
+            echo "::error::readme.txt has no changelog entry for $VERSION. Refusing to deploy."
+            exit 1
+          fi
+
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy to the plugin repository
+        # Pinned to the 2.3.0 commit so a compromised or retagged upstream release
+        # cannot silently change what runs with the SVN credentials.
+        uses: 10up/action-wordpress-plugin-deploy@54bd289b8525fd23a5c365ec369185f2966529c2
+        with:
+          # deploy.sh runs this value as a shell command, so it has to render as
+          # exactly true or false. A tag push is always a real deploy.
+          dry-run: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run || false }}
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SLUG: omni-webmaster-seo-suite
+          VERSION: ${{ steps.version.outputs.version }}

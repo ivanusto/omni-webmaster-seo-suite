@@ -1,0 +1,26 @@
+# Files that must never reach the WordPress.org plugin build.
+#
+# Consumed by 10up/action-wordpress-plugin-deploy as rsync --exclude-from, which
+# syncs SVN trunk with --delete --delete-excluded: whatever is listed here is
+# removed from trunk, and whatever is missing here is published. Keep it in sync
+# with the rsync excludes in .github/workflows/release.yml.
+#
+# Note: .wordpress-org is excluded from the plugin itself but is still published
+# separately as the SVN assets/ directory (banners, icons, screenshots).
+
+.git
+.github
+.claude
+.gitignore
+.distignore
+.wordpress-org
+node_modules
+
+README.md
+README.zh-TW.md
+SECURITY.md
+omni-webmaster-seo-suite-readme.txt
+
+.DS_Store
+*.bak
+*.zip
