@@ -6,7 +6,7 @@ An all-in-one WordPress performance & SEO suite for webmasters: cleans the HTML 
 
 > 🌟 **Officially approved & published on WordPress.org**: [omni-webmaster-seo-suite on WordPress.org](https://wordpress.org/plugins/omni-webmaster-seo-suite/)
 
-![Version](https://img.shields.io/badge/version-2.4.1-blue) ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759b) ![PHP](https://img.shields.io/badge/PHP-7.4%2B-777bb4) ![License](https://img.shields.io/badge/license-GPL--2.0--or--later-green)
+![Version](https://img.shields.io/badge/version-2.5.0-blue) ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759b) ![PHP](https://img.shields.io/badge/PHP-7.4%2B-777bb4) ![License](https://img.shields.io/badge/license-GPL--2.0--or--later-green)
 
 ![Banner](.wordpress-org/banner-1544x500.png)
 
