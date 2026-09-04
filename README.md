@@ -6,7 +6,7 @@ An all-in-one WordPress performance & SEO suite for webmasters: cleans the HTML 
 
 > 🌟 **Officially approved & published on WordPress.org**: [omni-webmaster-seo-suite on WordPress.org](https://wordpress.org/plugins/omni-webmaster-seo-suite/)
 
-![Version](https://img.shields.io/badge/version-2.5.1-blue) ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759b) ![PHP](https://img.shields.io/badge/PHP-7.4%2B-777bb4) ![License](https://img.shields.io/badge/license-GPL--2.0--or--later-green)
+![Version](https://img.shields.io/badge/version-2.6.0-blue) ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759b) ![PHP](https://img.shields.io/badge/PHP-7.4%2B-777bb4) ![License](https://img.shields.io/badge/license-GPL--2.0--or--later-green)
 
 ![Banner](.wordpress-org/banner-1544x500.png)
 
@@ -40,7 +40,7 @@ An all-in-one WordPress performance & SEO suite for webmasters: cleans the HTML 
 - **Disable Comments Everywhere**: Completely turn off comments, trackbacks, and pingbacks across all post types. Hides historical comments and removes comment menus and widgets from the dashboard.
 
 ### 3. Media & Thumbnail Optimization
-- **SEO-Friendly Upload File Renaming**: Transliterates accented characters to ASCII, converts spaces/underscores to hyphens, strips non-ASCII characters, and lowercases file names on upload (e.g. `Café Menü 2024.jpg` → `cafe-menu-2024.jpg`), with an optional `YYYY-MM-DD` date prefix. Shares its core logic with the standalone [smart-file-renamer](https://github.com/ivanusto/smart-file-renamer) plugin.
+- **SEO-Friendly Upload File Renaming**: Transliterates accented characters to ASCII, converts spaces/underscores to hyphens, strips non-ASCII characters, and lowercases file names on upload (e.g. `Café Menü 2024.jpg` → `cafe-menu-2024.jpg`), with an optional `YYYY-MM-DD` date prefix. A time-based naming mode can instead store every upload as `2026-09-04-153012.jpg`, keeping the name it was uploaded under (`今日快訊`) as the media library title so files stay searchable by their original name. Shares its core logic with the standalone [smart-file-renamer](https://github.com/ivanusto/smart-file-renamer) plugin.
 - **Automatic Upload Image Resizing**: Downscales oversized JPEG/PNG/GIF/WebP/AVIF images to configurable maximum dimensions (hard cap 2560px) at upload time — before the original is stored and thumbnails are generated — with adjustable quality and preserved transparency. Fails safe: if GD is missing or a resize step fails, the original upload proceeds unchanged. Shares its core logic with the standalone [smart-image-upload-resizer](https://github.com/ivanusto/smart-image-upload-resizer) plugin.
 - **Selective Thumbnail Disabling**: Stop WordPress from generating specific sizes on upload to save storage space.
 - **AJAX Thumbnail Cleanup**: A safe, batch-based cleanup tool (50 attachments per run) to recursively delete historical thumbnail files with a live progress bar.

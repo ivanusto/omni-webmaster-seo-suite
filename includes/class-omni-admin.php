@@ -101,6 +101,7 @@ class Omni_Admin {
         // Upload file renaming options
         $sanitized['file_rename_enable']      = isset( $input['file_rename_enable'] ) ? '1' : '0';
         $sanitized['file_rename_date_prefix'] = isset( $input['file_rename_date_prefix'] ) ? '1' : '0';
+        $sanitized['file_rename_serial']      = isset( $input['file_rename_serial'] ) ? '1' : '0';
 
         // Upload image resizing options (dimensions clamped to the hard 2560px cap)
         $sanitized['image_resize_enable']     = isset( $input['image_resize_enable'] ) ? '1' : '0';
@@ -272,6 +273,7 @@ class Omni_Admin {
             'disabled_sizes'      => [],
             'file_rename_enable'      => '0',
             'file_rename_date_prefix' => '0',
+            'file_rename_serial'      => '0',
             'image_resize_enable'     => '0',
             'image_resize_max_width'  => Omni_Image_Resizer::DEFAULT_MAX_WIDTH,
             'image_resize_max_height' => Omni_Image_Resizer::DEFAULT_MAX_HEIGHT,
@@ -657,6 +659,21 @@ class Omni_Admin {
                                             <div class="omni-field-desc">
                                                 <strong><?php esc_html_e( 'Rename Files with Accents and Special Characters on Upload', 'omni-webmaster-seo-suite' ); ?></strong>
                                                 <p><?php echo wp_kses_post( __( 'Example: <code>Café Menü 2024.jpg</code> becomes <code>cafe-menu-2024.jpg</code>. Only newly uploaded files are affected; existing media files are never renamed.', 'omni-webmaster-seo-suite' ) ); ?></p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><?php esc_html_e( 'Time-Based File Names', 'omni-webmaster-seo-suite' ); ?></th>
+                                    <td>
+                                        <div class="omni-field-row">
+                                            <label class="omni-switch">
+                                                <input type="checkbox" name="<?php echo esc_attr( $this->option_name ); ?>[file_rename_serial]" value="1" <?php checked( '1', $settings['file_rename_serial'] ); ?> />
+                                                <span class="omni-slider"></span>
+                                            </label>
+                                            <div class="omni-field-desc">
+                                                <strong><?php esc_html_e( 'Name Every Uploaded File After Its Upload Time (YYYY-MM-DD-HHMMSS)', 'omni-webmaster-seo-suite' ); ?></strong>
+                                                <p><?php echo wp_kses_post( __( 'Example: <code>今日快訊.jpg</code> becomes <code>2026-09-04-153012.jpg</code>. Useful when stripping CJK characters leaves uneven results, since every upload then gets the same predictable name. The media library title still holds the name the file was uploaded under (<code>今日快訊</code>), so files stay searchable by their original name. This replaces the whole file name, so the date prefix below is not applied on top of it.', 'omni-webmaster-seo-suite' ) ); ?></p>
                                             </div>
                                         </div>
                                     </td>

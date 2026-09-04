@@ -4,7 +4,7 @@ Tags: seo, performance, comments, thumbnails, translation
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.5.1
+Stable tag: 2.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,7 +27,7 @@ This plugin incorporates the following major components:
    Disable Comments Everywhere: Completely turn off comments, trackbacks, and pingbacks across all post types. Hides historical comments and removes comment menus and widgets from the WordPress dashboard.
 
 3. Media & Thumbnail Optimization
-   SEO-Friendly Upload File Renaming: Automatically transliterates accented characters to ASCII, converts spaces/underscores to hyphens, strips non-ASCII characters, and lowercases file names on upload, with an optional YYYY-MM-DD date prefix.
+   SEO-Friendly Upload File Renaming: Automatically transliterates accented characters to ASCII, converts spaces/underscores to hyphens, strips non-ASCII characters, and lowercases file names on upload, with an optional YYYY-MM-DD date prefix and an optional time-based naming mode that stores every upload as YYYY-MM-DD-HHMMSS while keeping the original name as the media library title.
    Automatic Upload Image Resizing: Downscales oversized JPEG/PNG/GIF/WebP/AVIF images to configurable maximum dimensions (up to 2560px) at upload time, before thumbnails are generated, with adjustable compression quality and preserved transparency.
    Selective Thumbnail Disabling: Stop WordPress from generating specific sizes on upload to save storage space.
    AJAX Thumbnail Cleanup: A safe, batch-based AJAX cleanup tool (50 attachments per run) to recursively delete historical thumbnail files with a live progress bar.
@@ -107,6 +107,11 @@ Only if your theme does not already output them. Open any post, view its page so
 No. This plugin uses a clean, unified settings array (`omni_webmaster_settings`) to prevent database clutter. You will need to check the desired options in the new admin settings panel.
 
 == Changelog ==
+
+= 2.6.0 =
+* New: **Time-Based File Names** option for the file renaming module. Every uploaded file is stored as its upload time, `2026-09-04-153012.jpg`, whatever it was called before. The existing rules only produced a timestamp when sanitization emptied the name completely, so a set of CJK uploads came out inconsistent - `今日快訊.jpg` became `file-1757000000.jpg` while `今日快訊2026.jpg` became `2026.jpg`. The time is read in the site's own time zone, so a file uploaded at 00:30 in Taipei carries that day's date rather than the UTC day before it. Off by default; the toggle sits above the date prefix in the Media & Thumbnails tab, and the date prefix is not applied on top of it.
+* The media library title still holds the name the file was uploaded under, so files stay searchable by their original name even when nothing of it survives in the file name. WordPress already does this in both upload paths - media_handle_upload() reads $_FILES before the renaming filter runs, and the REST controller keeps the submitted name - and the module now also covers the fallback in WP_REST_Attachments_Controller::create_item() that titles an attachment after the stored file. A title typed by a person, or read out of the image's IPTC metadata, is never touched.
+* Both changes match the standalone smart-file-renamer 1.3.0 release, which shares this module's core logic.
 
 = 2.5.1 =
 * Fixed: the thumbnail size cards showed no dimensions for the built-in 1536x1536 and 2048x2048 sizes. WordPress registers those two with add_image_size() and gives them no size options, but the plugin was reading the dimensions from those non-existent options. They are now read from the registered sub-sizes, with the fixed dimensions core names them after as a fallback for when the size is disabled and therefore no longer registered.

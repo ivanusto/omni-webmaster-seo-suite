@@ -254,6 +254,9 @@ msgstr ""
 msgid "Example: <code>Café Menü 2024.jpg</code> becomes <code>cafe-menu-2024.jpg</code>. Only newly uploaded files are affected; existing media files are never renamed."
 msgstr ""
 
+msgid "Example: <code>今日快訊.jpg</code> becomes <code>2026-09-04-153012.jpg</code>. Useful when stripping CJK characters leaves uneven results, since every upload then gets the same predictable name. The media library title still holds the name the file was uploaded under (<code>今日快訊</code>), so files stay searchable by their original name. This replaces the whole file name, so the date prefix below is not applied on top of it."
+msgstr ""
+
 msgid "Exclude Site Staff"
 msgstr ""
 
@@ -375,6 +378,9 @@ msgid "Meta Pixel Tracking"
 msgstr ""
 
 msgid "Monthly Post Data Export"
+msgstr ""
+
+msgid "Name Every Uploaded File After Its Upload Time (YYYY-MM-DD-HHMMSS)"
 msgstr ""
 
 msgid "Network error. Unable to load preview data."
@@ -576,6 +582,9 @@ msgid "This scans every image attachment in the media library and removes the co
 msgstr ""
 
 msgid "Thumbnail"
+msgstr ""
+
+msgid "Time-Based File Names"
 msgstr ""
 
 msgid "Uploaded images taller than this are scaled down (hard cap: %s px)."

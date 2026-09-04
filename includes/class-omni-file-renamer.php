@@ -14,6 +14,14 @@ class Omni_File_Renamer {
 
     private $options = null;
 
+    /**
+     * Original upload names of the files renamed during this request, keyed by
+     * the base name this module gave them
+     *
+     * @var array
+     */
+    private $original_titles = [];
+
     public function __construct() {
         // Only rename files that are actually being uploaded or sideloaded.
         //
@@ -24,6 +32,7 @@ class Omni_File_Renamer {
         // "custom-frontend.min.css" would come back as "custom-frontendmin.css").
         add_filter( 'wp_handle_upload_prefilter', [ $this, 'rename_upload' ] );
         add_filter( 'wp_handle_sideload_prefilter', [ $this, 'rename_upload' ] );
+        add_filter( 'wp_insert_attachment_data', [ $this, 'keep_original_title' ], 10, 2 );
     }
 
     /**
@@ -45,10 +54,71 @@ class Omni_File_Renamer {
             return $file;
         }
 
-        if ( ! empty( $file['name'] ) ) {
-            $file['name'] = $this->rename_file( $file['name'] );
+        if ( empty( $file['name'] ) ) {
+            return $file;
         }
+
+        $original     = (string) $file['name'];
+        $file['name'] = $this->rename_file( $original );
+
+        if ( $file['name'] !== $original ) {
+            $key   = pathinfo( $file['name'], PATHINFO_FILENAME );
+            $title = sanitize_text_field( pathinfo( $original, PATHINFO_FILENAME ) );
+
+            if ( '' !== $key && '' !== $title ) {
+                $this->original_titles[ $key ] = $title;
+            }
+        }
+
         return $file;
+    }
+
+    /**
+     * Keep the name the visitor uploaded as the media library title
+     *
+     * Both upload paths already do this on their own: media_handle_upload()
+     * reads $_FILES before the prefilter runs, and the REST controller keeps
+     * $files['file']['name'], which the prefilter never sees because PHP passes
+     * the array by value. This filter is the safety net for the fallbacks -
+     * WP_REST_Attachments_Controller::create_item() ends with "Fall back to the
+     * original approach" and titles the attachment after the *stored* file - so
+     * a renamed upload can never end up titled "2026-09-04-153012", which is
+     * unsearchable in the media library.
+     *
+     * The title is only restored when it still matches the name this module
+     * generated for that same file during this request (plus any "-1" collision
+     * suffix wp_unique_filename() added), so a title typed by a person or read
+     * out of the image's IPTC metadata is left alone.
+     *
+     * @param array $data    Sanitized, slashed attachment data about to be inserted.
+     * @param array $postarr Raw attachment data passed to wp_insert_post().
+     * @return array
+     */
+    public function keep_original_title( $data, $postarr ) {
+        if ( empty( $this->original_titles ) || ! empty( $postarr['ID'] ) ) {
+            return $data;
+        }
+
+        $title = isset( $data['post_title'] ) ? (string) $data['post_title'] : '';
+
+        if ( '' === $title ) {
+            return $data;
+        }
+
+        if ( ! isset( $this->original_titles[ $title ] ) ) {
+            // Two files renamed to the same name in the same second: the second
+            // one is stored as "<name>-1" by wp_unique_filename().
+            $title = (string) preg_replace( '/-\d+$/', '', $title );
+
+            if ( ! isset( $this->original_titles[ $title ] ) ) {
+                return $data;
+            }
+        }
+
+        // $data is slashed, as wp_insert_post() expects.
+        $data['post_title'] = wp_slash( $this->original_titles[ $title ] );
+
+        return $data;
     }
 
     /**
@@ -82,6 +152,7 @@ class Omni_File_Renamer {
             $this->options = [
                 'enable'      => isset( $settings['file_rename_enable'] ) ? $settings['file_rename_enable'] : '0',
                 'date_prefix' => isset( $settings['file_rename_date_prefix'] ) ? $settings['file_rename_date_prefix'] : '0',
+                'serial'      => isset( $settings['file_rename_serial'] ) ? $settings['file_rename_serial'] : '0',
             ];
         }
         return $this->options;
@@ -109,7 +180,18 @@ class Omni_File_Renamer {
         }
 
         $extension = strtolower( pathinfo( $filename, PATHINFO_EXTENSION ) );
-        $name      = pathinfo( $filename, PATHINFO_FILENAME );
+
+        // Serial mode replaces the name outright, so none of the normalization
+        // below applies. The upload time is taken in the site's own time zone:
+        // a file uploaded at 00:30 in Taipei belongs to that day, not to the
+        // UTC day before it.
+        if ( '1' === $options['serial'] ) {
+            $name = current_time( 'Y-m-d-His' );
+
+            return '' !== $extension ? "{$name}.{$extension}" : $name;
+        }
+
+        $name = pathinfo( $filename, PATHINFO_FILENAME );
 
         // Transliterate Latin diacritics to ASCII equivalents (WordPress built-in, 200+ characters)
         $name = remove_accents( $name );
