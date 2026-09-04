@@ -217,7 +217,9 @@ class Omni_File_Renamer {
         // a previously renamed file, or a derivative named after one) is not
         // prefixed a second time.
         if ( '1' === $options['date_prefix'] && ! preg_match( '/^\d{4}-\d{2}-\d{2}-/', $name ) ) {
-            $name = gmdate( 'Y-m-d' ) . '-' . $name;
+            // Site time zone, like serial mode above: gmdate() would stamp an
+            // upload made at 03:00 in Taipei with the previous day's date.
+            $name = current_time( 'Y-m-d' ) . '-' . $name;
         }
 
         return '' !== $extension ? "{$name}.{$extension}" : $name;

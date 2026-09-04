@@ -4,7 +4,7 @@ Tags: seo, performance, comments, thumbnails, translation
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.6.0
+Stable tag: 2.6.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -107,6 +107,10 @@ Only if your theme does not already output them. Open any post, view its page so
 No. This plugin uses a clean, unified settings array (`omni_webmaster_settings`) to prevent database clutter. You will need to check the desired options in the new admin settings panel.
 
 == Changelog ==
+
+= 2.6.1 =
+* Fixed: the file renaming date prefix used the UTC date, so on a site ahead of UTC every upload made before the offset - 00:00 to 08:00 in Taipei - was stamped with the previous day. It now reads the site's own time zone through current_time(), like the time-based naming option added in 2.6.0.
+* Matches the same fix in the standalone smart-file-renamer plugin, which shares this module's core logic.
 
 = 2.6.0 =
 * New: **Time-Based File Names** option for the file renaming module. Every uploaded file is stored as its upload time, `2026-09-04-153012.jpg`, whatever it was called before. The existing rules only produced a timestamp when sanitization emptied the name completely, so a set of CJK uploads came out inconsistent - `今日快訊.jpg` became `file-1757000000.jpg` while `今日快訊2026.jpg` became `2026.jpg`. The time is read in the site's own time zone, so a file uploaded at 00:30 in Taipei carries that day's date rather than the UTC day before it. Off by default; the toggle sits above the date prefix in the Media & Thumbnails tab, and the date prefix is not applied on top of it.
