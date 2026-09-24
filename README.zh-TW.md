@@ -61,6 +61,7 @@
 - **首頁輸出**：Meta Description、Open Graph 社群分享標籤（`og:title`、`og:description`、`og:image`、`twitter:card`）與 Schema.org WebSite/Organization JSON-LD——未安裝大型 SEO 外掛時的輕量替代方案。
 - **單篇文章與頁面輸出**（預設關閉）：`og:type=article`、標題、描述、含寬高與替代文字的 `og:image`、`article:published_time`、`article:modified_time`、Twitter Card 標籤與 BlogPosting/WebPage JSON-LD。分享圖依序退回精選圖片 → 內文第一張圖片 → 全站預設分享圖；描述優先使用手動摘要，未填寫時取內文前 160 字。
 - **防衝突機制**：偵測到大型 SEO 外掛（Yoast SEO、Rank Math、All in One SEO、SEOPress、The SEO Framework）時自動停止輸出，避免標籤重複。若佈景主題已自行輸出 OG 標籤，請保持單篇開關關閉。
+- **逐頁 `og:locale`**：locale 會經過 `omni_og_locale` 過濾器，多語系外掛可逐頁設定。[Just Lang](https://github.com/ivanusto/just-lang) 會自動處理；未安裝這類外掛時使用站台語系。
 - **媒體庫選取器**：直接從媒體庫選取 `og:image` 分享圖（建議 1200 × 630），支援即時預覽與描述字數計算。
 
 ## 系統需求
@@ -106,7 +107,8 @@
 
 ## 姊妹作品
 
-- [Omni Performance Hardening](https://github.com/ivanusto/omni-wp-perf-hardening)——專為高流量與大內容 WordPress 站台打造的效能強化與爬取收斂外掛，用以收斂站內搜尋全表掃描、`SQL_CALC_FOUND_ROWS`、低價值 Feed 與 oEmbed 端點，並優化 CDN 快取標頭。與本套件形成互補（本套件負責曝光與 SEO 索引，該套件負責伺服器效能與負載收斂）。
+- [Omni Performance Hardening](https://github.com/ivanusto/omni-wp-perf-hardening)：專為高流量與大內容 WordPress 站台打造的效能強化與爬取收斂外掛，用以收斂站內搜尋全表掃描、`SQL_CALC_FOUND_ROWS`、低價值 Feed 與 oEmbed 端點，並優化 CDN 快取標頭。與本套件形成互補（本套件負責曝光與 SEO 索引，該套件負責伺服器效能與負載收斂）。
+- [Just Lang](https://github.com/ivanusto/just-lang)：給「每種語言各做一頁」網站用的輕量多語系外掛。逐頁設定 `html lang`、含 `x-default` 的 `hreflang` 與 `og:locale`，提供語言切換器區塊與短代碼，並在瀏覽器端把初次來訪的訪客送到其語言的版本，因此整頁快取與 CDN 照常運作。不改寫網址，也不建資料表。可與本套件的 Meta 標籤模組搭配：啟用 Just Lang 後，本套件輸出的 `og:locale` 會跟著各頁的語言變化。
 
 ## 授權條款
 

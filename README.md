@@ -61,6 +61,7 @@ An all-in-one WordPress performance & SEO suite for webmasters: cleans the HTML 
 - **Homepage output**: Meta Description, Open Graph social sharing tags (`og:title`, `og:description`, `og:image`, `twitter:card`), and Schema.org WebSite/Organization JSON-LD — a lightweight alternative when no full SEO plugin is installed.
 - **Single post & page output** (off by default): `og:type=article`, title, description, `og:image` with width/height/alt, `article:published_time`, `article:modified_time`, Twitter Card tags, and BlogPosting/WebPage JSON-LD. The share image falls back from featured image → first image in the content → the site-wide default image; the description uses the manual excerpt, falling back to the first 160 characters of the content.
 - **Conflict-safe**: Output is automatically suppressed when a major SEO plugin (Yoast SEO, Rank Math, All in One SEO, SEOPress, The SEO Framework) is active, so tags are never duplicated. Leave the single-post switch off if your theme already prints its own OG tags.
+- **Per-page `og:locale`**: The locale passes through the `omni_og_locale` filter, so a multilingual plugin can set it per page. [Just Lang](https://github.com/ivanusto/just-lang) does this automatically; without such a plugin the site locale is used.
 - **Media library picker**: Choose the `og:image` share image (recommended 1200 × 630) directly from the media library, with live preview and a character counter for the description.
 
 ## Requirements
@@ -104,9 +105,10 @@ This suite grew out of six standalone plugins previously written by the author. 
 
 If you only need a single feature, the standalone plugins remain available.
 
-## Sister Project
+## Sister Projects
 
-- [Omni Performance Hardening](https://github.com/ivanusto/omni-wp-perf-hardening) — High-performance hardening toolkit for WordPress to reduce server load from full-table search scans, archive queries, low-value feeds, and oEmbed endpoints while tuning CDN cache headers. Complements this suite by handling server resource optimization and crawl mitigation.
+- [Omni Performance Hardening](https://github.com/ivanusto/omni-wp-perf-hardening): high-performance hardening toolkit for WordPress to reduce server load from full-table search scans, archive queries, low-value feeds, and oEmbed endpoints while tuning CDN cache headers. Complements this suite by handling server resource optimization and crawl mitigation.
+- [Just Lang](https://github.com/ivanusto/just-lang): lightweight multilingual signals for sites that build each language version as its own page. It sets `html lang`, `hreflang` with `x-default`, and `og:locale` per page, adds a language switcher block and shortcode, and sends first-time visitors to their language in the browser, so full-page caching and CDNs keep working. No URL rewriting and no extra tables. Pairs with this suite's Meta Tags module: once Just Lang is active, the `og:locale` printed here follows each page's language.
 
 ## License / 授權條款
 
