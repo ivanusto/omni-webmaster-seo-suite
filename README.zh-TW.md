@@ -2,7 +2,7 @@
 
 [English Version README](README.md) | [WordPress.org 官方外掛頁面](https://wordpress.org/plugins/omni-webmaster-seo-suite/)
 
-一站式 WordPress 網站優化與 SEO 站長工具：清理 HTML head、進階 RSS 控制、完全停用留言、選擇性停用縮圖與批次清理、上傳檔名自動優化、上傳圖片自動縮圖、中文標題自動翻譯英文網址，以及 Meta Pixel 廣告追蹤整合——全部集中在單一設定面板管理。
+一站式 WordPress 網站優化與 SEO 站長工具：清理 HTML head、進階 RSS 控制、完全停用留言、選擇性停用縮圖與批次清理、上傳檔名自動優化、上傳圖片自動縮圖、中文標題自動翻譯英文網址，以及 Meta Pixel 廣告追蹤整合，全部集中在單一設定面板管理。
 
 > 🌟 **已通過 WordPress 官方審查並正式上架**：[WordPress.org 官方外掛頁面](https://wordpress.org/plugins/omni-webmaster-seo-suite/)
 
@@ -34,7 +34,7 @@
 - **HTML Head 清理**：移除多餘的 feed 連結、RSD、WLManifest、shortlink 與 REST API header 標記。
 - **Robots Meta 客製化**：自動將標籤彙整頁、日期彙整頁、站內搜尋與深層分頁（第 3 頁以上）標記為 `noindex, follow`，集中搜尋權重。
 - **Sitemap 淨化**：從 WordPress 原生 sitemap 排除 `post_tag`，避免低品質彙整頁被索引。
-- **XML-RPC 安全強化**（選用）：移除全部 WordPress XML-RPC 方法（`wp.*`、`metaWeblog.*`、`pingback.*` 等），僅保留三個無害的系統方法——阻斷 `xmlrpc.php` 暴力破解與 pingback 濫用，相容任何伺服器、不依賴 `.htaccess`。
+- **XML-RPC 安全強化**（選用）：移除全部 WordPress XML-RPC 方法（`wp.*`、`metaWeblog.*`、`pingback.*` 等），僅保留三個無害的系統方法，藉此阻斷 `xmlrpc.php` 暴力破解與 pingback 濫用。相容任何伺服器，不依賴 `.htaccess`。
 
 ### 2. 留言控制
 - **全面停用留言**：一次關閉所有文章類型的留言、引用（trackback）與 pingback，隱藏歷史留言並移除後台的留言選單與小工具。
@@ -48,7 +48,7 @@
 
 ### 4. 網址代稱翻譯（Slug Translator）
 - **中文標題自動轉英文網址**：透過 Google Cloud Translation API 將中文文章標題翻譯為乾淨的小寫英文網址代稱（Slug）；未設定金鑰時自動改用免金鑰公開端點。
-- 本模組與獨立外掛 [Chinese to English Slug Converter (zh-to-en-slug)](https://github.com/ivanusto/zh-to-en-slug) 共用核心邏輯——若您只需要網址翻譯功能，建議直接使用該獨立外掛。
+- 本模組與獨立外掛 [Chinese to English Slug Converter (zh-to-en-slug)](https://github.com/ivanusto/zh-to-en-slug) 共用核心邏輯。若您只需要網址翻譯功能，建議直接使用該獨立外掛。
 
 ### 5. Meta Pixel 追蹤
 - **Meta（Facebook）Pixel 整合**：自動載入 PageView、ViewContent（單篇文章與頁面）與 Search 事件追蹤。
@@ -58,7 +58,7 @@
 - **按月 CSV 匯出**：直接在後台預覽並按月份匯出文章數據，支援自訂瀏覽量欄位（Meta Key）。
 
 ### 7. Meta 標籤與結構化資料
-- **首頁輸出**：Meta Description、Open Graph 社群分享標籤（`og:title`、`og:description`、`og:image`、`twitter:card`）與 Schema.org WebSite/Organization JSON-LD——未安裝大型 SEO 外掛時的輕量替代方案。
+- **首頁輸出**：Meta Description、Open Graph 社群分享標籤（`og:title`、`og:description`、`og:image`、`twitter:card`）與 Schema.org WebSite/Organization JSON-LD，是未安裝大型 SEO 外掛時的輕量替代方案。
 - **單篇文章與頁面輸出**（預設關閉）：`og:type=article`、標題、描述、含寬高與替代文字的 `og:image`、`article:published_time`、`article:modified_time`、Twitter Card 標籤與 BlogPosting/WebPage JSON-LD。分享圖依序退回精選圖片 → 內文第一張圖片 → 全站預設分享圖；描述優先使用手動摘要，未填寫時取內文前 160 字。
 - **防衝突機制**：偵測到大型 SEO 外掛（Yoast SEO、Rank Math、All in One SEO、SEOPress、The SEO Framework）時自動停止輸出，避免標籤重複。若佈景主題已自行輸出 OG 標籤，請保持單篇開關關閉。
 - **逐頁 `og:locale`**：locale 會經過 `omni_og_locale` 過濾器，多語系外掛可逐頁設定。[Just Lang](https://github.com/ivanusto/just-lang) 會自動處理；未安裝這類外掛時使用站台語系。
@@ -68,7 +68,7 @@
 
 - WordPress 6.0 或更高版本
 - PHP 7.4 或更高版本
-- （選填）Google Cloud Translation API 金鑰——未填寫時會自動使用免金鑰公開端點進行翻譯
+- （選填）Google Cloud Translation API 金鑰：未填寫時會自動使用免金鑰公開端點進行翻譯
 
 ## 安裝步驟
 
@@ -96,12 +96,12 @@
 
 本套件由作者先前撰寫的六個獨立外掛整合最佳化而來，並額外加入 Meta Pixel 追蹤與文章數據按月匯出功能：
 
-- [disable-all-thumbnails](https://github.com/ivanusto/disable-all-thumbnails)——停用 WordPress 指定縮圖格式的生成
-- [disable-all-comments](https://github.com/ivanusto/disable-all-comments)——完全禁用 WordPress 網站的所有留言功能
-- [zh-to-en-slug](https://github.com/ivanusto/zh-to-en-slug)——自動將中文文章標題翻譯成英文 Slug（仍持續維護，並與本套件的網址代稱翻譯模組同步）
-- [smart-image-upload-resizer](https://github.com/ivanusto/smart-image-upload-resizer)——圖片上傳自動縮圖並支援 WebP / AVIF
-- [smart-file-renamer](https://github.com/ivanusto/smart-file-renamer)——上傳時自動重新命名含變音符號與特殊字元的檔案以提升 SEO
-- [modern-rss-image-feed](https://github.com/ivanusto/modern-rss-image-feed)——為 RSS 訂閱源提供現代圖片格式（WebP、AVIF）支援
+- [disable-all-thumbnails](https://github.com/ivanusto/disable-all-thumbnails)：停用 WordPress 指定縮圖格式的生成
+- [disable-all-comments](https://github.com/ivanusto/disable-all-comments)：完全禁用 WordPress 網站的所有留言功能
+- [zh-to-en-slug](https://github.com/ivanusto/zh-to-en-slug)：自動將中文文章標題翻譯成英文 Slug（仍持續維護，並與本套件的網址代稱翻譯模組同步）
+- [smart-image-upload-resizer](https://github.com/ivanusto/smart-image-upload-resizer)：圖片上傳自動縮圖並支援 WebP / AVIF
+- [smart-file-renamer](https://github.com/ivanusto/smart-file-renamer)：上傳時自動重新命名含變音符號與特殊字元的檔案以提升 SEO
+- [modern-rss-image-feed](https://github.com/ivanusto/modern-rss-image-feed)：為 RSS 訂閱源提供現代圖片格式（WebP、AVIF）支援
 
 若您只需要單一功能，這些獨立外掛皆可繼續使用。
 
