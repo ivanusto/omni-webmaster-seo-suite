@@ -56,9 +56,11 @@ This suite grew out of six standalone plugins previously written by the author, 
 * smart-file-renamer: https://github.com/ivanusto/smart-file-renamer
 * modern-rss-image-feed: https://github.com/ivanusto/modern-rss-image-feed
 
-= Sister Project =
+= Sister Projects =
 
 * Omni Performance Hardening: https://github.com/ivanusto/omni-wp-perf-hardening - High-performance hardening toolkit for WordPress to reduce server load from search scans, archive queries, and low-value feeds.
+* Just Lang: https://github.com/ivanusto/just-lang - Multilingual signals for sites that build each language version as its own page: html lang, hreflang with x-default, og:locale, a language switcher and cache-friendly language detection. Once it is active, the og:locale printed by this suite follows each page's language.
+* Just Share: https://github.com/ivanusto/just-share - Share buttons and related posts that ad blockers leave alone, built from plain server-rendered links and inline SVG with no third-party requests. It prints no Open Graph tags of its own, so turn on "Output Meta Description and Open Graph Tags on Single Posts and Pages" here for shared links to get a title, description and image.
 
 == External Services ==
 
