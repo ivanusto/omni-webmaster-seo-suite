@@ -109,6 +109,7 @@ If you only need a single feature, the standalone plugins remain available.
 
 - [Omni Performance Hardening](https://github.com/ivanusto/omni-wp-perf-hardening): high-performance hardening toolkit for WordPress to reduce server load from full-table search scans, archive queries, low-value feeds, and oEmbed endpoints while tuning CDN cache headers. Complements this suite by handling server resource optimization and crawl mitigation.
 - [Just Lang](https://github.com/ivanusto/just-lang): lightweight multilingual signals for sites that build each language version as its own page. It sets `html lang`, `hreflang` with `x-default`, and `og:locale` per page, adds a language switcher block and shortcode, and sends first-time visitors to their language in the browser, so full-page caching and CDNs keep working. No URL rewriting and no extra tables. Pairs with this suite's Meta Tags module: once Just Lang is active, the `og:locale` printed here follows each page's language.
+- [Just Share](https://github.com/ivanusto/just-share): share buttons and related posts that ad blockers leave alone. Every button is a plain server-rendered link back to your own site, which redirects to the network, so filter rules that hide share links by address do not match. Inline SVG icons, no third-party requests. Just Share prints no Open Graph tags of its own: turn on this suite's "Output Meta Description and Open Graph Tags on Single Posts and Pages" so shared links get their title, description and image.
 
 ## License / 授權條款
 

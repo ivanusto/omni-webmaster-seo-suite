@@ -109,6 +109,7 @@
 
 - [Omni Performance Hardening](https://github.com/ivanusto/omni-wp-perf-hardening)：專為高流量與大內容 WordPress 站台打造的效能強化與爬取收斂外掛，用以收斂站內搜尋全表掃描、`SQL_CALC_FOUND_ROWS`、低價值 Feed 與 oEmbed 端點，並優化 CDN 快取標頭。與本套件形成互補（本套件負責曝光與 SEO 索引，該套件負責伺服器效能與負載收斂）。
 - [Just Lang](https://github.com/ivanusto/just-lang)：給「每種語言各做一頁」網站用的輕量多語系外掛。逐頁設定 `html lang`、含 `x-default` 的 `hreflang` 與 `og:locale`，提供語言切換器區塊與短代碼，並在瀏覽器端把初次來訪的訪客送到其語言的版本，因此整頁快取與 CDN 照常運作。不改寫網址，也不建資料表。可與本套件的 Meta 標籤模組搭配：啟用 Just Lang 後，本套件輸出的 `og:locale` 會跟著各頁的語言變化。
+- [Just Share](https://github.com/ivanusto/just-share)：不會被擋廣告套件藏起來的分享按鈕與延伸閱讀。每個按鈕都是由伺服器輸出、連回本站的一般連結，再由本站轉址到各平台，因此依網址隱藏分享連結的過濾規則比對不到。使用內嵌 SVG 圖示，不向第三方發出請求。Just Share 本身不輸出 Open Graph 標籤，請開啟本套件的「於單篇文章與頁面輸出 Meta Description 與 Open Graph 標籤」，分享出去的連結才會有標題、摘要與圖片。
 
 ## 授權條款
 
