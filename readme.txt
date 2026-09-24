@@ -4,7 +4,7 @@ Tags: seo, performance, comments, thumbnails, translation
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.6.1
+Stable tag: 2.6.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -107,6 +107,9 @@ Only if your theme does not already output them. Open any post, view its page so
 No. This plugin uses a clean, unified settings array (`omni_webmaster_settings`) to prevent database clutter. You will need to check the desired options in the new admin settings panel.
 
 == Changelog ==
+
+= 2.6.2 =
+* Added: the `omni_og_locale` filter, so multilingual plugins that give each page its own language (such as Just Lang) can set og:locale per page instead of the site locale.
 
 = 2.6.1 =
 * Fixed: the file renaming date prefix used the UTC date, so on a site ahead of UTC every upload made before the offset - 00:00 to 08:00 in Taipei - was stamped with the previous day. It now reads the site's own time zone through current_time(), like the time-based naming option added in 2.6.0.

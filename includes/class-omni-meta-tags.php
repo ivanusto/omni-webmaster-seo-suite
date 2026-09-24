@@ -143,7 +143,7 @@ class Omni_Meta_Tags {
             $this->meta_name( 'twitter:card', 'summary' );
         }
 
-        $this->meta_property( 'og:locale', get_locale() );
+        $this->meta_property( 'og:locale', $this->og_locale() );
 
         if ( ! empty( $settings['schema_website_enable'] ) ) {
             $this->output_website_schema( $site_name, $description, $image );
@@ -195,7 +195,7 @@ class Omni_Meta_Tags {
         }
 
         $this->meta_url( 'og:url', $permalink );
-        $this->meta_property( 'og:locale', get_locale() );
+        $this->meta_property( 'og:locale', $this->og_locale( $post ) );
 
         if ( ! empty( $image['url'] ) ) {
             $this->meta_url( 'og:image', $image['url'] );
@@ -227,6 +227,23 @@ class Omni_Meta_Tags {
         }
 
         echo "<!-- End Omni Meta Tags -->\n";
+    }
+
+    /**
+     * og:locale for the current request. Multilingual plugins that give each page
+     * its own language hook in here, so the tag follows the page rather than the site.
+     *
+     * @param WP_Post|null $post The post being rendered, or null on the homepage.
+     * @return string A locale such as en_US.
+     */
+    private function og_locale( $post = null ) {
+        /**
+         * Filter the og:locale value.
+         *
+         * @param string       $locale The site locale from get_locale().
+         * @param WP_Post|null $post   The post being rendered, or null on the homepage.
+         */
+        return (string) apply_filters( 'omni_og_locale', get_locale(), $post );
     }
 
     /**
