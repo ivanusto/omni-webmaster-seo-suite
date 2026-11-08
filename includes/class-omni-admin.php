@@ -1036,7 +1036,7 @@ class Omni_Admin {
                                         <label for="omni_export_views_meta" style="font-weight: 600; color: #374151;"><strong><?php esc_html_e( 'View Count Custom Field (Meta Key)', 'omni-webmaster-seo-suite' ); ?></strong></label>
                                         <div style="display: flex; flex-direction: column; gap: 4px;">
                                             <input type="text" id="omni_export_views_meta" name="<?php echo esc_attr( $this->option_name ); ?>[views_meta_key]" value="<?php echo esc_attr( $settings['views_meta_key'] ); ?>" class="regular-text" style="width: 150px; padding: 6px 12px; border-radius: 6px; border: 1.5px solid #d1d5db;" placeholder="views" />
-                                            <span class="description" style="font-size: 11px; color: #6b7280;"><?php echo wp_kses_post( __( 'Defaults to <code>views</code> (used by WP-PostViews). Enter the view count custom field name (meta key) used on your site.', 'omni-webmaster-seo-suite' ) ); ?></span>
+                                            <span class="description" style="font-size: 11px; color: #6b7280;"><?php echo wp_kses_post( __( 'Defaults to <code>views</code> (used by WP-PostViews). Enter the view count custom field name (meta key) used on your site, or <code>popularpostsdata</code> to read the WordPress Popular Posts table (also used by JNews).', 'omni-webmaster-seo-suite' ) ); ?></span>
                                         </div>
                                     </div>
                                 </div>
@@ -1242,14 +1242,30 @@ class Omni_Admin {
                 $link = get_permalink( $post_id );
 
                 // 5. View count
-                $views = 0;
+                /**
+                 * Short-circuit the view count of one post in the monthly export.
+                 *
+                 * Return an integer to use it instead of the configured source; return null to keep the default lookup.
+                 *
+                 * @since 2.7.0
+                 *
+                 * @param int|null $views          Null by default.
+                 * @param int      $post_id        Post ID.
+                 * @param string   $views_meta_key The configured source (meta key, `popularpostsdata`, or a JNews key).
+                 */
+                $views = apply_filters( 'omni_post_views', null, $post_id, $views_meta_key );
                 $is_jnews_key = ( stripos( $views_meta_key, 'jnews' ) !== false );
+                // `popularpostsdata` reads the WordPress Popular Posts compatible table directly (JNews uses the same table).
+                $is_table_key = ( 'popularpostsdata' === $views_meta_key );
 
-                if ( $is_jnews_key ) {
-                    if ( function_exists( 'jnews_get_views' ) ) {
+                if ( null !== $views ) {
+                    $views = intval( $views );
+                } elseif ( $is_jnews_key || $is_table_key ) {
+                    if ( $is_jnews_key && function_exists( 'jnews_get_views' ) ) {
                         $views = intval( jnews_get_views( $post_id, 'all', false ) );
                     } else {
-                        // Fallback to direct DB query if JNews function is not loaded
+                        $views = 0;
+                        // Read the table directly (no JNews, or the table source was chosen)
                         global $wpdb;
                         $table_name = $wpdb->prefix . 'popularpostsdata';
 

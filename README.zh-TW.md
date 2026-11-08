@@ -6,7 +6,7 @@
 
 > 🌟 **已通過 WordPress 官方審查並正式上架**：[WordPress.org 官方外掛頁面](https://wordpress.org/plugins/omni-webmaster-seo-suite/)
 
-![Version](https://img.shields.io/badge/version-2.6.2-blue) ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759b) ![PHP](https://img.shields.io/badge/PHP-7.4%2B-777bb4) ![License](https://img.shields.io/badge/license-GPL--2.0--or--later-green)
+![Version](https://img.shields.io/badge/version-2.7.0-blue) ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759b) ![PHP](https://img.shields.io/badge/PHP-7.4%2B-777bb4) ![License](https://img.shields.io/badge/license-GPL--2.0--or--later-green)
 
 ![Banner](.wordpress-org/banner-1544x500.png)
 
@@ -53,15 +53,18 @@
 ### 5. Meta Pixel 追蹤
 - **Meta（Facebook）Pixel 整合**：自動載入 PageView、ViewContent（單篇文章與頁面）與 Search 事件追蹤。
 - **乾淨的受眾資料**：預設排除網站工作人員（具 `edit_posts` 權限的登入使用者），並且不在 feed、預覽與 oEmbed 頁面載入追蹤代碼。
+- **沒有行內 script**：基礎程式碼由靜態檔案載入，設定放在 JSON 資料區塊，嚴格的 Content Security Policy 只需在 `script-src` 允許 `https://connect.facebook.net`。
 
 ### 6. 文章數據匯出
 - **按月 CSV 匯出**：直接在後台預覽並按月份匯出文章數據，支援自訂瀏覽量欄位（Meta Key）。
+- **瀏覽量來源**：文章自訂欄位、`popularpostsdata`（WordPress Popular Posts 相容資料表，JNews 也使用這張表），或經 `omni_post_views` 過濾器自行提供。
 
 ### 7. Meta 標籤與結構化資料
 - **首頁輸出**：Meta Description、Open Graph 社群分享標籤（`og:title`、`og:description`、`og:image`、`twitter:card`）與 Schema.org WebSite/Organization JSON-LD，是未安裝大型 SEO 外掛時的輕量替代方案。
 - **單篇文章與頁面輸出**（預設關閉）：`og:type=article`、標題、描述、含寬高與替代文字的 `og:image`、`article:published_time`、`article:modified_time`、Twitter Card 標籤與 BlogPosting/WebPage JSON-LD。分享圖依序退回精選圖片 → 內文第一張圖片 → 全站預設分享圖；描述優先使用手動摘要，未填寫時取內文前 160 字。
 - **防衝突機制**：偵測到大型 SEO 外掛（Yoast SEO、Rank Math、All in One SEO、SEOPress、The SEO Framework）時自動停止輸出，避免標籤重複。若佈景主題已自行輸出 OG 標籤，請保持單篇開關關閉。
 - **逐頁 `og:locale`**：locale 會經過 `omni_og_locale` 過濾器，多語系外掛可逐頁設定。[Just Lang](https://github.com/ivanusto/just-lang) 會自動處理；未安裝這類外掛時使用站台語系。
+- **可擴充的 graph**：`omni_schema_graph` 過濾器讓佈景主題把 BreadcrumbList 等節點加進同一份 JSON-LD graph。
 - **媒體庫選取器**：直接從媒體庫選取 `og:image` 分享圖（建議 1200 × 630），支援即時預覽與描述字數計算。
 
 ## 系統需求

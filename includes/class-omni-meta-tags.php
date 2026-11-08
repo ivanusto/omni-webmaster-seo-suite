@@ -526,6 +526,21 @@ class Omni_Meta_Tags {
      * Print a JSON-LD @graph document
      */
     private function print_schema( $id, array $nodes ) {
+        /**
+         * Filter the JSON-LD @graph nodes before they are printed.
+         *
+         * Lets a theme add nodes (for example a BreadcrumbList) to the same graph instead of printing a second document.
+         *
+         * @since 2.7.0
+         *
+         * @param array  $nodes The schema.org nodes.
+         * @param string $id    Script element ID: `omni-schema-website` (front page) or `omni-schema-article` (singular).
+         */
+        $nodes = (array) apply_filters( 'omni_schema_graph', $nodes, $id );
+        if ( empty( $nodes ) ) {
+            return;
+        }
+
         $graph = [
             '@context' => 'https://schema.org',
             '@graph'   => $nodes,

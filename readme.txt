@@ -4,7 +4,7 @@ Tags: seo, performance, comments, thumbnails, translation
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.6.2
+Stable tag: 2.7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,13 +37,13 @@ This plugin incorporates the following major components:
    This module shares its core logic with the standalone plugin Chinese to English Slug Converter (zh-to-en-slug): https://github.com/ivanusto/zh-to-en-slug — use the standalone plugin if slug translation is the only feature you need.
 
 5. Meta Pixel Tracking
-   Meta (Facebook) Pixel integration with PageView, ViewContent, and Search event tracking. Site staff are excluded by default to keep ad audience data clean.
+   Meta (Facebook) Pixel integration with PageView, ViewContent, and Search event tracking. Site staff are excluded by default to keep ad audience data clean. The tracking code loads from a static file and reads its settings from a JSON data block, so pages carry no inline script and can run under a strict Content Security Policy (allow https://connect.facebook.net in script-src).
 
 6. Post Data Export
-   Preview and export monthly post data (including a configurable page-view meta key) as CSV from the admin panel.
+   Preview and export monthly post data (including a configurable page-view meta key) as CSV from the admin panel. Enter `popularpostsdata` as the key to read the WordPress Popular Posts compatible table, or supply the numbers yourself through the `omni_post_views` filter.
 
 7. Meta Tags & Structured Data
-   Outputs Meta Description, Open Graph social sharing tags (og:title, og:description, og:image, twitter:card), and Schema.org WebSite/Organization JSON-LD on the homepage — a lightweight alternative when no full SEO plugin is installed. A separate switch (off by default) extends the same output to single posts and pages with og:type=article, image width/height/alt, article:published_time, article:modified_time, Twitter Card tags, and BlogPosting/WebPage JSON-LD; the share image falls back from featured image to the first image in the content to the site-wide default image. Automatically disables its output when a major SEO plugin (Yoast SEO, Rank Math, All in One SEO, SEOPress, The SEO Framework) is detected to prevent duplicate tags.
+   Outputs Meta Description, Open Graph social sharing tags (og:title, og:description, og:image, twitter:card), and Schema.org WebSite/Organization JSON-LD on the homepage — a lightweight alternative when no full SEO plugin is installed. A separate switch (off by default) extends the same output to single posts and pages with og:type=article, image width/height/alt, article:published_time, article:modified_time, Twitter Card tags, and BlogPosting/WebPage JSON-LD (the `omni_schema_graph` filter lets a theme add nodes such as a BreadcrumbList to the same graph); the share image falls back from featured image to the first image in the content to the site-wide default image. Automatically disables its output when a major SEO plugin (Yoast SEO, Rank Math, All in One SEO, SEOPress, The SEO Framework) is detected to prevent duplicate tags.
 
 = Origin Projects =
 
@@ -109,6 +109,12 @@ Only if your theme does not already output them. Open any post, view its page so
 No. This plugin uses a clean, unified settings array (`omni_webmaster_settings`) to prevent database clutter. You will need to check the desired options in the new admin settings panel.
 
 == Changelog ==
+
+= 2.7.0 =
+* Changed: the Meta Pixel base code is no longer printed inline. It loads from `assets/js/meta-pixel.js`, which reads the Pixel ID and the advanced events from a `<script type="application/json">` data block, so the site can use a `script-src 'self' https://connect.facebook.net` Content Security Policy. The events sent are the same as before (PageView, plus ViewContent and Search when advanced events are on), and so is the noscript image.
+* Added: `popularpostsdata` as a view count source in the monthly export. It reads the WordPress Popular Posts compatible table directly, so the numbers keep working after JNews and its view counter are removed. Keys that contain `jnews` keep their old behaviour.
+* Added: the `omni_post_views` filter, to supply the view count of each post in the export.
+* Added: the `omni_schema_graph` filter, to add nodes (for example a BreadcrumbList) to the JSON-LD graph instead of printing a second document.
 
 = 2.6.2 =
 * Added: the `omni_og_locale` filter, so multilingual plugins that give each page its own language (such as Just Lang) can set og:locale per page instead of the site locale.

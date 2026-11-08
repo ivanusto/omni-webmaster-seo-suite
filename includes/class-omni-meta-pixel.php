@@ -18,8 +18,9 @@ class Omni_Meta_Pixel {
 
     public function __construct() {
         if ( ! empty( $this->get_settings()['meta_pixel_enable'] ) && '' !== $this->get_pixel_id() ) {
-            // Insert the main tracking code in wp_head
-            add_action( 'wp_head', [ $this, 'insert_pixel_script' ], 20 );
+            // The tracking code is a static file; its settings go in a JSON data block, so no inline script is printed
+            add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_pixel_script' ] );
+            add_action( 'wp_head', [ $this, 'insert_pixel_config' ], 2 );
 
             // Insert the noscript pixel code at wp_body_open
             add_action( 'wp_body_open', [ $this, 'insert_pixel_noscript' ] );
@@ -95,39 +96,54 @@ class Omni_Meta_Pixel {
     }
 
     /**
-     * Insert the main Meta Pixel JavaScript code
+     * Enqueue the Meta Pixel loader (assets/js/meta-pixel.js).
+     *
+     * The loader reads its settings from the JSON data block printed by insert_pixel_config(),
+     * so the page needs no inline script and works under a `script-src 'self'` policy
+     * (plus https://connect.facebook.net for fbevents.js).
      */
-    public function insert_pixel_script() {
+    public function enqueue_pixel_script() {
+        if ( '' === $this->get_pixel_id() || ! $this->should_track() ) {
+            return;
+        }
+
+        wp_enqueue_script(
+            'omni-meta-pixel',
+            OMNI_WEBMASTER_URL . 'assets/js/meta-pixel.js',
+            [],
+            OMNI_WEBMASTER_VERSION,
+            [ 'strategy' => 'defer' ]
+        );
+    }
+
+    /**
+     * Print the Pixel settings as a JSON data block (not executed, so not subject to script-src)
+     */
+    public function insert_pixel_config() {
         $pixel_id = $this->get_pixel_id();
 
         if ( '' === $pixel_id || ! $this->should_track() ) {
             return;
         }
 
-        $js  = "!function(f,b,e,v,n,t,s)\n";
-        $js .= "{if(f.fbq)return;n=f.fbq=function(){n.callMethod?\n";
-        $js .= "n.callMethod.apply(n,arguments):n.queue.push(arguments)};\n";
-        $js .= "if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';\n";
-        $js .= "n.queue=[];t=b.createElement(e);t.async=!0;\n";
-        $js .= "t.src=v;s=b.getElementsByTagName(e)[0];\n";
-        $js .= "s.parentNode.insertBefore(t,s)}(window, document,'script',\n";
-        $js .= "'https://connect.facebook.net/en_US/fbevents.js');\n";
-        $js .= "fbq('init', '" . esc_js( $pixel_id ) . "');\n";
-        $js .= "fbq('track', 'PageView');\n";
+        $config = [
+            'id'     => $pixel_id,
+            'events' => ! empty( $this->get_settings()['meta_pixel_advanced'] ) ? $this->build_advanced_events() : [],
+        ];
 
-        if ( ! empty( $this->get_settings()['meta_pixel_advanced'] ) ) {
-            $js .= $this->build_advanced_events_js();
-        }
-
-        echo "<!-- Meta Pixel Code -->\n";
-        wp_print_inline_script_tag( $js, [ 'id' => 'omni-meta-pixel' ] );
-        echo "<!-- End Meta Pixel Code -->\n";
+        wp_print_inline_script_tag(
+            wp_json_encode( $config, JSON_HEX_TAG | JSON_HEX_AMP | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ),
+            [
+                'type' => 'application/json',
+                'id'   => 'omni-meta-pixel-config',
+            ]
+        );
     }
 
     /**
-     * Build the advanced standard-event JavaScript snippet for the current page
+     * Build the advanced standard events for the current page, as [ event name, parameters ] pairs
      */
-    private function build_advanced_events_js() {
+    private function build_advanced_events() {
         if ( is_singular() ) {
             $post_id   = get_the_ID();
             $cat_names = [];
@@ -135,23 +151,31 @@ class Omni_Meta_Pixel {
                 $cat_names[] = $cat->name;
             }
 
-            $params = [
-                'content_name'     => get_the_title(),
-                'content_category' => implode( ', ', $cat_names ),
-                'content_ids'      => [ (string) $post_id ],
-                'content_type'     => get_post_type(),
+            return [
+                [
+                    'ViewContent',
+                    [
+                        'content_name'     => get_the_title(),
+                        'content_category' => implode( ', ', $cat_names ),
+                        'content_ids'      => [ (string) $post_id ],
+                        'content_type'     => get_post_type(),
+                    ],
+                ],
             ];
-            return "fbq('track', 'ViewContent', " . wp_json_encode( $params ) . ");\n";
         }
 
         if ( is_search() ) {
-            $params = [
-                'search_string' => get_search_query(),
+            return [
+                [
+                    'Search',
+                    [
+                        'search_string' => get_search_query(),
+                    ],
+                ],
             ];
-            return "fbq('track', 'Search', " . wp_json_encode( $params ) . ");\n";
         }
 
-        return '';
+        return [];
     }
 
     /**

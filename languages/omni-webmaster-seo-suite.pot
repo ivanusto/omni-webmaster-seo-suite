@@ -191,7 +191,7 @@ msgstr ""
 msgid "Default Social Share Image (og:image)"
 msgstr ""
 
-msgid "Defaults to <code>views</code> (used by WP-PostViews). Enter the view count custom field name (meta key) used on your site."
+msgid "Defaults to <code>views</code> (used by WP-PostViews). Enter the view count custom field name (meta key) used on your site, or <code>popularpostsdata</code> to read the WordPress Popular Posts table (also used by JNews)."
 msgstr ""
 
 msgid "Disable Generation"

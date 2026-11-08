@@ -192,8 +192,8 @@ msgstr "日期"
 msgid "Default Social Share Image (og:image)"
 msgstr "預設社群分享圖 (og:image)"
 
-msgid "Defaults to <code>views</code> (used by WP-PostViews). Enter the view count custom field name (meta key) used on your site."
-msgstr "預設為 <code>views</code> (WP-PostViews 用)。請輸入您網站使用的瀏覽量自訂欄位名稱 (Meta Key)。"
+msgid "Defaults to <code>views</code> (used by WP-PostViews). Enter the view count custom field name (meta key) used on your site, or <code>popularpostsdata</code> to read the WordPress Popular Posts table (also used by JNews)."
+msgstr "預設為 <code>views</code> (WP-PostViews 用)。請輸入您網站使用的瀏覽量自訂欄位名稱 (Meta Key)，或輸入 <code>popularpostsdata</code> 直接讀取 WordPress Popular Posts 資料表 (JNews 也使用這張表)。"
 
 msgid "Disable Generation"
 msgstr "停用生成"
