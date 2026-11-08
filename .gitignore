@@ -7,3 +7,6 @@ vendor/
 
 # Distribution archives
 *.zip
+
+# Claude Code per-user permissions (may contain secrets)
+.claude/settings.local.json
