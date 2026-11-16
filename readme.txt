@@ -4,7 +4,7 @@ Tags: seo, performance, comments, thumbnails, translation
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.8.0
+Stable tag: 2.8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -117,6 +117,9 @@ Only if your theme does not already output them. Open any post, view its page so
 No. This plugin uses a clean, unified settings array (`omni_webmaster_settings`) to prevent database clutter. You will need to check the desired options in the new admin settings panel.
 
 == Changelog ==
+
+= 2.8.1 =
+* Fixed: with seven tabs the settings page ran wider than the screen. The tabs now wrap, four per row on wide screens, two per row below 782 px and one per row on phones.
 
 = 2.8.0 =
 * Added: Google tag (gtag.js) for Google Analytics 4, in a new Google Analytics tab. Like the Meta Pixel it loads from a static file (`assets/js/google-tag.js`) that reads the tag ID from a `<script type="application/json">` data block, so the page prints no inline script and works under a `script-src 'self' https://www.googletagmanager.com` Content Security Policy. Site staff are excluded by default. Turn off Site Kit's tag (or remove Site Kit) when switching, or page views are counted twice.

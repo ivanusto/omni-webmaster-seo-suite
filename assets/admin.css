@@ -71,24 +71,32 @@
     line-height: 1.6;
 }
 
-/* Tab container overrides */
+/* Tab container overrides: the tabs wrap (four per row on wide screens), so each tab is a full rounded
+   button and the active one is marked by colour and the top bar instead of joining the card below. */
 .omni-settings-wrap .nav-tab-wrapper {
     border-bottom: 2px solid #e5e7eb;
     margin-bottom: 0;
-    padding-left: 5px;
+    padding: 0 0 10px 0;
     display: flex;
-    gap: 4px;
+    flex-wrap: wrap;
+    gap: 6px;
 }
 
 .omni-settings-wrap .nav-tab {
+    box-sizing: border-box;
+    flex: 0 1 calc(25% - 4.5px);
+    min-width: 0;
+    justify-content: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     background: #f3f4f6;
     border: 1.5px solid #e5e7eb;
-    border-bottom: none;
     color: #6b7280;
     font-weight: 500;
-    padding: 12px 24px;
-    border-radius: 8px 8px 0 0;
-    margin-right: 0;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 0;
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     font-size: 14px;
     display: inline-flex;
@@ -105,13 +113,11 @@
 .omni-settings-wrap .nav-tab-active,
 .omni-settings-wrap .nav-tab-active:hover {
     background: #ffffff;
-    border-color: #e5e7eb;
-    border-bottom: 2px solid #ffffff;
+    border-color: #99f6e4;
     color: #0f766e;
     font-weight: 600;
     position: relative;
-    top: 2px;
-    box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 2px 6px -1px rgba(15, 118, 110, 0.12);
 }
 
 .omni-settings-wrap .nav-tab-active::after {
@@ -126,10 +132,31 @@
 }
 
 .omni-settings-wrap .nav-tab .dashicons {
+    flex: none;
     font-size: 18px;
     width: 18px;
     height: 18px;
     line-height: 18px;
+}
+
+@media (max-width: 1100px) {
+    .omni-settings-wrap .nav-tab {
+        padding: 12px 8px;
+        font-size: 13px;
+        gap: 6px;
+    }
+}
+
+@media (max-width: 782px) {
+    .omni-settings-wrap .nav-tab {
+        flex-basis: calc(50% - 3px);
+    }
+}
+
+@media (max-width: 600px) {
+    .omni-settings-wrap .nav-tab {
+        flex-basis: 100%;
+    }
 }
 
 /* Card Container layout */
