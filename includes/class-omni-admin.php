@@ -1278,7 +1278,8 @@ class Omni_Admin {
                             wp_cache_set( 'omni_popularpostsdata_exists', $table_exists, 'omni-webmaster-seo', HOUR_IN_SECONDS );
                         }
 
-                        if ( 1 === $table_exists ) {
+                        // Persistent object caches such as Redis can return the cached 1 as the string "1".
+                        if ( 1 === (int) $table_exists ) {
                             $cache_key = 'omni_post_views_' . $post_id;
                             $cached_views = wp_cache_get( $cache_key, 'omni-webmaster-seo' );
                             if ( false === $cached_views ) {

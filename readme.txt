@@ -4,7 +4,7 @@ Tags: seo, performance, comments, thumbnails, translation
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.7.0
+Stable tag: 2.7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,6 +109,9 @@ Only if your theme does not already output them. Open any post, view its page so
 No. This plugin uses a clean, unified settings array (`omni_webmaster_settings`) to prevent database clutter. You will need to check the desired options in the new admin settings panel.
 
 == Changelog ==
+
+= 2.7.1 =
+* Fixed: with a persistent object cache such as Redis, the monthly export showed 0 views for every post when the `popularpostsdata` source was chosen. The cached table check came back as the string "1" and failed a strict comparison, so only the request right after the cache expired had numbers.
 
 = 2.7.0 =
 * Changed: the Meta Pixel base code is no longer printed inline. It loads from `assets/js/meta-pixel.js`, which reads the Pixel ID and the advanced events from a `<script type="application/json">` data block, so the site can use a `script-src 'self' https://connect.facebook.net` Content Security Policy. The events sent are the same as before (PageView, plus ViewContent and Search when advanced events are on), and so is the noscript image.
