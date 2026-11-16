@@ -4,7 +4,7 @@ Tags: seo, performance, comments, thumbnails, translation
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.7.1
+Stable tag: 2.8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,8 +36,9 @@ This plugin incorporates the following major components:
    Auto Asian Title to English Slug: Integrates with Google Cloud Translation API to translate Asian-language titles (Chinese, Japanese, Korean, Thai) into clean, lowercase English URL slugs, preventing duplicate URLs and character overflow. The source language is auto-detected.
    This module shares its core logic with the standalone plugin Chinese to English Slug Converter (zh-to-en-slug): https://github.com/ivanusto/zh-to-en-slug — use the standalone plugin if slug translation is the only feature you need.
 
-5. Meta Pixel Tracking
+5. Meta Pixel and Google Analytics
    Meta (Facebook) Pixel integration with PageView, ViewContent, and Search event tracking. Site staff are excluded by default to keep ad audience data clean. The tracking code loads from a static file and reads its settings from a JSON data block, so pages carry no inline script and can run under a strict Content Security Policy (allow https://connect.facebook.net in script-src).
+   Google tag (gtag.js) for Google Analytics 4: enter a G- or GT- ID and every public page sends a page view. It loads the same way (static file plus JSON data block, no inline script; allow https://www.googletagmanager.com in script-src), excludes site staff by default, and replaces the tag that Site Kit or a pasted snippet would add.
 
 6. Post Data Export
    Preview and export monthly post data (including a configurable page-view meta key) as CSV from the admin panel. Enter `popularpostsdata` as the key to read the WordPress Popular Posts compatible table, or supply the numbers yourself through the `omni_post_views` filter.
@@ -80,6 +81,13 @@ This plugin utilizes third-party and external services to provide specific funct
      * Meta Business Tools Terms: https://www.facebook.com/legal/controller_addendum
      * Meta Privacy Policy: https://www.facebook.com/privacy/policy/
 
+3. Google tag (gtag.js) for Google Analytics:
+   * What it is: Used to measure site traffic with Google Analytics 4 when the Google tag is turned on and a tag ID is entered.
+   * Data sent: The visitor's browser loads gtag.js from www.googletagmanager.com and sends page view data (page URL, title, referrer, a pseudonymous client ID, device and browser details) to Google Analytics. By default, logged-in site staff (users with `edit_posts` capability) are excluded, and the tag is not loaded on feeds, previews, and oEmbed pages.
+   * Terms and Privacy:
+     * Google Analytics Terms of Service: https://marketingplatform.google.com/about/analytics/terms/us/
+     * Google Privacy Policy: https://policies.google.com/privacy
+
 == Installation ==
 
 1. Upload the `omni-webmaster-seo-suite` folder to the `/wp-content/plugins/` directory.
@@ -110,7 +118,9 @@ No. This plugin uses a clean, unified settings array (`omni_webmaster_settings`)
 
 == Changelog ==
 
-= 2.7.1 =
+= 2.8.0 =
+* Added: Google tag (gtag.js) for Google Analytics 4, in a new Google Analytics tab. Like the Meta Pixel it loads from a static file (`assets/js/google-tag.js`) that reads the tag ID from a `<script type="application/json">` data block, so the page prints no inline script and works under a `script-src 'self' https://www.googletagmanager.com` Content Security Policy. Site staff are excluded by default. Turn off Site Kit's tag (or remove Site Kit) when switching, or page views are counted twice.
+* Added: the `omni_google_tag_enabled` filter (for consent tools) and the `omni_google_tag_config` filter (parameters for `gtag('config')`).
 * Fixed: with a persistent object cache such as Redis, the monthly export showed 0 views for every post when the `popularpostsdata` source was chosen. The cached table check came back as the string "1" and failed a strict comparison, so only the request right after the cache expired had numbers.
 
 = 2.7.0 =

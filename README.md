@@ -50,10 +50,11 @@ An all-in-one WordPress performance & SEO suite for webmasters: cleans the HTML 
 - **Auto Chinese Title to English Slug**: Translates Chinese post titles into clean, lowercase English URL slugs via the Google Cloud Translation API, with an automatic key-less fallback endpoint when no API key is configured.
 - This module shares its core logic with the standalone plugin [Chinese to English Slug Converter (zh-to-en-slug)](https://github.com/ivanusto/zh-to-en-slug). Use the standalone plugin if slug translation is the only feature you need.
 
-### 5. Meta Pixel Tracking
+### 5. Meta Pixel and Google Analytics
 - **Meta (Facebook) Pixel integration**: PageView, ViewContent (single posts/pages), and Search event tracking.
 - **Clean audience data**: Site staff (logged-in users with `edit_posts`) are excluded by default; feeds, previews, and oEmbed pages are never tracked.
 - **No inline script**: The base code loads from a static file and reads its settings from a JSON data block, so a strict Content Security Policy only has to allow `https://connect.facebook.net` in `script-src`.
+- **Google tag (gtag.js) for Google Analytics 4**: Enter a G- or GT- ID and every public page sends a page view. It loads the same way (static file, JSON data block, no inline script; allow `https://www.googletagmanager.com` in `script-src`), excludes site staff by default, and can replace the tag added by Site Kit. Filters: `omni_google_tag_enabled`, `omni_google_tag_config`.
 
 ### 6. Post Data Export
 - **Monthly CSV export**: Preview and export post data by month, including a configurable page-view meta key, straight from the admin panel.

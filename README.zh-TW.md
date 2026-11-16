@@ -50,10 +50,11 @@
 - **中文標題自動轉英文網址**：透過 Google Cloud Translation API 將中文文章標題翻譯為乾淨的小寫英文網址代稱（Slug）；未設定金鑰時自動改用免金鑰公開端點。
 - 本模組與獨立外掛 [Chinese to English Slug Converter (zh-to-en-slug)](https://github.com/ivanusto/zh-to-en-slug) 共用核心邏輯。若您只需要網址翻譯功能，建議直接使用該獨立外掛。
 
-### 5. Meta Pixel 追蹤
+### 5. Meta Pixel 與 Google Analytics
 - **Meta（Facebook）Pixel 整合**：自動載入 PageView、ViewContent（單篇文章與頁面）與 Search 事件追蹤。
 - **乾淨的受眾資料**：預設排除網站工作人員（具 `edit_posts` 權限的登入使用者），並且不在 feed、預覽與 oEmbed 頁面載入追蹤代碼。
 - **沒有行內 script**：基礎程式碼由靜態檔案載入，設定放在 JSON 資料區塊，嚴格的 Content Security Policy 只需在 `script-src` 允許 `https://connect.facebook.net`。
+- **Google Analytics 4 的 Google 代碼（gtag.js）**：填入 G- 或 GT- 開頭的 ID，所有公開頁面都會送出網頁瀏覽。載入方式相同（靜態檔案、JSON 資料區塊、沒有行內 script；`script-src` 允許 `https://www.googletagmanager.com` 即可），預設排除網站工作人員，可取代 Site Kit 加入的代碼。過濾器：`omni_google_tag_enabled`、`omni_google_tag_config`。
 
 ### 6. 文章數據匯出
 - **按月 CSV 匯出**：直接在後台預覽並按月份匯出文章數據，支援自訂瀏覽量欄位（Meta Key）。

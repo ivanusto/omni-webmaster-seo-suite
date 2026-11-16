@@ -39,6 +39,9 @@ msgstr "1536 像素 (1536x1536)"
 msgid "2048px (2048x2048)"
 msgstr "2048 像素 (2048x2048)"
 
+msgid "A GA4 measurement ID (G-) or a Google tag ID (GT-). You can find them in Google Analytics under Admin, Data streams, or in Google Tag Manager under Google tags."
+msgstr "GA4 評估 ID（G-）或 Google 代碼 ID（GT-），可在 Google Analytics 的「管理」>「資料串流」，或 Google 代碼管理工具的「Google 代碼」中找到。"
+
 msgid "Add Date Prefix"
 msgstr "加上日期前綴"
 
@@ -216,6 +219,9 @@ msgstr "下載 CSV 檔案 (Excel)"
 msgid "e.g. 123456789012345"
 msgstr "例如：123456789012345"
 
+msgid "e.g. G-XXXXXXXXXX or GT-XXXXXXX"
+msgstr "例如 G-XXXXXXXXXX 或 GT-XXXXXXX"
+
 msgid "e.g. yBlog"
 msgstr "例如：yBlog"
 
@@ -234,6 +240,9 @@ msgstr "啟用 Meta Pixel 追蹤"
 msgid "Enable Single Post OG Tags"
 msgstr "啟用單篇 OG 標籤"
 
+msgid "Enable the Google Tag"
+msgstr "啟用 Google 代碼"
+
 msgid "Enable Upload File Renaming"
 msgstr "啟用上傳檔名優化"
 
@@ -242,6 +251,9 @@ msgstr "啟用上傳圖片縮圖"
 
 msgid "Enter a Cloud Translation API key created in the Google Cloud console (<a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">how to get an API key</a>).<br/><strong>Fallback (no key required)</strong>: leave this field empty and the plugin automatically falls back to the keyless public Google Translate endpoint.<br/><strong>An API key is recommended</strong>: the keyless endpoint often produces lower-quality slugs (e.g. <code>how-was-it-able-9</code>), while the official Cloud API returns noticeably more accurate translations and includes a monthly free quota."
 msgstr "請輸入於 Google Cloud 主控台建立的 Cloud Translation API 金鑰（<a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">如何申請 API 金鑰</a>）。<br/><strong>免金鑰備援</strong>：此欄留空時，系統會自動改用免金鑰的 Google Translate 公開端點。<br/><strong>建議使用 API 金鑰</strong>：免金鑰端點翻譯品質較差，可能產生如 <code>how-was-it-able-9</code> 的網址字串；官方 Cloud API 翻譯明顯較精準，且每月提供免費額度。"
+
+msgid "Enter a Google tag ID such as G-XXXXXXXXXX or GT-XXXXXXX"
+msgstr "請輸入 G-XXXXXXXXXX 或 GT-XXXXXXX 格式的 Google 代碼 ID"
 
 msgid "Enter a numbers-only Meta Pixel ID"
 msgstr "請輸入純數字的 Meta Pixel ID"
@@ -285,11 +297,26 @@ msgstr "GitHub Gist 程式碼深色修正"
 msgid "Global Comment Blocking Switch"
 msgstr "留言全局封鎖開關"
 
+msgid "Google Analytics"
+msgstr "Google Analytics"
+
+msgid "Google Analytics (Google tag)"
+msgstr "Google Analytics（Google 代碼）"
+
+msgid "Google Tag ID"
+msgstr "Google 代碼 ID"
+
 msgid "Helps Google display the correct <strong>site name</strong> (instead of the domain name) and site logo in search results (the Site Icon is used first, falling back to the share image above when not set). Requires \"Enable Homepage Meta Tags\" above to be turned on as well."
 msgstr "協助 Google 在搜尋結果顯示正確的<strong>站名</strong>（而非網域名稱）與網站 logo（優先使用「網站圖示 Site Icon」，未設定時退回上方分享圖）。需同時開啟上方「啟用首頁 Meta 標籤」。"
 
 msgid "Homepage Meta Description"
 msgstr "首頁 Meta Description"
+
+msgid "Load the Google Tag on the Front End"
+msgstr "在前台載入 Google 代碼"
+
+msgid "Loads the Google tag (gtag.js) for Google Analytics 4 from a static file, with no inline script, so it works under a strict Content Security Policy. Turn off any other plugin that adds the same tag (such as Site Kit) to avoid counting page views twice."
+msgstr "以靜態檔案載入 Google Analytics 4 使用的 Google 代碼（gtag.js），頁面不含行內程式，可在嚴格的內容安全政策（CSP）下運作。請關閉其他加入相同代碼的外掛（例如 Site Kit），以免網頁瀏覽重複計算。"
 
 msgid "Meta Tags & Structured Data"
 msgstr "Meta 標籤與結構化資料"
@@ -605,6 +632,12 @@ msgstr "查看文章"
 
 msgid "Views"
 msgstr "瀏覽量"
+
+msgid "When enabled, every public front-end page loads <code>gtag.js</code> in the <code>&lt;head&gt;</code> and sends a page view."
+msgstr "啟用後，所有公開的前台頁面都會在 <code>&lt;head&gt;</code> 載入 <code>gtag.js</code> 並送出網頁瀏覽。"
+
+msgid "When enabled, logged-in users with post editing capability (<code>edit_posts</code>) do not load the Google tag on the front end, so their own browsing stays out of the reports (recommended to keep on)."
+msgstr "啟用後，具備文章編輯權限（<code>edit_posts</code>）的登入使用者瀏覽前台時不會載入 Google 代碼，站方人員自身的瀏覽不會進入報表（建議保持開啟）。"
 
 msgid "When enabled, logged-in users with post editing capability (<code>edit_posts</code>) will not load the Pixel tracking code when browsing the front end, keeping staff browsing behavior from polluting your ad audiences and conversion data (recommended to keep on)."
 msgstr "啟用後，具備文章編輯權限（<code>edit_posts</code>）的登入使用者瀏覽前台時將不會載入 Pixel 追蹤碼，避免站方人員自身的瀏覽行為污染廣告受眾與轉換數據（建議保持開啟）。"

@@ -123,6 +123,11 @@ class Omni_Admin {
         $sanitized['meta_pixel_advanced']       = isset( $input['meta_pixel_advanced'] ) ? '1' : '0';
         $sanitized['meta_pixel_exclude_admins'] = isset( $input['meta_pixel_exclude_admins'] ) ? '1' : '0';
 
+        // Google tag options (G-, GT-, AW- or DC- ID; anything else is dropped)
+        $sanitized['google_tag_enable']         = isset( $input['google_tag_enable'] ) ? '1' : '0';
+        $sanitized['google_tag_id']             = isset( $input['google_tag_id'] ) ? Omni_Google_Tag::sanitize_tag_id( sanitize_text_field( $input['google_tag_id'] ) ) : '';
+        $sanitized['google_tag_exclude_admins'] = isset( $input['google_tag_exclude_admins'] ) ? '1' : '0';
+
         // Meta tags and structured data options (homepage / single posts)
         $sanitized['meta_tags_enable']      = isset( $input['meta_tags_enable'] ) ? '1' : '0';
         $sanitized['og_singular_enable']    = isset( $input['og_singular_enable'] ) ? '1' : '0';
@@ -285,6 +290,9 @@ class Omni_Admin {
             'meta_pixel_id'       => '',
             'meta_pixel_advanced' => '0',
             'meta_pixel_exclude_admins' => '1',
+            'google_tag_enable'         => '0',
+            'google_tag_id'             => '',
+            'google_tag_exclude_admins' => '1',
             'meta_tags_enable'      => '0',
             'home_meta_description' => '',
             'og_default_image'      => '',
@@ -297,7 +305,7 @@ class Omni_Admin {
 
         // Tab switching
         $active_tab = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : 'seo'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-        if ( ! in_array( $active_tab, [ 'seo', 'comments', 'thumbnails', 'slug', 'export', 'pixel' ], true ) ) {
+        if ( ! in_array( $active_tab, [ 'seo', 'comments', 'thumbnails', 'slug', 'export', 'pixel', 'gtag' ], true ) ) {
             $active_tab = 'seo';
         }
         ?>
@@ -325,6 +333,9 @@ class Omni_Admin {
                 </a>
                 <a href="?page=omni-webmaster-seo&tab=pixel" class="nav-tab <?php echo $active_tab === 'pixel' ? 'nav-tab-active' : ''; ?>">
                     <span class="dashicons dashicons-chart-line"></span> <?php esc_html_e( 'Meta Pixel Tracking', 'omni-webmaster-seo-suite' ); ?>
+                </a>
+                <a href="?page=omni-webmaster-seo&tab=gtag" class="nav-tab <?php echo $active_tab === 'gtag' ? 'nav-tab-active' : ''; ?>">
+                    <span class="dashicons dashicons-chart-area"></span> <?php esc_html_e( 'Google Analytics', 'omni-webmaster-seo-suite' ); ?>
                 </a>
                 <a href="?page=omni-webmaster-seo&tab=export" class="nav-tab <?php echo $active_tab === 'export' ? 'nav-tab-active' : ''; ?>">
                     <span class="dashicons dashicons-database-export"></span> <?php esc_html_e( 'Post Data Export', 'omni-webmaster-seo-suite' ); ?>
@@ -980,6 +991,60 @@ class Omni_Admin {
                                             <div class="omni-field-desc">
                                                 <strong><?php esc_html_e( 'Do Not Track Logged-In Administrators and Editors', 'omni-webmaster-seo-suite' ); ?></strong>
                                                 <p><?php echo wp_kses_post( __( 'When enabled, logged-in users with post editing capability (<code>edit_posts</code>) will not load the Pixel tracking code when browsing the front end, keeping staff browsing behavior from polluting your ad audiences and conversion data (recommended to keep on).', 'omni-webmaster-seo-suite' ) ); ?></p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Tab: Google tag -->
+                    <div class="omni-tab-panel <?php echo $active_tab === 'gtag' ? 'is-active' : ''; ?>">
+                        <div class="omni-tab-content">
+                            <h3><?php esc_html_e( 'Google Analytics (Google tag)', 'omni-webmaster-seo-suite' ); ?></h3>
+                            <p class="section-desc"><?php esc_html_e( 'Loads the Google tag (gtag.js) for Google Analytics 4 from a static file, with no inline script, so it works under a strict Content Security Policy. Turn off any other plugin that adds the same tag (such as Site Kit) to avoid counting page views twice.', 'omni-webmaster-seo-suite' ); ?></p>
+
+                            <table class="form-table omni-form-table">
+                                <tr>
+                                    <th scope="row"><?php esc_html_e( 'Enable the Google Tag', 'omni-webmaster-seo-suite' ); ?></th>
+                                    <td>
+                                        <div class="omni-field-row">
+                                            <label class="omni-switch">
+                                                <input type="checkbox" name="<?php echo esc_attr( $this->option_name ); ?>[google_tag_enable]" value="1" <?php checked( '1', $settings['google_tag_enable'] ); ?> />
+                                                <span class="omni-slider"></span>
+                                            </label>
+                                            <div class="omni-field-desc">
+                                                <strong><?php esc_html_e( 'Load the Google Tag on the Front End', 'omni-webmaster-seo-suite' ); ?></strong>
+                                                <p><?php echo wp_kses_post( __( 'When enabled, every public front-end page loads <code>gtag.js</code> in the <code>&lt;head&gt;</code> and sends a page view.', 'omni-webmaster-seo-suite' ) ); ?></p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><?php esc_html_e( 'Google Tag ID', 'omni-webmaster-seo-suite' ); ?></th>
+                                    <td>
+                                        <input type="text"
+                                               name="<?php echo esc_attr( $this->option_name ); ?>[google_tag_id]"
+                                               value="<?php echo esc_attr( $settings['google_tag_id'] ); ?>"
+                                               class="regular-text"
+                                               placeholder="<?php esc_attr_e( 'e.g. G-XXXXXXXXXX or GT-XXXXXXX', 'omni-webmaster-seo-suite' ); ?>"
+                                               pattern="\s*([Gg][Tt]?|[Aa][Ww]|[Dd][Cc])-[A-Za-z0-9]{4,20}\s*"
+                                               title="<?php esc_attr_e( 'Enter a Google tag ID such as G-XXXXXXXXXX or GT-XXXXXXX', 'omni-webmaster-seo-suite' ); ?>" />
+                                        <p class="description"><?php esc_html_e( 'A GA4 measurement ID (G-) or a Google tag ID (GT-). You can find them in Google Analytics under Admin, Data streams, or in Google Tag Manager under Google tags.', 'omni-webmaster-seo-suite' ); ?></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><?php esc_html_e( 'Exclude Site Staff', 'omni-webmaster-seo-suite' ); ?></th>
+                                    <td>
+                                        <div class="omni-field-row">
+                                            <label class="omni-switch">
+                                                <input type="checkbox" name="<?php echo esc_attr( $this->option_name ); ?>[google_tag_exclude_admins]" value="1" <?php checked( '1', $settings['google_tag_exclude_admins'] ); ?> />
+                                                <span class="omni-slider"></span>
+                                            </label>
+                                            <div class="omni-field-desc">
+                                                <strong><?php esc_html_e( 'Do Not Track Logged-In Administrators and Editors', 'omni-webmaster-seo-suite' ); ?></strong>
+                                                <p><?php echo wp_kses_post( __( 'When enabled, logged-in users with post editing capability (<code>edit_posts</code>) do not load the Google tag on the front end, so their own browsing stays out of the reports (recommended to keep on).', 'omni-webmaster-seo-suite' ) ); ?></p>
                                             </div>
                                         </div>
                                     </td>

@@ -2,8 +2,8 @@
 /**
  * Plugin Name: Omni Webmaster & SEO Suite
  * Plugin URI:  https://github.com/ivanusto/omni-webmaster-seo-suite
- * Description: All-in-one WordPress optimization & SEO toolkit: SEO markup cleanup, advanced RSS control, automatic Asian-title slug translation, complete comment disabling, selective thumbnail disabling with one-click batch cleanup, SEO-friendly upload file renaming, and automatic upload image resizing.
- * Version:     2.7.1
+ * Description: All-in-one WordPress optimization & SEO toolkit: SEO markup cleanup, advanced RSS control, automatic Asian-title slug translation, Meta Pixel and Google tag (GA4) without inline scripts, complete comment disabling, selective thumbnail disabling with one-click batch cleanup, SEO-friendly upload file renaming, and automatic upload image resizing.
+ * Version:     2.8.0
  * Author:      Ivan Lin
  * Text Domain: omni-webmaster-seo-suite
  * Domain Path: /languages
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin constants
-define( 'OMNI_WEBMASTER_VERSION', '2.7.1' );
+define( 'OMNI_WEBMASTER_VERSION', '2.8.0' );
 define( 'OMNI_WEBMASTER_DIR', plugin_dir_path( __FILE__ ) );
 define( 'OMNI_WEBMASTER_URL', plugin_dir_url( __FILE__ ) );
 define( 'OMNI_WEBMASTER_BASENAME', plugin_basename( __FILE__ ) );
@@ -27,6 +27,7 @@ require_once OMNI_WEBMASTER_DIR . 'includes/class-omni-disable-comments.php';
 require_once OMNI_WEBMASTER_DIR . 'includes/class-omni-disable-thumbnails.php';
 require_once OMNI_WEBMASTER_DIR . 'includes/class-omni-slug-converter.php';
 require_once OMNI_WEBMASTER_DIR . 'includes/class-omni-meta-pixel.php';
+require_once OMNI_WEBMASTER_DIR . 'includes/class-omni-google-tag.php';
 require_once OMNI_WEBMASTER_DIR . 'includes/class-omni-meta-tags.php';
 require_once OMNI_WEBMASTER_DIR . 'includes/class-omni-file-renamer.php';
 require_once OMNI_WEBMASTER_DIR . 'includes/class-omni-image-resizer.php';
@@ -48,6 +49,7 @@ function omni_webmaster_seo_suite_init() {
     $disable_thumbnails = new Omni_Disable_Thumbnails();
     $slug_converter     = new Omni_Slug_Converter();
     $meta_pixel         = new Omni_Meta_Pixel();
+    $google_tag         = new Omni_Google_Tag();
     $meta_tags          = new Omni_Meta_Tags();
     $file_renamer       = new Omni_File_Renamer();
     $image_resizer      = new Omni_Image_Resizer();

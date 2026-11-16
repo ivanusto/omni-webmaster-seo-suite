@@ -38,6 +38,9 @@ msgstr ""
 msgid "2048px (2048x2048)"
 msgstr ""
 
+msgid "A GA4 measurement ID (G-) or a Google tag ID (GT-). You can find them in Google Analytics under Admin, Data streams, or in Google Tag Manager under Google tags."
+msgstr ""
+
 msgid "Add Date Prefix"
 msgstr ""
 
@@ -215,6 +218,9 @@ msgstr ""
 msgid "e.g. 123456789012345"
 msgstr ""
 
+msgid "e.g. G-XXXXXXXXXX or GT-XXXXXXX"
+msgstr ""
+
 msgid "e.g. yBlog"
 msgstr ""
 
@@ -233,6 +239,9 @@ msgstr ""
 msgid "Enable Single Post OG Tags"
 msgstr ""
 
+msgid "Enable the Google Tag"
+msgstr ""
+
 msgid "Enable Upload File Renaming"
 msgstr ""
 
@@ -240,6 +249,9 @@ msgid "Enable Upload Image Resizing"
 msgstr ""
 
 msgid "Enter a Cloud Translation API key created in the Google Cloud console (<a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">how to get an API key</a>).<br/><strong>Fallback (no key required)</strong>: leave this field empty and the plugin automatically falls back to the keyless public Google Translate endpoint.<br/><strong>An API key is recommended</strong>: the keyless endpoint often produces lower-quality slugs (e.g. <code>how-was-it-able-9</code>), while the official Cloud API returns noticeably more accurate translations and includes a monthly free quota."
+msgstr ""
+
+msgid "Enter a Google tag ID such as G-XXXXXXXXXX or GT-XXXXXXX"
 msgstr ""
 
 msgid "Enter a numbers-only Meta Pixel ID"
@@ -284,10 +296,25 @@ msgstr ""
 msgid "Global Comment Blocking Switch"
 msgstr ""
 
+msgid "Google Analytics"
+msgstr ""
+
+msgid "Google Analytics (Google tag)"
+msgstr ""
+
+msgid "Google Tag ID"
+msgstr ""
+
 msgid "Helps Google display the correct <strong>site name</strong> (instead of the domain name) and site logo in search results (the Site Icon is used first, falling back to the share image above when not set). Requires \"Enable Homepage Meta Tags\" above to be turned on as well."
 msgstr ""
 
 msgid "Homepage Meta Description"
+msgstr ""
+
+msgid "Load the Google Tag on the Front End"
+msgstr ""
+
+msgid "Loads the Google tag (gtag.js) for Google Analytics 4 from a static file, with no inline script, so it works under a strict Content Security Policy. Turn off any other plugin that adds the same tag (such as Site Kit) to avoid counting page views twice."
 msgstr ""
 
 msgid "Meta Tags & Structured Data"
@@ -603,6 +630,12 @@ msgid "View Post"
 msgstr ""
 
 msgid "Views"
+msgstr ""
+
+msgid "When enabled, every public front-end page loads <code>gtag.js</code> in the <code>&lt;head&gt;</code> and sends a page view."
+msgstr ""
+
+msgid "When enabled, logged-in users with post editing capability (<code>edit_posts</code>) do not load the Google tag on the front end, so their own browsing stays out of the reports (recommended to keep on)."
 msgstr ""
 
 msgid "When enabled, logged-in users with post editing capability (<code>edit_posts</code>) will not load the Pixel tracking code when browsing the front end, keeping staff browsing behavior from polluting your ad audiences and conversion data (recommended to keep on)."
